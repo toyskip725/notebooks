@@ -1,0 +1,61 @@
+---
+layout: ../../layouts/NoteLayout.astro
+title: basics
+section: 1
+---
+import Definition from "../../components/math/Definition";
+import Proposition from "../../components/math/Proposition";
+import Proof from "../../components/math/Proof";
+
+# 群論の基礎事項
+
+群の定義からはじめ、準同型定理までを概観する。
+
+## 群の定義
+
+<Definition name={"群"}>
+$G$ を空でない集合とし、$\cdot : G \times G \to G$ を $G$ 上の二項演算とする。組 $(G, \cdot)$ が **群(group)** であるのは、$(G, \cdot)$ が以下の条件を満たすときである : 
+1. \[ $\cdot$ の結合則 \] 任意の $a, b, c \in G$ に対して、$a \cdot (b \cdot c) = (a \cdot b) \cdot c$ である。
+1. \[ 単位元 \] ある元 $e \in G$ が存在し、あらゆる $a \in G$ に対して$e \cdot a = a$, $a \cdot e = a$ となる。この元を **単位元** といい、$1_{G}$ で表す。
+1. \[ 逆元 \] それぞれの $a \in G$ に対して、$ a \cdot a' = 1_{G}$, $a' \cdot a = 1_{G}$ となる $a' \in G$が存在する。この元を **逆元** といい、$a^{-1}$ で表す。
+</Definition>
+
+文脈から明らかな場合、$(G, \cdot)$ を省略して $G$ で表す。
+
+## 部分群
+
+<Definition name={"部分群"}>
+$G$ を群とする。$H \subset G$ が $G$ の **部分群(subgroup)** であるのは、$H$ が以下の条件を満たすときである :
+1. $1_{G} \in H$ .
+1. 任意の $a, b \in G$ について, $a \cdot b \in H$ .
+1. 任意の $a \in G$ について, $a^{-1} \in H$ .
+</Definition>
+
+
+## 準同型写像
+
+<Definition name={"準同型写像"}>
+$G$, $H$ を群とする。写像 $\phi: G \to H $ が **準同型写像(homomorphism)** であるのは、$\phi$ が以下の条件を満たすときである :
+- 任意の $a, b \in G$ について、$\phi(a \cdot b) = \phi(a) \cdot \phi(b)$ .
+</Definition>
+
+<Proposition>
+群の準同型写像は単位元、逆元を保つ : すなわち、$G$, $H$を群、$a \in G$、$\phi: G \to H$を準同型写像とすると、
+$$
+\phi (1_{G}) = 1_{H}, \quad \phi (a)^{-1} = \phi (a^{-1})
+$$
+が成り立つ。
+</Proposition>
+
+<Proof client:load>
+(1) $\phi$ は準同型写像なので、$\phi(1_{G}) \cdot \phi(1_{G}) = \phi (1_{G} \cdot 1_{G}) = \phi (1_{G})$ である。
+仮定より $\phi (1_{G})^{-1} \in H$ なので、
+$$
+\phi(1_{G}) = \phi(1_{G}) \cdot \phi(1_{G}) \cdot \phi (1_{G})^{-1} = \phi (1_{G}) \cdot \phi (1_{G})^{-1} = 1_{H}
+$$
+すなわち $\phi(1_{G}) = 1_{H}$ である。
+
+(2) 同様に $\phi$ は準同型写像なので、$\phi (a) \cdot \phi (a^{-1}) = \phi (a \cdot a^{-1}) = \phi (1_{G}) = 1_{H} $ 、および
+$\phi (a^{-1}) \cdot \phi (a) = \phi (a^{-1} \cdot a) = \phi (1_{G}) = 1_{H} $ が成り立つ。ゆえに $\phi (a)$ の逆元は $ \phi(a^{-1}) $ である。 $ \Box $
+</Proof>
+

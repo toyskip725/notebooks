@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 const {frontmatter} = Astro.props;
 ---
 
@@ -20,8 +22,8 @@ const {frontmatter} = Astro.props;
   <body>
     <div class="note">
       <div class="sidebar">Side Navigation</div>
-    <div class="markdown-content">
-      <slot />
+      <div class="markdown-content">
+        <slot />
       </div>
     </div>
   </body>

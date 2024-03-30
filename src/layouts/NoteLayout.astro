@@ -18,16 +18,28 @@ const {frontmatter} = Astro.props;
     <title>{frontmatter.title}</title>
   </head>
   <body>
+    <div class="note">
+      <div class="sidebar">Side Navigation</div>
     <div class="markdown-content">
       <slot />
-    <div>
+      </div>
+    </div>
   </body>
 </html>
 
 <style>
+.note {
+  display: flex;
+}
+
+.sidebar {
+  width: 20%;
+  padding: 10px;
+}
+
 .markdown-content {
-  width: 75%;
-  margin: auto;
+  width: 60%;
+  padding: 10px;
 }
 </style>
 

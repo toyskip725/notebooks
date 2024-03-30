@@ -11,6 +11,10 @@ const Proof = ({ children }: Props) => {
   };
 
   const mainStyle = {
+    padding: "5px 0px 20px 0px"
+  };
+
+  const contentStyle = {
     borderLeft: "1px solid #000",
     padding: "0px 20px"
   };
@@ -25,9 +29,9 @@ const Proof = ({ children }: Props) => {
   const buttonText = isOpen ? "▼ 証明" : "▶ 証明を表示";
 
   return (
-    <div>
+    <div style={mainStyle}>
       <button style={buttonStyle} onClick={handleClick}>{buttonText}</button>
-      {isOpen && <div style={mainStyle}>{children}</div>}
+      {isOpen && <div style={contentStyle}>{children}</div>}
     </div>
   );
 };

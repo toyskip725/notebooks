@@ -6,8 +6,8 @@ type Props = {
 
 const Proposition= ({ name, children }: Props) => {
   const layoutStyle = {
-    border: "1px solid #000",
-    borderColor: "#007989",
+    border: "1px solid #007989",
+    borderLeft: "10px solid #007989",
     padding: "5px 20px",
     margin: "20px 0px"
   }

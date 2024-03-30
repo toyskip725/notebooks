@@ -1,7 +1,9 @@
 ---
+import SideNavigation from '../components/SideNavigation';
 import '../styles/global.css';
 
-const {frontmatter} = Astro.props;
+const { frontmatter } = Astro.props;
+const posts = await Astro.glob('../pages/*/*.mdx');
 ---
 
 <!doctype html>
@@ -21,7 +23,9 @@ const {frontmatter} = Astro.props;
   </head>
   <body>
     <div class="note">
-      <div class="sidebar">Side Navigation</div>
+      <aside class="sidebar">
+        <SideNavigation parentDirectoryName={frontmatter.parent} posts={posts}/>
+      </aside>
       <div class="markdown-content">
         <slot />
       </div>
@@ -37,6 +41,9 @@ const {frontmatter} = Astro.props;
 .sidebar {
   width: 20%;
   padding: 10px;
+  position: sticky;
+  align-self: flex-start;
+  top: 0;
 }
 
 .markdown-content {

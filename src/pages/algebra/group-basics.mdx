@@ -5,6 +5,8 @@ section: 1
 ---
 import Definition from "../../components/math/Definition";
 import Proposition from "../../components/math/Proposition";
+import Example from "../../components/math/Example";
+import ExampleContent from "../../components/math/ExampleContent";
 import Proof from "../../components/math/Proof";
 
 # 群論の基礎事項
@@ -21,6 +23,22 @@ $G$ を空でない集合とし、$\cdot : G \times G \to G$ を $G$ 上の二�
 </Definition>
 
 文脈から明らかな場合、$(G, \cdot)$ を省略して $G$ で表す。
+
+<Example name={"一般線形群 𝐺𝐿ₙ(ℝ)"}>
+<ExampleContent client:load>
+$G$ を実数成分からなる $n$ 次正則行列の集合とする。このとき、$G$ は通常の行列の積を演算として群になる : 
+
+<Proof client:load>
+\[ 結合則 \] 行列の積は結合的なので、$G$ 上の演算はつねに結合則を満たす。
+
+\[ 単位元 \] 単位行列 $I_{n}$ はあらゆる $A \in G$ に対して $I_{n}A = AI_{n} = A$ となることから、$I_{n}$ は単位元である。
+
+\[ 逆元 \] $A \in G$ とする。$A$ は正則行列なので、$A^{-1}$ が存在して $AA^{-1} = A^{-1}A = I_{n}$ となる : すなわち、$A^{-1}$ は $A$ の逆元である。 $ \Box$
+</Proof>
+
+この群 $G$ を**実一般線形群**といい、$GL_{n}(\mathbb{R})$ で表す。
+</ExampleContent>
+</Example>
 
 ## 部分群
 

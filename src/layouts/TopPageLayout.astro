@@ -3,9 +3,8 @@ import SideNavigation from '../components/SideNavigation';
 import '../styles/global.css';
 
 const { frontmatter } = Astro.props;
-const dirpath = Astro.url.pathname.split('/')[1];
-const allPosts = await Astro.glob('../pages/**/*.mdx')
-const posts = allPosts.filter((post) => post.url?.includes(dirpath));
+const allTopPosts = await Astro.glob('../pages/*.mdx');
+const posts = allTopPosts.filter((post) => post.frontmatter.section !== 1);
 ---
 
 <!doctype html>
@@ -26,7 +25,7 @@ const posts = allPosts.filter((post) => post.url?.includes(dirpath));
   <body>
     <div class="note">
       <aside class="sidebar">
-        <SideNavigation dirpath={dirpath} posts={posts}/>
+        <SideNavigation dirpath={""} posts={posts}/>
       </aside>
       <div class="markdown-content">
         <slot />
@@ -53,11 +52,3 @@ const posts = allPosts.filter((post) => post.url?.includes(dirpath));
   padding: 10px;
 }
 </style>
-
-<script>
-  const section = document.getElementById('section');
-  const elements = document.getElementsByClassName('math-numbering');
-  Array.prototype.forEach.call(elements, (element, index) => 
-    element.innerText = `${element.innerText} ${section?.attributes[1].value}.${index + 1}`
-  );
-</script>

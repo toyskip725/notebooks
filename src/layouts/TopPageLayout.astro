@@ -1,0 +1,54 @@
+---
+import SideNavigation from '../components/SideNavigation';
+import '../styles/global.css';
+
+const { frontmatter } = Astro.props;
+const allTopPosts = await Astro.glob('../pages/*.mdx');
+const posts = allTopPosts.filter((post) => post.frontmatter.section !== 1);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="generator" content={Astro.generator} />
+    <meta id="section" content={frontmatter.section} />
+    <link 
+      rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" 
+      integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+      crossorigin="anonymous"
+    />
+    <title>{frontmatter.title}</title>
+  </head>
+  <body>
+    <div class="note">
+      <aside class="sidebar">
+        <SideNavigation dirpath={""} posts={posts}/>
+      </aside>
+      <div class="markdown-content">
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+.note {
+  display: flex;
+}
+
+.sidebar {
+  width: 20%;
+  padding: 10px;
+  position: sticky;
+  align-self: flex-start;
+  top: 0;
+}
+
+.markdown-content {
+  width: 60%;
+  padding: 10px;
+}
+</style>

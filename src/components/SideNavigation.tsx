@@ -1,16 +1,27 @@
 import type { MDXInstance } from "astro";
 
 type Props = {
-  parentDirectoryName: string;
+  dirpath: string;
   posts: MDXInstance<Record<string, any>>[]
 }
 
-const SideNavigation = ({ parentDirectoryName, posts }: Props) => {
-  const relevantPosts = posts.filter((post) => post.url?.includes(parentDirectoryName));
+const SideNavigation = ({ dirpath, posts }: Props) => {
+  const displayPosts = posts.sort((post1, post2) => post1.frontmatter.section - post2.frontmatter.section);
+  
+  const homeButtonStyle: React.CSSProperties = {
+    display: "block",
+    fontSize: "1.5em",
+    color: "#000",
+    margin: "20px 20px 20px 0px",
+    textAlign: "left",
+    textDecoration: "none"
+  };
+
   return (
     <div>
-      <p>{parentDirectoryName}</p>
-      {relevantPosts.map((post) => (<a href={post.url}>{post.frontmatter.title}</a>))}
+      <a style={homeButtonStyle} href="/">Notebooks</a>
+      <p>{dirpath}</p>
+      {displayPosts.map((post) => (<li><a href={post.url}>{post.frontmatter.title}</a></li>))}
     </div>
   );
 };

@@ -3,7 +3,9 @@ import SideNavigation from '../components/SideNavigation';
 import '../styles/global.css';
 
 const { frontmatter } = Astro.props;
-const posts = await Astro.glob('../pages/*/*.mdx');
+const dirpath = Astro.url.pathname.split('/')[1];
+const allPosts = await Astro.glob('../pages/**/*.mdx')
+const posts = allPosts.filter((post) => post.url?.includes(dirpath));
 ---
 
 <!doctype html>
@@ -24,7 +26,7 @@ const posts = await Astro.glob('../pages/*/*.mdx');
   <body>
     <div class="note">
       <aside class="sidebar">
-        <SideNavigation parentDirectoryName={frontmatter.parent} posts={posts}/>
+        <SideNavigation dirpath={dirpath} posts={posts}/>
       </aside>
       <div class="markdown-content">
         <slot />

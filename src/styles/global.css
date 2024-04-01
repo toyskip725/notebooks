@@ -1,3 +1,6 @@
 body {
   font-family: 'Noto Sans JP', sans-serif;
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
 }

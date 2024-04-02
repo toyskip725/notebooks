@@ -1,8 +1,9 @@
 ---
 import SideNavigation from '../components/SideNavigation';
+import TableofContents from '../components/TableofContents';
 import '../styles/global.css';
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
 const dirpath = Astro.url.pathname.split('/')[1];
 const allPosts = await Astro.glob('../pages/**/*.mdx')
 const posts = allPosts.filter((post) => post.url?.includes(dirpath));
@@ -31,6 +32,9 @@ const posts = allPosts.filter((post) => post.url?.includes(dirpath));
       <div class="markdown-content">
         <slot />
       </div>
+      <aside class="table-of-contents">
+        <TableofContents headings={headings}/>
+      </aside>
     </div>
   </body>
 </html>
@@ -52,9 +56,18 @@ const posts = allPosts.filter((post) => post.url?.includes(dirpath));
   width: 60%;
   padding: 10px;
 }
+
+.table-of-contents {
+  width: 18%;
+  padding: 10px;
+  position: sticky;
+  align-self: flex-start;
+  top: 0;
+}
 </style>
 
 <script>
+  // 定理番号を付与
   const section = document.getElementById('section');
   const elements = document.getElementsByClassName('math-numbering');
   Array.prototype.forEach.call(elements, (element, index) => 

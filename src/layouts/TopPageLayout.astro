@@ -1,8 +1,9 @@
 ---
 import SideNavigation from '../components/SideNavigation';
+import TableofContents from '../components/TableofContents';
 import '../styles/global.css';
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
 const allTopPosts = await Astro.glob('../pages/*.mdx');
 const posts = allTopPosts.filter((post) => post.frontmatter.section !== 1);
 ---
@@ -30,6 +31,9 @@ const posts = allTopPosts.filter((post) => post.frontmatter.section !== 1);
       <div class="markdown-content">
         <slot />
       </div>
+      <aside class="table-of-contents">
+        <TableofContents headings={headings} />
+      </aside>
     </div>
   </body>
 </html>
@@ -50,5 +54,13 @@ const posts = allTopPosts.filter((post) => post.frontmatter.section !== 1);
 .markdown-content {
   width: 60%;
   padding: 10px;
+}
+
+.table-of-contents {
+  width: 18%;
+  padding: 10px;
+  position: sticky;
+  align-self: flex-start;
+  top: 0;
 }
 </style>

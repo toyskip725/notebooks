@@ -1,4 +1,5 @@
 ---
+import Footer from '../components/Footer';
 import SideNavigation from '../components/SideNavigation';
 import TableofContents from '../components/TableofContents';
 import '../styles/global.css';
@@ -35,6 +36,7 @@ const posts = allTopPosts.filter((post) => post.frontmatter.section !== 1);
         <TableofContents headings={headings} />
       </aside>
     </div>
+    <Footer />
   </body>
 </html>
 

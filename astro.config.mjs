@@ -10,5 +10,7 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex]
   },
-  integrations: [react(), mdx()]
+  integrations: [react(), mdx()],
+  site: "https://toyskip725.github.io",
+  base: "/notebooks",
 });

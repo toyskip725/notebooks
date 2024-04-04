@@ -18,7 +18,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4

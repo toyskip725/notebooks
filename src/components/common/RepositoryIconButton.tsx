@@ -27,7 +27,7 @@ const RepositoryIconButton = () => {
     <div style={mainStyle}>
       <a href={repositoryPath} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
         <div style={wrapperStyle}>
-          <img src="github-mark.svg" alt="go to GitHub repository" style={iconStyle}/>
+          <img src="/notebooks/github-mark.svg" alt="go to GitHub repository" style={iconStyle}/>
           <span style={textStyle}>GitHub</span>
         </div>
       </a>

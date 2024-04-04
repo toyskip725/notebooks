@@ -19,7 +19,7 @@ const SideNavigation = ({ dirpath, posts }: Props) => {
 
   return (
     <div>
-      <a style={homeButtonStyle} href="/">Notebooks</a>
+      <a style={homeButtonStyle} href="/notebooks">Notebooks</a>
       <p>{dirpath}</p>
       {displayPosts.map((post) => (<li><a href={post.url}>{post.frontmatter.title}</a></li>))}
     </div>

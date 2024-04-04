@@ -5,7 +5,7 @@ import TableofContents from '../components/TableofContents';
 import '../styles/global.css';
 
 const { frontmatter, headings } = Astro.props;
-const dirpath = Astro.url.pathname.split('/')[1];
+const dirpath = Astro.url.pathname.split('/')[2];
 const allPosts = await Astro.glob('../pages/**/*.mdx')
 const posts = allPosts.filter((post) => post.url?.includes(dirpath));
 ---

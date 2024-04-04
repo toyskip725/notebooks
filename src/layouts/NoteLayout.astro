@@ -1,4 +1,5 @@
 ---
+import Footer from '../components/Footer';
 import SideNavigation from '../components/SideNavigation';
 import TableofContents from '../components/TableofContents';
 import '../styles/global.css';
@@ -37,6 +38,7 @@ const posts = allPosts.filter((post) => post.url?.includes(dirpath));
       </aside>
     </div>
   </body>
+  <Footer />
 </html>
 
 <style>

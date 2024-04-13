@@ -1,0 +1,35 @@
+const InProgressNotification = () => {
+  const text = "このページは編集中です。 今後大きく内容が変更される可能性があります。";
+  const mainStyle: React.CSSProperties = {
+    backgroundColor: "#cccccc",
+    marginTop: "50px",
+    marginBottom: "40px",
+  };
+
+  const wrapperStyle: React.CSSProperties = {
+    display: "inline-flex",
+    alignItems: "center",
+  };
+
+  const iconStyle: React.CSSProperties = {
+    color: "#666",
+    padding: "8px 15px",
+  };
+
+  const descriptionStyle: React.CSSProperties = {
+    color: "#666",
+    fontSize: "0.9em",
+    padding: "8px",
+  }
+
+  return (
+    <div style={mainStyle}>
+      <div style={wrapperStyle}>
+        <span className="material-symbols-outlined" style={iconStyle}>error</span>
+        <p style={descriptionStyle}>{text}</p>
+      </div>
+    </div>
+  );
+};
+
+export default InProgressNotification;

@@ -3,14 +3,19 @@ layout: ../../layouts/NoteLayout.astro
 title: 群の基礎事項
 section: 1
 ---
+import MainColorDivider from "../../components/common/MainColorDivider";
+import InProgressNotification from "../../components/notification/InProgressNotification";
 import Definition from "../../components/math/Definition";
 import Proposition from "../../components/math/Proposition";
 import Example from "../../components/math/Example";
 import ExampleContent from "../../components/math/ExampleContent";
 import Proof from "../../components/math/Proof";
 
+<InProgressNotification />
 
 # 群の基礎事項
+
+<MainColorDivider />
 
 群の定義からはじめ、準同型定理までを概観する。
 
@@ -77,4 +82,3 @@ $$
 (2) 同様に $\phi$ は準同型写像なので、$\phi (a) \cdot \phi (a^{-1}) = \phi (a \cdot a^{-1}) = \phi (1_{G}) = 1_{H} $ 、および
 $\phi (a^{-1}) \cdot \phi (a) = \phi (a^{-1} \cdot a) = \phi (1_{G}) = 1_{H} $ が成り立つ。ゆえに $\phi (a)$ の逆元は $ \phi(a^{-1}) $ である。 $ \Box $
 </Proof>
-

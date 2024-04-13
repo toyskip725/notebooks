@@ -1,6 +1,10 @@
+import definceConfig from "../../../astro.config.mjs";
+
 const repositoryPath = "https://github.com/toyskip725/notebooks";
 
 const RepositoryIconButton = () => {
+  const iconSrc = `${definceConfig.base}/github-mark.svg`;
+
   const mainStyle: React.CSSProperties = {
     display: "inline-flex",
     border: "1px solid #505050",
@@ -27,7 +31,7 @@ const RepositoryIconButton = () => {
     <div style={mainStyle}>
       <a href={repositoryPath} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
         <div style={wrapperStyle}>
-          <img src="/notebooks/github-mark.svg" alt="go to GitHub repository" style={iconStyle}/>
+          <img src={iconSrc} alt="GitHub repository" style={iconStyle}/>
           <span style={textStyle}>GitHub</span>
         </div>
       </a>

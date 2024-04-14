@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/NoteLayout.astro
-title: 群の基礎事項
+title: 群の基本概念
 section: 1
 ---
 import MainColorDivider from "../../components/common/MainColorDivider";
@@ -13,11 +13,12 @@ import Proof from "../../components/math/Proof";
 
 <InProgressNotification />
 
-# 群の基礎事項
+# 群の基本概念
 
 <MainColorDivider />
 
-群の定義からはじめ、準同型定理までを概観する。
+**群**は演算が一つしかないという点では比較的単純な代数的構造ですが、数学だけでなく物理など幅広い応用先があり、また群それ自体も魅力的な研究対象です。
+このページでは、群の定義を導入するところからはじめ、いくつかの基本的な概念を概観します。
 
 ## 群の定義
 
@@ -28,7 +29,7 @@ $G$ を空でない集合とし、$\cdot : G \times G \to G$ を $G$ 上の二�
 1. \[ 逆元 \] それぞれの $a \in G$ に対して、$ a \cdot a' = 1_{G}$, $a' \cdot a = 1_{G}$ となる $a' \in G$が存在する。この元を **逆元** といい、$a^{-1}$ で表す。
 </Definition>
 
-文脈から明らかな場合、$(G, \cdot)$ を省略して $G$ で表す。
+以下文脈から明らかな場合、$(G, \cdot)$ を省略して $G$ で表す。
 
 <Example name={"一般線形群 𝐺𝐿ₙ(ℝ)"}>
 <ExampleContent client:load>

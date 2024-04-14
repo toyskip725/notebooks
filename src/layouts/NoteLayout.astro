@@ -23,6 +23,9 @@ const posts = allPosts.filter((post) => post.url?.includes(dirpath));
       integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
       crossorigin="anonymous"
     />
+    <link 
+      rel="stylesheet" 
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
     <title>{frontmatter.title}</title>
   </head>
   <body>
@@ -60,7 +63,7 @@ const posts = allPosts.filter((post) => post.url?.includes(dirpath));
 }
 
 .table-of-contents {
-  width: 18%;
+  width: 20%;
   padding: 10px;
   position: sticky;
   align-self: flex-start;

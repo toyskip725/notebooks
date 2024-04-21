@@ -1,8 +1,15 @@
-const InProgressNotification = () => {
-  const text = "このページは編集中です。 今後大きく内容が変更される可能性があります。";
+type Props = {
+  target: "page" | "section",
+};
+
+const InProgressNotification = ({ target }: Props) => {
+  const pageText = "このページは編集中です。 今後大きく内容が変更される可能性があります。";
+  const sectionText = "このセクションは編集中です。";
+  const text = target === "page" ? pageText : sectionText;
+
   const mainStyle: React.CSSProperties = {
     backgroundColor: "#cccccc",
-    marginTop: "50px",
+    marginTop: target === "page" ? "50px" : "20px",
     marginBottom: "40px",
   };
 

@@ -10,8 +10,9 @@ import Proposition from "../../components/math/Proposition";
 import Example from "../../components/math/Example";
 import ExampleContent from "../../components/math/ExampleContent";
 import Proof from "../../components/math/Proof";
+import References from "../../components/common/References";
 
-<InProgressNotification />
+<InProgressNotification target="page" />
 
 # 群の基本概念
 
@@ -47,6 +48,10 @@ $G$ を実数成分からなる $n$ 次正則行列の集合とする。この�
 </ExampleContent>
 </Example>
 
+
+## 位数
+<InProgressNotification target="section" />
+
 ## 部分群
 
 <Definition name={"部分群"}>
@@ -56,6 +61,8 @@ $G$ を群とする。$H \subset G$ が $G$ の **部分群(subgroup)** であ�
 1. 任意の $a \in G$ について, $a^{-1} \in H$ .
 </Definition>
 
+## 直積
+<InProgressNotification target="section" />
 
 ## 準同型写像
 
@@ -83,3 +90,9 @@ $$
 (2) 同様に $\phi$ は準同型写像なので、$\phi (a) \cdot \phi (a^{-1}) = \phi (a \cdot a^{-1}) = \phi (1_{G}) = 1_{H} $ 、および
 $\phi (a^{-1}) \cdot \phi (a) = \phi (a^{-1} \cdot a) = \phi (1_{G}) = 1_{H} $ が成り立つ。ゆえに $\phi (a)$ の逆元は $ \phi(a^{-1}) $ である。 $ \Box $
 </Proof>
+
+
+## 参考文献
+<References>
+[1] 雪江明彦, 2010. 『代数学1: 群論入門』. 日本評論社.
+</References>

@@ -2,6 +2,7 @@
 import Footer from '../components/Footer';
 import SideNavigation from '../components/SideNavigation';
 import TableofContents from '../components/TableofContents';
+import LastUpdatedNotification from '../components/notification/LastUpdatedNotification';
 import '../styles/global.css';
 
 const { frontmatter, headings } = Astro.props;
@@ -37,6 +38,7 @@ const title = `${frontmatter.title} | Notebooks`;
       </aside>
       <div class="markdown-content">
         <slot />
+        <LastUpdatedNotification date={frontmatter.lastUpdated}/>
       </div>
       <aside class="table-of-contents">
         <TableofContents headings={headings}/>

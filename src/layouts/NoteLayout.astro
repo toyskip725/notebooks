@@ -8,6 +8,7 @@ const { frontmatter, headings } = Astro.props;
 const dirpath = Astro.url.pathname.split('/')[2];
 const allPosts = await Astro.glob('../pages/**/*.mdx')
 const posts = allPosts.filter((post) => post.url?.includes(dirpath));
+const title = `${frontmatter.title} | Notebooks`;
 ---
 
 <!doctype html>
@@ -27,7 +28,7 @@ const posts = allPosts.filter((post) => post.url?.includes(dirpath));
     <link 
       rel="stylesheet" 
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
-    <title>{frontmatter.title}</title>
+    <title>{title}</title>
   </head>
   <body>
     <div class="note">

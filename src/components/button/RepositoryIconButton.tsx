@@ -1,9 +1,7 @@
-import definceConfig from "../../../astro.config.mjs";
-
 const repositoryPath = "https://github.com/toyskip725/notebooks";
 
 const RepositoryIconButton = () => {
-  const iconSrc = `${definceConfig.base}/github-mark.svg`;
+  const iconSrc = `${import.meta.env.SITE}${import.meta.env.BASE_URL}github-mark.svg`;
 
   const mainStyle: React.CSSProperties = {
     display: "inline-flex",

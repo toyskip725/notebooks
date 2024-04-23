@@ -1,5 +1,4 @@
 import type { MDXInstance } from "astro";
-import defineConfig from "../../astro.config.mjs";
 
 type Props = {
   dirpath: string;
@@ -8,7 +7,6 @@ type Props = {
 
 const SideNavigation = ({ dirpath, posts }: Props) => {
   const displayPosts = posts.sort((post1, post2) => post1.frontmatter.section - post2.frontmatter.section);
-  const to = defineConfig.base !== "" ? defineConfig.base : "/";
   
   const homeButtonStyle: React.CSSProperties = {
     display: "block",
@@ -21,7 +19,7 @@ const SideNavigation = ({ dirpath, posts }: Props) => {
 
   return (
     <div>
-      <a style={homeButtonStyle} href={to}>Notebooks</a>
+      <a style={homeButtonStyle} href={import.meta.env.BASE_URL}>Notebooks</a>
       <p>{dirpath}</p>
       {displayPosts.map((post) => (<li><a href={post.url}>{post.frontmatter.title}</a></li>))}
     </div>

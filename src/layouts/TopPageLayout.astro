@@ -2,12 +2,15 @@
 import Footer from '../components/site/Footer';
 import SideNavigation from '../components/site/SideNavigation';
 import TableofContents from '../components/site/TableofContents';
+import TopNavigation from '../components/site/TopNavigation';
+import { WebsiteTitle } from '../utils/constants';
 import '../styles/global.css';
+
 
 const { frontmatter, headings } = Astro.props;
 const allTopPosts = await Astro.glob('../pages/*.mdx');
 const posts = allTopPosts.filter((post) => post.frontmatter.section !== 1);
-const title = frontmatter.title !== "index" ? `${frontmatter.title} | Notebooks` : "Notebooks";
+const title = frontmatter.title !== "index" ? `${frontmatter.title} | ${WebsiteTitle}` : `${WebsiteTitle}`;
 ---
 
 <!doctype html>
@@ -24,6 +27,7 @@ const title = frontmatter.title !== "index" ? `${frontmatter.title} | Notebooks`
     <title>{title}</title>
   </head>
   <body>
+    <TopNavigation />
     <div class="note">
       <aside class="sidebar">
         <SideNavigation dirpath={""} posts={posts}/>

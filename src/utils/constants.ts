@@ -1,1 +1,1 @@
-export const WebsiteTitle = "suminotebooks";
+export const WebsiteTitle = "sumi notebooks";

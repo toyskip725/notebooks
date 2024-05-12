@@ -30,7 +30,7 @@ const title = frontmatter.title !== "index" ? `${frontmatter.title} | ${WebsiteT
     <TopNavigation />
     <div class="note">
       <aside class="sidebar">
-        <SideNavigation dirpath={""} posts={posts}/>
+        <SideNavigation posts={posts} currentPath={Astro.url.pathname}/>
       </aside>
       <div class="markdown-content">
         <slot />

@@ -6,6 +6,7 @@ import TopNavigation from '../components/site/TopNavigation';
 import LastUpdatedNotification from '../components/notification/LastUpdatedNotification';
 import { WebsiteTitle } from '../utils/constants';
 import '../styles/global.css';
+import BackButton from '../components/link/BackButton';
 
 const { frontmatter, headings } = Astro.props;
 const dirpath = Astro.url.pathname.split('/')[2];
@@ -31,7 +32,8 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
     <TopNavigation />
     <div class="note">
       <aside class="sidebar">
-        <SideNavigation dirpath={dirpath} posts={posts}/>
+        <SideNavigation posts={posts} currentPath={Astro.url.pathname} />
+        <BackButton name={"ノート一覧"} href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/posts`}/>
       </aside>
       <div class="markdown-content">
         <slot />

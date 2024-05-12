@@ -1,11 +1,11 @@
 import type { MDXInstance } from "astro";
 
 type Props = {
-  dirpath: string;
-  posts: MDXInstance<Record<string, any>>[]
+  posts: MDXInstance<Record<string, any>>[];
+  currentPath: string;
 }
 
-const SideNavigation = ({ dirpath, posts }: Props) => {
+const SideNavigation = ({ posts, currentPath }: Props) => {
   const displayPosts = posts.sort((post1, post2) => post1.frontmatter.section - post2.frontmatter.section);
 
   const mainStyle: React.CSSProperties = {
@@ -34,14 +34,18 @@ const SideNavigation = ({ dirpath, posts }: Props) => {
   return (
     <div style={mainStyle}>
       <div style={dividerStyle}/>
-      {displayPosts.map((post) => (
-        <>
-          <li style={linkElementStyle}>
-            <a style={linkTextStyle} href={post.url}>{post.frontmatter.title}</a>
-          </li>
-          <div style={dividerStyle}/>
-        </>
-      ))}
+      {displayPosts.map((post) => {
+        const url = post.url ?? "";
+        const linkText = currentPath.includes(url) ? `▶ ${post.frontmatter.title}` : post.frontmatter.title;
+        return (
+          <>
+            <li style={linkElementStyle}>
+              <a style={linkTextStyle} href={post.url}>{linkText}</a>
+            </li>
+            <div style={dividerStyle}/>
+          </>
+        );
+      })}
     </div>
   );
 };

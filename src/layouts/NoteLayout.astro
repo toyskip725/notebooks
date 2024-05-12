@@ -31,7 +31,7 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
     <TopNavigation />
     <div class="note">
       <aside class="sidebar">
-        <SideNavigation dirpath={dirpath} posts={posts}/>
+        <SideNavigation posts={posts} currentPath={Astro.url.pathname} />
       </aside>
       <div class="markdown-content">
         <slot />

@@ -36,7 +36,7 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
     <div class="note">
       <aside class="sidebar">
         <SideNavigation posts={posts} currentPath={Astro.url.pathname} />
-        <BackButton name={"ノート一覧"} href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/posts`}/>
+        <BackButton href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/posts`}/>
       </aside>
       <div class="markdown-content">
         <slot />

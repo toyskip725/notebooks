@@ -15,14 +15,15 @@ const Proof = ({ children }: Props) => {
   };
 
   const contentStyle = {
-    borderLeft: "1px solid #000",
+    borderLeft: "1px solid #2a2a31",
     padding: "0px 20px"
   };
   
   const buttonStyle = {
     fontSize: "1em",
-    border: "1px solid #000",
-    backgroundColor: "#fff",
+    border: "1px solid #2a2a31",
+    color: "#2a2a31",
+    backgroundColor: "#fafafa",
     padding: "2px 15px",
   };
 

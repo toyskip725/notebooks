@@ -5,7 +5,7 @@ const TopNavigation = () => {
     padding: "20px 10px 0px 10px",
   };
   const titleStyle: React.CSSProperties = {
-    color: "#000",
+    color: "#2a2a31",
     textAlign: "left",
     textDecoration: "none"
   };

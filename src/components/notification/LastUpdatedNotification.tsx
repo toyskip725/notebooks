@@ -6,13 +6,13 @@ const LastUpdatedNotification = ({ date }: Props) => {
   const text = `最終更新日 :  ${date}`;
 
   const mainStyle: React.CSSProperties = {
-    borderTop: "1px solid #000",
+    borderTop: "1px solid #2a2a31",
     marginTop: "20px",
     width: "50%",
   };
 
   const textStyle: React.CSSProperties = {
-    color: "#000",
+    color: "#2a2a31",
     fontSize: "0.9em",
     padding: "5px 0px",
   };

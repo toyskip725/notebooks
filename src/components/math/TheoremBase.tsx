@@ -23,7 +23,7 @@ const TheoremBase = ({ name, theoremType, children }: Props) => {
   }
 
   const titleStyle = {
-    color: "#ffffff",
+    color: "#fafafa",
     backgroundColor: "#007989",
     fontWeight: "bold",
     width: "fit-content",

@@ -1,0 +1,17 @@
+.note-footer {
+  border-top: 1px solid #2a2a31;
+  padding-top: 5px;
+  margin-top: 20px;
+  width: 50%;
+}
+
+.note-footer-text {
+  color: #2a2a31;
+  font-size: 0.9rem;
+}
+
+@media screen and (max-width: 640px) {
+  p.note-footer-text {
+    font-size: 0.8rem;
+  }
+}

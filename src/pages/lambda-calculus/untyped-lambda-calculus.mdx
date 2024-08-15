@@ -2,10 +2,11 @@
 layout: ../../layouts/NoteLayout.astro
 title: ラムダ計算の基礎事項
 section: 1
+version: 0.1.0
 lastUpdated: 2024/05/08
 ---
 import MainColorDivider from "../../components/design/MainColorDivider";
-import InProgressNotification from "../../components/notification/InProgressNotification";
+import InProgress from "../../components/common/InProgress";
 import Definition from "../../components/math/Definition";
 import Proposition from "../../components/math/Proposition";
 import Example from "../../components/math/Example";
@@ -69,7 +70,7 @@ $$
 
 ## 自由変数と束縛変数
 
-<InProgressNotification target={"section"} />
+<InProgress target={"section"} />
 
 <Definition name={"自由変数"}>
 ラムダ項 $M$ の自由変数の集合を $\mathrm{FV}(M)$で表す。

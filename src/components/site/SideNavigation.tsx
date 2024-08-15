@@ -22,7 +22,7 @@ const SideNavigation = ({ posts, currentPath }: Props) => {
     listStyle: "none",
   };
   const linkTextStyle: React.CSSProperties = {
-    color: "#000",
+    color: "#2a2a31",
     textDecoration: "none",
   };
   const dividerStyle: React.CSSProperties = {

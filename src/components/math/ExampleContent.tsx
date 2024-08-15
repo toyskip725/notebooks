@@ -14,8 +14,8 @@ const ExampleContent = ({ children }: Props) => {
   const buttonStyle: React.CSSProperties = {
     fontSize: "1em",
     color: "#a22041",
-    backgroundColor: "#fff",
-    border: "1px none #fff",
+    backgroundColor: "#fafafa",
+    border: "1px none #fafafa",
     padding: "10px"
   };
   const buttonContainerStyle: React.CSSProperties = {

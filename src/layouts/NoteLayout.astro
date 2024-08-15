@@ -3,7 +3,7 @@ import Footer from '../components/site/Footer';
 import SideNavigation from '../components/site/SideNavigation';
 import TableofContents from '../components/site/TableofContents';
 import TopNavigation from '../components/site/TopNavigation';
-import LastUpdatedNotification from '../components/notification/LastUpdatedNotification';
+import NoteFooter from '../components/note/NoteFooter';
 import { WebsiteTitle } from '../utils/constants';
 import '../styles/global.css';
 import BackButton from '../components/link/BackButton';
@@ -36,11 +36,11 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
     <div class="note">
       <aside class="sidebar">
         <SideNavigation posts={posts} currentPath={Astro.url.pathname} />
-        <BackButton name={"ノート一覧"} href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/posts`}/>
+        <BackButton href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/posts`}/>
       </aside>
       <div class="markdown-content">
         <slot />
-        <LastUpdatedNotification date={frontmatter.lastUpdated}/>
+        <NoteFooter version={frontmatter.version} lastUpdated={frontmatter.lastUpdated}/>
       </div>
       <aside class="table-of-contents">
         <TableofContents headings={headings}/>
@@ -66,6 +66,24 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
 .markdown-content {
   width: 60%;
   padding: 10px;
+
+  h1 {
+    color: #2a2a31;
+    font-weight: normal;
+  }
+  h2 {
+    color: #2a2a31;
+    font-weight: normal;
+    padding-top: 1.75em;
+  }
+  p {
+    color: #2a2a31;
+    line-height: 1.75rem;
+  }
+  li {
+    color: #2a2a31;
+    line-height: 1.75rem;
+  }
 }
 
 .table-of-contents {
@@ -74,6 +92,19 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
   position: sticky;
   align-self: flex-start;
   top: 0;
+}
+
+@media screen and (max-width: 640px) {
+  aside {
+    display: none;
+  }
+  .note {
+    display: block;
+  }
+  .markdown-content {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 </style>
 

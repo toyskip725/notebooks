@@ -2,7 +2,7 @@ type Props = {
   target: "page" | "section",
 };
 
-const InProgressNotification = ({ target }: Props) => {
+const InProgress = ({ target }: Props) => {
   const pageText = "このページは編集中です。 今後大きく内容が変更される可能性があります。";
   const sectionText = "このセクションは編集中です。";
   const text = target === "page" ? pageText : sectionText;
@@ -39,4 +39,4 @@ const InProgressNotification = ({ target }: Props) => {
   );
 };
 
-export default InProgressNotification;
+export default InProgress;

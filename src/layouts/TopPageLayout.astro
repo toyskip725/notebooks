@@ -3,6 +3,7 @@ import Footer from '../components/site/Footer';
 import SideNavigation from '../components/site/SideNavigation';
 import TableofContents from '../components/site/TableofContents';
 import TopNavigation from '../components/site/TopNavigation';
+import BackButton from '../components/link/BackButton';
 import { WebsiteTitle } from '../utils/constants';
 import '../styles/global.css';
 
@@ -34,6 +35,7 @@ const title = frontmatter.title !== "index" ? `${frontmatter.title} | ${WebsiteT
     <div class="note">
       <aside class="sidebar">
         <SideNavigation posts={posts} currentPath={Astro.url.pathname}/>
+        <BackButton href={`${import.meta.env.SITE}`}/>
       </aside>
       <div class="markdown-content">
         <slot />
@@ -62,6 +64,22 @@ const title = frontmatter.title !== "index" ? `${frontmatter.title} | ${WebsiteT
 .markdown-content {
   width: 60%;
   padding: 10px;
+  h1 {
+    color: #2a2a31;
+    font-weight: normal;
+  }
+  h2 {
+    color: #2a2a31;
+    font-weight: normal;
+  }
+  p {
+    color: #2a2a31;
+    line-height: 1.75rem;
+  }
+  li {
+    color: #2a2a31;
+    line-height: 1.75rem;
+  }
 }
 
 .table-of-contents {
@@ -70,5 +88,31 @@ const title = frontmatter.title !== "index" ? `${frontmatter.title} | ${WebsiteT
   position: sticky;
   align-self: flex-start;
   top: 0;
+}
+
+@media screen and (max-width: 640px) {
+  aside {
+    display: none;
+  }
+  .markdown-content {
+    width: auto;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+    h2 {
+      font-size: 1.25rem;
+    }
+    p {
+      font-size: 0.875rem;
+    }
+    li {
+      font-size: 0.875rem;
+    }
+    .MathJax {
+      transform: scale(0.875);
+      overflow-x: auto;
+    }
+  }
 }
 </style>

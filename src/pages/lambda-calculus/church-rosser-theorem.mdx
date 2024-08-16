@@ -1,0 +1,331 @@
+---
+layout: ../../layouts/NoteLayout.astro
+title: チャーチ・ロッサーの定理
+section: 2
+version: 0.1.0
+lastUpdated: 2024/08/16
+---
+import Definition from "../../components/math/Definition";
+import Proposition from "../../components/math/Proposition";
+import Lemma from "../../components/math/Lemma";
+import Theorem from "../../components/math/Theorem";
+import Corollary from "../../components/math/Corollary";
+import Example from "../../components/math/Example";
+import ExampleContent from "../../components/math/ExampleContent";
+import Proof from "../../components/math/Proof";
+import Memo from "../../components/common/Memo";
+import InProgress from "../../components/common/InProgress";
+import References from "../../components/common/References";
+
+
+チャーチ・ロッサーの定理およびその証明と、いくつかの帰結について。
+
+## チャーチ・ロッサー性 (合流性)
+
+<Example name={"β簡約の合流性"}>
+<ExampleContent client:load>
+ラムダ項 $(\lambda x.(\lambda y. xy) ((\lambda z. z) w)) v$ の $\beta$ 簡約を考える。
+
+束縛変数$x$, $y$, $z$の順に簡約を行うと、
+$$
+\begin{align}
+(\lambda x.(\lambda y. xy) ((\lambda z. z) w)) v &\to_{\beta} (\lambda y. vy) ((\lambda z. z) w) \\
+&\to_{\beta} v((\lambda z. z)w) \\
+&\to_{\beta} vw
+\end{align}
+$$
+
+逆に、$z$, $y$, $x$の順に簡約を行うと、
+$$
+\begin{align}
+(\lambda x.(\lambda y. xy) ((\lambda z. z) w)) v &\to_{\beta} (\lambda x.(\lambda y. xy) w) v \\
+&\to_{\beta} (\lambda x.xw) v \\
+&\to_{\beta} vw
+\end{align}
+$$
+
+どちらの順でも、最終的には$vw$へと簡約されるが、途中の計算結果は大きく異なっている。
+</ExampleContent>
+</Example>
+
+このように、「簡約手順によって、途中の計算結果は様々でありうるが、簡約を継続すると同じ結果に辿り着く」というこの性質は、
+**チャーチ・ロッサー性** (Church-Rosser Property) 、または**合流性** (confluence) という名前で知られている。
+
+実際、一般に$\beta$ 簡約がこの性質を持つことは厳密に証明可能である。
+
+<Theorem name={"チャーチ・ロッサーの定理"}>
+$M, N, L$ をラムダ項とし、$M \twoheadrightarrow_{\beta} N$ および $M \twoheadrightarrow_{\beta} L$ が成り立つとする。
+このとき、あるラムダ項 $Z$ が存在して、$N \twoheadrightarrow_{\beta} Z$ および $L \twoheadrightarrow_{\beta} Z$ が成り立つ。
+
+$$
+\begin{CD}
+M @>{\beta}>>  N\\
+@V{\beta}VV   @V{\beta}VV\\
+L @>>{\beta}> Z
+\end{CD}
+$$
+</Theorem>
+
+
+## 証明
+
+<InProgress target={"section"} />
+
+$\twoheadrightarrow_{\beta}$ がチャーチ・ロッサー性を満たすことを直接示すのは難しいため、証明は以下のような方針で行う。
+
+1. ラムダ項どうしの「理想的」な二項関係を定義する。
+1. その二項関係が $\twoheadrightarrow_{\beta}$ と関係として等価であることを証明する。
+1. その二項関係がチャーチ・ロッサー性を満たすことを証明する。
+
+<Memo>
+「$\twoheadrightarrow_{\beta}$ がチャーチ・ロッサー性を満たすことを直接示す」のどこに困難があるかを本来は説明すべきだが、ひとまず省略する。
+また、ここでは証明のイメージを示すことを優先して、敢えてやや不正確な言葉遣いを選んでいる。
+</Memo>
+
+<Definition name={"並行的β簡約"}>
+ラムダ項の集合 $\lambda(V)$ 上の二項関係として、**並行的1ステップ $\beta$ 簡約** (parallel 1-step $\beta$-reduction) ($\overset{p}{\to}_{\beta}$という記号で表す)を以下の導出規則により定義する：
+
+**公理**
+$$
+\begin{prooftree}
+  \AxiomC{}
+  \RightLabel{$p$-id}
+  \UnaryInfC{$x \overset{p}{\to}_{\beta} x$}
+\end{prooftree}
+$$
+
+**簡約規則**
+$$
+\begin{prooftree}
+  \AxiomC{$M \overset{p}{\to}_{\beta} M'$}
+  \AxiomC{$N \overset{p}{\to}_{\beta} N'$}
+  \RightLabel{$p$-$\beta$}
+  \BinaryInfC{$(\lambda x.M)N \overset{p}{\to}_{\beta} M'[x:=N']$}
+\end{prooftree}
+$$
+
+$$
+\begin{prooftree}
+  \AxiomC{$M \overset{p}{\to}_{\beta} M'$}
+  \AxiomC{$N \overset{p}{\to}_{\beta} N'$}
+  \RightLabel{$p$-cong}
+  \BinaryInfC{$MN \overset{p}{\to}_{\beta} M'N'$}
+\end{prooftree}
+$$
+
+$$
+\begin{prooftree}
+  \AxiomC{$M \overset{p}{\to}_{\beta} M'$}
+  \RightLabel{$p$-$\xi$}
+  \UnaryInfC{$\lambda x.M \overset{p}{\to}_{\beta} \lambda x.M'$}
+\end{prooftree}
+$$
+</Definition>
+
+<Proposition>
+任意のラムダ項 $M$ について、$M \overset{p}{\to}_{\beta} M$である。
+</Proposition>
+
+<Proof client:load>
+証明はラムダ項 $M$ の構成にかんする帰納法による。
+
+\[initial step\] $M$ が変数 $x$ の場合は、$p$-$\text{id}$規則により $M \overset{p}{\to}_{\beta} M$ である。
+
+\[inductive step\]
+
+- $M = \lambda x.N$の場合：$N \overset{p}{\to}_{\beta} N$ を仮定する（$\because$ 帰納法の仮定）と、$p$-$\xi$規則により
+$\lambda x.N \overset{p}{\to}_{\beta} \lambda x.N$ となるので、$M \overset{p}{\to}_{\beta} M$ である。
+
+- $M = NL$の場合：$N \overset{p}{\to}_{\beta} N$ および $L \overset{p}{\to}_{\beta} L$ を仮定する（$\because$ 帰納法の仮定）と、
+$p$-$\text{cong}$規則により$NL \overset{p}{\to}_{\beta} NL$ となるので、$M \overset{p}{\to}_{\beta} M$ である。
+
+以上より、任意のラムダ項 $M$ について、$M \overset{p}{\to}_{\beta} M$ が成り立つ。 $\Box$
+</Proof>
+
+<Proposition>
+$M \overset{p}{\to}_{\beta} M'$ かつ $N \overset{p}{\to}_{\beta} N'$ であるならば、$M[x:= N] \overset{p}{\to}_{\beta} M'[x:= N']$ が成り立つ。
+</Proposition>
+
+<Proof client:load>
+証明は $M \overset{p}{\to}_{\beta} M'$ の導出にかんする帰納法による。
+
+\[initial step\] $M \overset{p}{\to}_{\beta} M'$ が $p$-$\text{id}$ 規則からただちに得られるのは以下の二通りの場合である：
+
+- $M = M' = x$ の場合
+- $M = M' = z$ ($x \neq z$) の場合
+
+(1) \[$M = M' = x$の場合\]
+
+$M[x:= N] = x[x:= N] = N$, $M'[x:= N'] = x[x:= N'] = N'$ なので、求めるべき導出関係は $N \overset{p}{\to}_{\beta} N'$ となるが、
+これは仮定より成り立つ。
+
+(2) \[$M = M' = z$ ($x \neq z$) の場合\]
+
+$M[x:= N] = z[x:= N] = z$, $M'[x:= N'] = z[x:= N'] = z$ なので、求めるべき導出関係は $z \overset{p}{\to}_{\beta} z$ となるが、
+これは$M \overset{p}{\to}_{\beta} M'$そのものなので、やはり成り立つ。
+
+\[inductive step\] $M \overset{p}{\to}_{\beta} M'$を得たときに最後に適用した規則によって場合分けする：
+
+- $p$-$\beta$規則の場合
+- $p$-$\text{cong}$規則の場合
+- $p$-$\xi$規則の場合
+
+(1) \[$p$-$\beta$規則の場合\] 
+
+$M = (\lambda y. L)P$, $M' = L'[y:= P']$とし、$L$, $P$ については、
+それぞれ$L[x:= N] \overset{p}{\to}_{\beta} L'[x:= N']$、および$P[x:=N] \overset{p}{\to}_{\beta} P'[x:=N']$が成り立っていると仮定する ($\because$ 帰納法の仮定)。
+
+$p$-$\beta$規則を適用すると
+$$
+\begin{prooftree}
+  \AxiomC{$L[x:= N] \overset{p}{\to}_{\beta} L'[x:= N']$}
+  \AxiomC{$P[x:=N] \overset{p}{\to}_{\beta} P'[x:=N']$}
+  \RightLabel{$p$-$\beta$}
+  \BinaryInfC{$(\lambda y.L[x:=N])P[x:=N] \overset{p}{\to}_{\beta} L'[x:=N'][y:=P'[x:=N']]$}
+\end{prooftree}
+$$
+となるが、
+
+$$
+\begin{align}
+(\lambda y.L[x:=N])P[x:=N] &= (\lambda y.L)[x:=N]P[x:=N] \\
+  &= ((\lambda y.L)P)[x:=N] \\
+  &= M[x:=N]
+\end{align}
+$$
+および
+$$
+\begin{align}
+L'[x:=N'][y:=P'[x:=N']] &= (L'[y:=P'])[x:=N'] (\because x \neq y) \\
+  &= M'[x:=N']
+\end{align}
+$$
+なので、$M[x:= N] \overset{p}{\to}_{\beta} M'[x:= N']$ が成り立つ。
+
+(2) \[$p$-$\text{cong}$規則の場合\]
+
+$M = LP$, $M' = L'P'$とし、$L$, $P$ については、
+それぞれ$L[x:= N] \overset{p}{\to}_{\beta} L'[x:= N']$、および$P[x:=N] \overset{p}{\to}_{\beta} P'[x:=N']$が成り立っていると仮定する ($\because$ 帰納法の仮定)。
+
+$p$-$\text{cong}$規則を適用すると
+$$
+\begin{prooftree}
+  \AxiomC{$L[x:= N] \overset{p}{\to}_{\beta} L'[x:= N']$}
+  \AxiomC{$P[x:= N] \overset{p}{\to}_{\beta} P'[x:= N']$}
+  \RightLabel{$p$-cong}
+  \BinaryInfC{$L[x:= N]P[x:= N] \overset{p}{\to}_{\beta} L'[x:= N']P'[x:= N']$}
+\end{prooftree}
+$$
+となるが、
+
+$$
+L[x:= N]P[x:= N] = (LP)[x:=N] = M[x:=N]
+$$
+および
+
+$$
+L'[x:= N']P'[x:= N'] = (L'P')[x:=N'] = M'[x:=N']
+$$
+なので、$M[x:= N] \overset{p}{\to}_{\beta} M'[x:= N']$ が成り立つ。
+
+(3) \[$p$-$\xi$規則の場合\]
+
+$M = \lambda y. L$, $M' = \lambda y. L'$とし、$L$ については$L[x:= N] \overset{p}{\to}_{\beta} L'[x:= N']$が成り立っていると仮定する ($\because$ 帰納法の仮定)。
+
+$p$-$\xi$規則を適用すると
+$$
+\begin{prooftree}
+  \AxiomC{$L[x:= N] \overset{p}{\to}_{\beta} L'[x:= N']$}
+  \RightLabel{$p$-$\xi$}
+  \UnaryInfC{$\lambda y.L[x:= N] \overset{p}{\to}_{\beta} \lambda y. L'[x:= N']$}
+\end{prooftree}
+$$
+となるが、
+$$
+\begin{align}
+\lambda y.L[x:= N] &= (\lambda y.L)[x:= N] (\because x \neq y)\\
+&= M[x:=N]
+\end{align}
+$$
+$$
+\begin{align}
+\lambda y. L'[x:= N'] &= (\lambda y. L')[x:= N'] (\because x \neq y) \\
+&= M'[x:=N']
+\end{align}
+$$
+なので、$M[x:= N] \overset{p}{\to}_{\beta} M'[x:= N']$ が成り立つ。 $\Box$
+</Proof>
+
+<Lemma>
+以下の (1) (2) が成り立つ：
+
+1. $M \to_{\beta} M'$ ならば $M \overset{p}{\to}_{\beta} M'$ である。
+1. $M \overset{p}{\to}_{\beta} M'$ ならば $M \twoheadrightarrow_{\beta} M'$ である。
+
+特に、$\overset{p}{\to}_{\beta}$ の反射推移閉包を $\overset{p}{\twoheadrightarrow}_{\beta}$ と表すことにすると、
+$$
+\twoheadrightarrow_{\beta} = \overset{p}{\twoheadrightarrow}_{\beta}
+$$ 
+が成り立つ。
+</Lemma>
+
+
+<Lemma>
+$M$, $N$をラムダ項とし、$M \overset{p}{\to}_{\beta} N$であるとする。このとき $M$ に対して一意的に定まるラムダ項 $M^{*}$ が存在して、$N \overset{p}{\to}_{\beta} M^{*}$ が成り立つ。
+</Lemma>
+
+<Proof client:load>
+以下に大まかな証明の方針を示す。
+
+- $M^{*}$ を $M$ の**極大簡約形**として定義し、その一意性を示す。
+- 実際に、$M \overset{p}{\to}_{\beta} N$ ならば $N \overset{p}{\to}_{\beta} M^{*}$ であることを証明する。ここでの証明は、$M \overset{p}{\to}_{\beta} N$ の導出にかんする帰納法による。
+
+</Proof>
+
+この補題の帰結として、**$\overset{p}{\to}_{\beta}$ がチャーチ・ロッサー性を満たす**ことに注意したい。
+これは、ラムダ項$M$, $N$, $P$について、$M \overset{p}{\to}_{\beta} N$ かつ $M \overset{p}{\to}_{\beta} P$ であるとすると、$M$の極大簡約形 $M^{*}$に対して
+$N \overset{p}{\to}_{\beta} M^{*}$ かつ $P \overset{p}{\to}_{\beta} M^{*}$ であることが言えるからである。
+
+$$
+\begin{CD}
+M @>{p}>>  N\\
+@V{p}VV   @V{p}VV\\
+P @>>{p}> M^{*}
+\end{CD}
+$$
+
+以上を前準備として、チャーチ・ロッサーの定理は以下のように証明できる。
+
+<Proof client:load>
+補題2.7より、$\overset{p}{\to}_{\beta}$ がチャーチ・ロッサー性を満たすので、その反射推移閉包 $\overset{p}{\twoheadrightarrow}_{\beta}$ もチャーチ・ロッサー性を満たす。
+補題2.6で見たように、$\twoheadrightarrow_{\beta} = \overset{p}{\twoheadrightarrow}_{\beta}$が成り立つことから、
+$\overset{p}{\twoheadrightarrow}_{\beta}$ もまたチャーチ・ロッサー性を満たすことがわかる。 $\Box$
+</Proof>
+
+## いくつかの帰結
+
+<InProgress target={"section"} />
+
+<Corollary>
+$M$, $N$をラムダ項とし、$M =_{\beta} N$ であるとする。このとき、あるラムダ項 $Z$ が存在して、$M \twoheadrightarrow_{\beta} Z$ および $N \twoheadrightarrow_{\beta} Z$ が成り立つ。
+</Corollary>
+
+<Corollary>
+$M$, $N$をラムダ項とし、$M =_{\beta} N$ かつ $N$ は $\beta$ 正規形であるとする。このとき、 $M \twoheadrightarrow_{\beta} N$ が成り立つ。
+</Corollary>
+
+<Corollary>
+ラムダ項は高々一つの $\beta$ 正規形を持つ。
+</Corollary>
+
+<Memo>
+「高々一つ」としているのは、$\beta$ 正規形を持たないラムダ項も存在するからである。
+例えば、ラムダ項 $(\lambda x. xx)(\lambda x. xx)$ は $\beta$ 正規形を持たない。
+</Memo>
+
+
+## 参考文献
+<References>
+[1] Peter Selinger, 2013. "Lecture notes on the lambda calculus". https://doi.org/10.48550/arXiv.0804.3434. <br />
+[2] 横内寛文, 1994. 『情報数学講座7 プログラム意味論』. 共立出版.
+</References>

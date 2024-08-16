@@ -3,6 +3,7 @@ import Footer from '../components/site/Footer';
 import SideNavigation from '../components/site/SideNavigation';
 import TableofContents from '../components/site/TableofContents';
 import TopNavigation from '../components/site/TopNavigation';
+import NoteHeader from '../components/note/NoteHeader';
 import NoteFooter from '../components/note/NoteFooter';
 import { WebsiteTitle } from '../utils/constants';
 import '../styles/global.css';
@@ -40,6 +41,7 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
         <BackButton href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/posts`}/>
       </aside>
       <div class="markdown-content">
+        <NoteHeader title={frontmatter.title} />
         <slot />
         <NoteFooter version={frontmatter.version} lastUpdated={frontmatter.lastUpdated}/>
       </div>

@@ -1,9 +1,9 @@
 ---
 layout: ../../layouts/NoteLayout.astro
-title: ラムダ計算の基礎事項
+title: 型なしラムダ計算
 section: 1
-version: 0.1.0
-lastUpdated: 2024/05/08
+version: 0.2.0
+lastUpdated: 2024/08/16
 ---
 import Definition from "../../components/math/Definition";
 import Proposition from "../../components/math/Proposition";
@@ -22,7 +22,7 @@ import References from "../../components/common/References";
 <Definition name={"ラムダ項"}>
 (1) 記号の集合は、以下のように与えられるとする：
 
-- $V$：変数記号 $ x, y, \ldots $ の集合 (変数記号は無限とみなせる程度には存在するものとする)
+- $V$：変数記号 $ x, y, \ldots $ の集合
 - $\lambda, ., (, )$：補助記号
 
 (2) **ラムダ項** (lambda term) の集合 $\lambda(V)$ を以下のように帰納的に定義する：
@@ -95,7 +95,7 @@ $\mathrm{FV}(M)$を以下のように帰納的に定義する：
 
 (2)
 - substitution
-  - $ (ML)[x:=N] = M[x:=N]L[x:=N] $
+  - $ (ML)[x:=N] $ $= M[x:=N]L[x:=N] $
 - rename
   - $ (MN)[x/y] = M[x/y]N[x/y] $
 
@@ -103,7 +103,7 @@ $\mathrm{FV}(M)$を以下のように帰納的に定義する：
 - substitution
   - $ (\lambda x.M)[x:=N] = \lambda x.M $
   - $ (\lambda y.M)[x:=N] = \lambda y.(M[x:=N]) $ (ただし、$x \neq y$ かつ $ y \notin \mathrm{FV}(N) $ とする)
-  - $ (\lambda y.M)[x:=N] = ((\lambda y.M)[y/y'])[x:=N] $ (ただし、$x \neq y$ かつ $y \in \mathrm{FV}(N) $であり、$y'$ は $M, N$ において未使用の変数であるとする)
+  - $ (\lambda y.M)[x:=N] $ $= ((\lambda y.M)[y/y'])[x:=N] $ (ただし、$x \neq y$ かつ $y \in \mathrm{FV}(N) $であり、$y'$ は $M, N$ において未使用の変数であるとする)
 - rename
   - $ (\lambda x.M)[x/y] = \lambda y.(M[x/y]) $
   - $ (\lambda z.M)[x/y] = \lambda z.(M[x/y]) $ (ただし、$x \neq z$ とする)
@@ -263,6 +263,25 @@ $$
 </Proof>
 </ExampleContent>
 </Example>
+
+## β正規形
+
+<Definition name={"β基・β正規形"}>
+(1) $M$, $N$ をラムダ項とする。
+$$
+(\lambda x. M)N
+$$
+の形式のラムダ項を **$\beta$ 基** ($\beta$-redex) といい、これに1ステップの $\beta$ 簡約を適用した
+$$
+M [x:= N]
+$$
+の形式のラムダ項をその **$\beta$ 簡約形** (contractum / reduct) という。
+
+(2) $\beta$ 基を部分項として持たないラムダ項のことを **$\beta$ 正規形** ($\beta$-normal form) という。
+</Definition>
+
+<InProgress target={"section"} />
+
 
 ## 参考文献
 <References>

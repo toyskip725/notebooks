@@ -1,0 +1,45 @@
+---
+layout: ../../layouts/NoteLayout.astro
+title: 単純型付きラムダ計算
+section: 1
+version: 0.1.0
+lastUpdated: 2024/08/16
+---
+import Definition from "../../components/math/Definition";
+import Proposition from "../../components/math/Proposition";
+import Lemma from "../../components/math/Lemma";
+import Theorem from "../../components/math/Theorem";
+import Corollary from "../../components/math/Corollary";
+import Example from "../../components/math/Example";
+import ExampleContent from "../../components/math/ExampleContent";
+import Proof from "../../components/math/Proof";
+import Memo from "../../components/common/Memo";
+import InProgress from "../../components/common/InProgress";
+import References from "../../components/common/References";
+
+
+## 型と構文規則
+
+<Definition name={"型"}>
+(1) 記号の集合は、以下のように与えられるとする：
+
+- $\mathscr{B}$：基底型記号 $ A, B, \ldots $ の集合
+- $\to$：補助記号
+
+(2) **型** (type) の集合 $\tau(\mathscr{B})$ を以下のように帰納的に定義する：
+
+1. **基底型** $A \in \mathscr{B}$ は型である。
+1. $\sigma, \tau$ が型であるならば、$\sigma \to \tau$も型である。
+
+BNF記法で表記すると、以下のようになる：
+
+$$
+\sigma, \tau ::= A \mid \sigma \to \tau
+$$
+</Definition>
+
+## 参考文献
+<References>
+[1] Peter Selinger, 2013. "Lecture notes on the lambda calculus". https://doi.org/10.48550/arXiv.0804.3434. <br />
+[2] 横内寛文, 1994. 『情報数学講座7 プログラム意味論』. 共立出版.
+</References>

@@ -4,14 +4,19 @@ title: ノート一覧
 section: 3
 ---
 import MainColorDivider from "../components/design/MainColorDivider";
+import Algebra from "../templates/Algebra";
+import LambdaCalculus from "../templates/LambdaCalculus";
+import TypeTheory from "../templates/TypeTheory";
 
 # {frontmatter.title}
 
 <MainColorDivider />
 
 ## Algebra
-- [群](../algebra/group-basics)
+<Algebra showColor={true} />
 
 ## Lambda Calculus
-- [型なしラムダ計算](../lambda-calculus/untyped-lambda-calculus)
-- [チャーチ・ロッサーの定理](../lambda-calculus/church-rosser-theorem)
+<LambdaCalculus showColor={true} />
+
+## Type Theory
+<TypeTheory showColor={true} />

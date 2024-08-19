@@ -7,12 +7,10 @@ import NoteHeader from '../components/note/NoteHeader';
 import NoteFooter from '../components/note/NoteFooter';
 import { WebsiteTitle } from '../utils/constants';
 import '../styles/global.css';
-import BackButton from '../components/link/BackButton';
 
 const { frontmatter, headings } = Astro.props;
-const dirpath = Astro.url.pathname.split('/')[2];
-const allPosts = await Astro.glob('../pages/**/*.mdx')
-const posts = allPosts.filter((post) => post.url?.includes(dirpath));
+
+const parentPath = Astro.url.pathname.split('/').slice(0, -1).join('/');
 const title = `${frontmatter.title} | ${WebsiteTitle}`;
 ---
 
@@ -37,7 +35,7 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
     <TopNavigation />
     <div class="note">
       <div class="markdown-content">
-        <NoteHeader title={frontmatter.title} pathname={Astro.url.pathname} />
+        <NoteHeader title={frontmatter.title} pathname={parentPath} />
         <slot />
         <NoteFooter version={frontmatter.version} lastUpdated={frontmatter.lastUpdated}/>
       </div>

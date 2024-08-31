@@ -9,7 +9,8 @@ import '../styles/global.css';
 
 const { frontmatter, headings } = Astro.props;
 
-const parentPath = Astro.url.pathname.split('/').slice(0, 2).join('/');
+const pathname =  Astro.url.pathname;
+const parentPath = pathname.includes("notebooks") ? pathname.split('/').slice(0, 3).join('/') : pathname.split('/').slice(0, 2).join('/');
 const title = `${frontmatter.title} | ${WebsiteTitle}`;
 ---
 

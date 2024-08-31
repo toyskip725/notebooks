@@ -14,7 +14,7 @@ const TypeTheory = ({ showColor }: Props) => {
   return (
     <div style={mainStyle}>
       <ol>
-        <li><a href={`${import.meta.env.SITE}/${PATH}/simply-typed-lambda-calculus`}>単純型付きラムダ計算</a></li>
+        <li><a href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/${PATH}/simply-typed-lambda-calculus`}>単純型付きラムダ計算</a></li>
       </ol>
     </div>
   );

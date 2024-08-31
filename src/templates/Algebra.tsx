@@ -14,7 +14,7 @@ const Algebra = ({ showColor }: Props) => {
   return (
     <div style={mainStyle}>
       <ol>
-        <li><a href={`${import.meta.env.SITE}/${PATH}/group-basics`}>群</a></li>
+        <li><a href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/${PATH}/group-basics`}>群</a></li>
       </ol>
     </div>
   );

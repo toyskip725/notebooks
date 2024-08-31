@@ -1,6 +1,5 @@
 ---
 import Footer from '../components/site/Footer';
-import SideNavigation from '../components/site/SideNavigation';
 import TableofContents from '../components/site/TableofContents';
 import TopNavigation from '../components/site/TopNavigation';
 import NoteHeader from '../components/note/NoteHeader';
@@ -10,7 +9,7 @@ import '../styles/global.css';
 
 const { frontmatter, headings } = Astro.props;
 
-const parentPath = Astro.url.pathname.split('/').slice(0, -1).join('/');
+const parentPath = Astro.url.pathname.split('/').slice(0, 2).join('/');
 const title = `${frontmatter.title} | ${WebsiteTitle}`;
 ---
 

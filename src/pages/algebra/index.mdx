@@ -1,0 +1,16 @@
+---
+layout: ../../layouts/TopPageLayout.astro
+title: Algebra
+section: 1
+---
+import MainColorDivider from "../../components/design/MainColorDivider";
+import FooterLink from "../../components/link/FooterLink";
+import Algebra from "../../templates/Algebra";
+
+# {frontmatter.title}
+
+<MainColorDivider />
+
+<Algebra showColor={false} />
+
+<FooterLink title={"ノート一覧に戻る"} url={`${import.meta.env.SITE}/posts`} icon={"back"} />

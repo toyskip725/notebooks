@@ -1,0 +1,180 @@
+---
+layout: ../../layouts/NoteLayout.astro
+title: 単純型付きラムダ計算
+section: 1
+version: 0.1.0
+lastUpdated: 2024/08/31
+---
+import Definition from "../../components/math/Definition";
+import Proposition from "../../components/math/Proposition";
+import Lemma from "../../components/math/Lemma";
+import Theorem from "../../components/math/Theorem";
+import Corollary from "../../components/math/Corollary";
+import Example from "../../components/math/Example";
+import ExampleContent from "../../components/math/ExampleContent";
+import Proof from "../../components/math/Proof";
+import Memo from "../../components/common/Memo";
+import InProgress from "../../components/common/InProgress";
+import References from "../../components/common/References";
+
+
+## 型と構文規則
+<InProgress target={"section"} />
+
+<Definition name={"型"}>
+(1) 記号の集合は、以下のように与えられるとする：
+
+- $\mathscr{B}$：変数記号 $ A, B, \ldots $ の集合
+- $\to$：補助記号
+
+(2) **型** (type) の集合 $\tau(\mathscr{B})$ を以下のように帰納的に定義する：
+
+1. **基底型** $\tau \in \mathscr{B}$ は型である。
+1. $A, B$ が型であるならば、$A \to B$も型である。
+
+BNF記法で表記すると、以下のようになる：
+
+$$
+A, B ::= \tau \mid A \to B
+$$
+</Definition>
+
+ラムダ項の定義は、[型なしラムダ計算](../lambda-calculus/untyped-lambda-calculus)の場合とほぼ同様である：
+
+<Definition name={"ラムダ項"}>
+
+**ラムダ項**を以下のように定義する：
+$$
+M, N ::= x \mid (MN) \mid (\lambda x^{A}.M)
+$$
+</Definition>
+
+<Definition name={"型判定式"}>
+(1) **型文脈** (typing context) $\Gamma$ を以下のように帰納的に定義する：
+
+1. **空文脈** $\langle \rangle$ は型文脈である。
+1. $\Gamma$ が型文脈であるならば、$x$をまだ $\Gamma$ に現れていない変数、$A$ を型とすると、$\Gamma, x : A$ も型文脈である。
+
+(2) $M$ をラムダ項、$A$ を型、$\Gamma$ を型文脈とするとき、**型判定式** (typing judgement) とは以下の形式の記号列である： 
+$$
+\Gamma \vdash M : A
+$$
+この型判定式は「$M$ は型文脈 $\Gamma$ のもとで型 $A$ を持つ」ということを表す。
+</Definition>
+
+ただし、我々が以下考察の対象とするのは、**適切に型付けられた** (well-typed) 型判定式のみである。
+この適切な型付けの概念は、これまでと同様に形式体系の形で与えられる：
+
+<Definition name={"型付け規則"}>
+型付け規則を以下の規則により定義する。
+
+**型付け公理**
+$$
+\begin{prooftree}
+  \AxiomC{}
+  \RightLabel{ id}
+  \UnaryInfC{$x : A \vdash x : A$}
+\end{prooftree}
+$$
+
+**型付け規則**
+$$
+\begin{prooftree}
+  \AxiomC{$\Gamma, x : A \vdash M : B$}
+  \RightLabel{ abs}
+  \UnaryInfC{$\Gamma \vdash \lambda x^{A}. M : A \to B$}
+\end{prooftree}
+$$
+
+$$
+\begin{prooftree}
+  \AxiomC{$\Gamma \vdash M : A \to B$}
+  \AxiomC{$\Gamma \vdash N : A$}
+  \RightLabel{ app}
+  \BinaryInfC{$\Gamma \vdash MN : B$}
+\end{prooftree}
+$$
+
+**構造規則**
+$$
+\begin{prooftree}
+  \AxiomC{$\Gamma \vdash M : A$}
+  \RightLabel{ k}
+  \UnaryInfC{$\Gamma, y : B \vdash M : A$}
+\end{prooftree}
+
+(\text{where} \quad y \notin \Gamma)
+$$
+
+$$
+\begin{prooftree}
+  \AxiomC{$\Gamma, x : A, y : B, \Delta \vdash M : C$}
+  \RightLabel{ c}
+  \UnaryInfC{$\Gamma, y : B, x : A, \Delta \vdash M : C$}
+\end{prooftree}
+$$
+</Definition>
+
+<Example name={"型判定式の例"}>
+<ExampleContent client:load>
+
+(1) $\vdash \lambda x^{A} \lambda y^{B} .x : A \to (B \to A)$
+
+<Proof client:load>
+$$
+\begin{prooftree}
+  \AxiomC{$x : A \vdash x : A$}
+  \RightLabel{ k}
+  \UnaryInfC{$x : A, y : B \vdash x : A$}
+  \RightLabel{ abs}
+  \UnaryInfC{$x : A \vdash \lambda y^{B} .x : B \to A$}
+  \RightLabel{ abs}
+  \UnaryInfC{$\vdash \lambda x^{A} \lambda y^{B} .x : A \to (B \to A)$}
+\end{prooftree}
+$$
+</Proof>
+
+</ExampleContent>
+</Example>
+
+## 簡約公理
+
+<InProgress target={"section"} />
+
+<Definition name={"簡約公理"}>
+
+(1) ラムダ項に対し、**1ステップ簡約** (1-step reduction) の公理を以下のように定義する：
+
+$$
+\begin{align}
+(\lambda x^{A}. M)N &\to M[x:=N]   \tag{$\beta_{\to}$} \\
+(\lambda x^{A}. M)x &\to M   \tag{$\eta_{\to}$} \\
+\end{align}
+$$
+
+(2) $\lambda(V)$ 上の二項関係 $\twoheadrightarrow$ を1ステップ簡約の反射推移閉包として定義する：すなわち、
+
+- [$\to \subset \twoheadrightarrow$] $M \to N$ ならば $M \twoheadrightarrow N$.
+- [反射性] $M \twoheadrightarrow M$.
+- [推移性] $M \twoheadrightarrow N$ かつ $M \twoheadrightarrow L$ ならば、$M \twoheadrightarrow L$. 
+- [最小性] もし $\lambda(V)$ 上の二項関係 $R$ が上記を満たすならば、$\twoheadrightarrow \subset R$.
+</Definition>
+
+## 代入補題と型保存定理
+
+<InProgress target={"section"} />
+
+<Lemma name={"型に関する代入補題"}>
+$\Gamma, x : B \vdash M : A$ かつ $\Gamma \vdash N : B$ ならば、$\Gamma \vdash M[x := N] : A$ である。
+</Lemma>
+
+<Theorem name={"型保存定理"}>
+$\Gamma \vdash M : A$ かつ $M \twoheadrightarrow N$ ならば、$\Gamma \vdash N : A$ である。
+</Theorem>
+
+## 参考文献
+<References>
+[1] Peter Selinger, 2013. "Lecture notes on the lambda calculus". https://doi.org/10.48550/arXiv.0804.3434. <br />
+[2] 龍田真, 1992. 『レクチャーノート／ソフトウェア学 1 型理論』. 近代科学社. <br />
+[3] 横内寛文, 1994. 『情報数学講座7 プログラム意味論』. 共立出版.
+</References>

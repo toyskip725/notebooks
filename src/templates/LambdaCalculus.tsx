@@ -1,22 +1,17 @@
-import { mainColor } from "../utils/mainColor";
-
-type Props = {
-  showColor: boolean;
-};
+import NoteLinkElement from "../components/link/NoteLinkElement";
 
 const PATH = "lambda-calculus";
-const LambdaCalculus = ({ showColor }: Props) => {
-  const mainStyle: React.CSSProperties = {};
-  if (showColor) {
-    mainStyle.borderLeft = `solid 5px ${mainColor.crimson}`;
-  }
+const LambdaCalculus = () => {
+  const listStyle: React.CSSProperties = {
+    padding: "0em",
+  };
 
   return (
-    <div style={mainStyle}>
-      <ol>
-        <li><a href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/${PATH}/untyped-lambda-calculus`}>型なしラムダ計算</a></li>
-        <li><a href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/${PATH}/church-rosser-theorem`}>チャーチ・ロッサーの定理</a></li>
-      </ol>
+    <div>
+      <ul style={listStyle}>
+        <NoteLinkElement segment={PATH} section={1} path={"untyped-lambda-calculus"} title={"型なしラムダ計算"} />
+        <NoteLinkElement segment={PATH} section={2} path={"church-rosser-theorem"} title={"チャーチ・ロッサーの定理"} />
+      </ul>
     </div>
   );
 };

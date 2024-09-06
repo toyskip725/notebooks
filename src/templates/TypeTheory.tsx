@@ -1,21 +1,16 @@
-import { mainColor } from "../utils/mainColor";
-
-type Props = {
-  showColor: boolean;
-};
+import NoteLinkElement from "../components/link/NoteLinkElement";
 
 const PATH = "type-theory";
-const TypeTheory = ({ showColor }: Props) => {
-  const mainStyle: React.CSSProperties = {};
-  if (showColor) {
-    mainStyle.borderLeft = `solid 5px ${mainColor.crimson}`;
-  }
+const TypeTheory = () => {
+  const listStyle: React.CSSProperties = {
+    padding: "0em",
+  };
 
   return (
-    <div style={mainStyle}>
-      <ol>
-        <li><a href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/${PATH}/simply-typed-lambda-calculus`}>単純型付きラムダ計算</a></li>
-      </ol>
+    <div>
+      <ul style={listStyle}>
+        <NoteLinkElement segment={PATH} section={1} path={"simply-typed-lambda-calculus"} title={"単純型付きラムダ計算"} />
+      </ul>
     </div>
   );
 };

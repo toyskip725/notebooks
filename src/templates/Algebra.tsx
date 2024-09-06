@@ -1,21 +1,16 @@
-import { mainColor } from "../utils/mainColor";
-
-type Props = {
-  showColor: boolean;
-};
+import NoteLinkElement from "../components/link/NoteLinkElement";
 
 const PATH = "algebra";
-const Algebra = ({ showColor }: Props) => {
-  const mainStyle: React.CSSProperties = {};
-  if (showColor) {
-    mainStyle.borderLeft = `solid 5px ${mainColor.navy}`;
-  }
+const Algebra = () => {
+  const listStyle: React.CSSProperties = {
+    padding: "0em",
+  };
 
   return (
-    <div style={mainStyle}>
-      <ol>
-        <li><a href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/${PATH}/group-basics`}>群</a></li>
-      </ol>
+    <div>
+      <ul style={listStyle}>
+        <NoteLinkElement segment={PATH} section={1} path={"group-basics"} title={"群"} />
+      </ul>
     </div>
   );
 };

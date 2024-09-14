@@ -1,0 +1,294 @@
+---
+layout: ../../layouts/NoteLayout.astro
+title: "単純型付きラムダ計算 (2) - さまざまな型"
+section: 2
+version: 0.1.0
+lastUpdated: 2024/09/15
+---
+import Definition from "../../components/math/Definition";
+import Proposition from "../../components/math/Proposition";
+import Lemma from "../../components/math/Lemma";
+import Theorem from "../../components/math/Theorem";
+import Corollary from "../../components/math/Corollary";
+import Example from "../../components/math/Example";
+import ExampleContent from "../../components/math/ExampleContent";
+import Proof from "../../components/math/Proof";
+import Link from "../../components/common/Link";
+import Memo from "../../components/common/Memo";
+import InProgress from "../../components/common/InProgress";
+import HeadingFrame from "../../components/common/HeadingFrame";
+import References from "../../components/common/References";
+
+
+<Link title={"単純型付きラムダ計算 (1)"} path={"/type-theory/simply-typed-lambda-calculus"} /> の続き。
+単純型（パラメータのない型）の範囲でのさまざまな型構成子について。
+
+## 直積型
+
+<InProgress target={"section"} />
+
+<Definition name={"直積型"}>
+
+(1) **型**の集合 $\tau(T)$ を以下の規則により拡張する： 
+
+- $A, B$ が型であるならば、$A \times B$ も型である。
+
+(2) **ラムダ項**の集合 $\lambda(V)$ を以下の規則により拡張する：
+
+- $M, N$ がラムダ項であるならば、**ペアリング** (pairing) $\langle M, N \rangle$ もラムダ項である。
+- $M$ がラムダ項であるならば、 **射影** (projection) $\pi_{1} M$, $\pi_{2} M$ もラムダ項である。
+</Definition>
+
+型 $A \times B$ を **直積型** (product type) という。
+
+<Definition name={"直積型の型付け規則"}>
+
+直積型の型付け規則として、以下の規則を追加する：
+
+$$
+\begin{prooftree}
+  \AxiomC{$\Gamma \vdash M : A$}
+    \AxiomC{$\Gamma \vdash N : B$}
+  \RightLabel{ product}
+  \BinaryInfC{$\Gamma \vdash \langle M, N \rangle : A \times B$}
+\end{prooftree}
+$$
+
+$$
+\begin{prooftree}
+  \AxiomC{$\Gamma \vdash M : A \times B$}
+  \RightLabel{ projection}
+  \UnaryInfC{$\Gamma \vdash \pi_{1} M : A$}
+\end{prooftree}
+
+\quad
+
+\begin{prooftree}
+  \AxiomC{$\Gamma \vdash M : A \times B$}
+  \RightLabel{ projection}
+  \UnaryInfC{$\Gamma \vdash \pi_{2} M : B$}
+\end{prooftree}
+$$
+</Definition>
+
+<Definition name={"直積型の簡約公理"}>
+
+直積型の簡約公理として、以下の簡約公理を追加する：
+$$
+\begin{align}
+\pi_{1} \langle M, N \rangle \quad &\leadsto \quad M \tag{$\beta_{\times}$} \\
+\pi_{2} \langle M, N \rangle \quad &\leadsto \quad N \\
+\end{align}
+$$
+
+$$
+\begin{align}
+\langle \pi_{1}M, \pi_{2}M \rangle \quad \leadsto \quad M \tag{$\eta_{\times}$}
+\end{align}
+$$
+</Definition>
+
+<Example name={"直積型の型判断"}>
+<ExampleContent client:load>
+
+</ExampleContent>
+</Example>
+
+## 直和型
+
+<InProgress target={"section"} />
+
+<Definition name={"直和型"}>
+(1) **型**の集合 $\tau(T)$ を以下の規則により拡張する： 
+
+- $A, B$ が型であるならば、$A + B$ も型である。
+
+(2) **ラムダ項**の集合 $\lambda(V)$ を以下の規則により拡張する：
+
+- $M$ がラムダ項であるならば、**入射** (injection) $\textsf{in}_{1}M$, $\textsf{in}_{2}M$ もラムダ項である。
+- $x, y$ が変数、$M, N, L$ がラムダ項であるならば、 $\textsf{ case } M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L$ もラムダ項である。
+</Definition>
+
+型 $A + B$ を**直和型** (sum type) という。
+
+<Definition name={"直和型の型付け規則"}>
+直和型の型付け規則として、以下の規則を追加する：
+
+$$
+\begin{prooftree}
+  \AxiomC{$\Gamma \vdash M : A$}
+  \RightLabel{ injection}
+  \UnaryInfC{$\Gamma \vdash \textsf{in}_{1}M : A + B$}
+\end{prooftree}
+
+\quad 
+
+\begin{prooftree}
+  \AxiomC{$\Gamma \vdash N : B$}
+  \RightLabel{ injection}
+  \UnaryInfC{$\Gamma \vdash \textsf{in}_{2}N : A + B$}
+\end{prooftree}
+$$
+
+$$
+\begin{prooftree}
+  \AxiomC{$\Gamma \vdash M : A + B$}
+    \AxiomC{$\Gamma, x : A \vdash N : C$}
+      \AxiomC{$\Gamma, y : B \vdash L : C$}
+  \RightLabel{ cases}
+  \TrinaryInfC{$\Gamma \vdash \textsf{ case } M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L : C$}
+\end{prooftree}
+$$
+</Definition>
+
+<Definition name={"直和型の簡約公理"}>
+直和型の簡約公理として、以下の簡約公理を追加する：
+
+$$
+\begin{align}
+\textsf{ case } \textsf{in}_{1}M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L \quad &\leadsto \quad N[x:=M] \tag{$\beta_{+}$}  \\
+\textsf{ case } \textsf{in}_{2}M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L \quad &\leadsto \quad L[y:=M]   \\
+\end{align}
+$$
+
+</Definition>
+
+<Example name={"直和型の型判断"}>
+<ExampleContent client:load>
+
+</ExampleContent>
+</Example>
+
+直積型と直和型の型構成子 $\times$, $+$ を加えた体系においても、型保存定理が成り立つ。
+これは、追加した簡約公理が「その公理に則って簡約を行っても型が保存される」という意味で正当なものであることの証でもある。
+
+<Proposition name={"型保存定理 - 直積型・直和型"}>
+$\Gamma \vdash M : A$ は直積型と直和型を追加して拡張した体系における型判断であるとする。
+このとき、$M \overset{*}{\leadsto} N$ ならば、$\Gamma \vdash N : A$ である。
+</Proposition>
+
+<Proof client:load>
+
+新しく追加した簡約公理が型を保存することを示せばよい。
+
+(1) [$\beta_{\times}$]
+
+第一射影 $\pi_{1}$ の場合のみ示す。1ステップの簡約が公理 $\beta_{\times}$ からただちに得られる場合、具体的には $M = \pi_{1} \langle N, L \rangle$
+と表せるので、$\Gamma \vdash \pi_{1} \langle N, L \rangle : A$ と仮定する。このとき、直前の導出を考えると、
+
+$$
+\begin{prooftree}
+  \AxiomC{$\vdots$}
+  \noLine
+  \UnaryInfC{$\Gamma \vdash N : A$}
+    \AxiomC{$\vdots$}
+    \noLine
+    \UnaryInfC{$\Gamma \vdash L : B$}
+  \RightLabel{ product}
+  \BinaryInfC{$\Gamma \vdash \langle N, L \rangle : A \times B$}
+  \RightLabel{ projection}
+  \UnaryInfC{$\Gamma \vdash \pi_{1} \langle N, L \rangle : A$}
+\end{prooftree}
+$$
+
+のようになる：すなわち、この仮定の下では $\Gamma \vdash N : A$ の導出が存在する。
+
+
+(2) [$\eta_{\times}$]
+
+1ステップの簡約が $\eta_{\times}$ からただちに得られる場合、具体的には $M = \langle \pi_{1}N, \pi_{2}N \rangle$ と表せるので、
+$\Gamma \vdash \langle \pi_{1}N, \pi_{2}N \rangle : A' \times A''$ と仮定する（$A = A' \times A''$）。このとき、直前の導出を考えると、
+
+$$
+\begin{prooftree}
+  \AxiomC{$\vdots$}
+  \noLine
+  \UnaryInfC{$\Gamma \vdash N : A' \times A''$}
+  \RightLabel{ projection}
+  \UnaryInfC{$\Gamma \vdash \pi_{1}N : A'$}
+    \AxiomC{$\vdots$}
+    \noLine
+    \UnaryInfC{$\Gamma \vdash N : A' \times A''$}
+    \RightLabel{ projection}
+    \UnaryInfC{$\Gamma \vdash \pi_{2}N : A''$}
+  \RightLabel{ product}
+  \BinaryInfC{$\Gamma \vdash \langle \pi_{1}N, \pi_{2}N \rangle : A' \times A''$}
+\end{prooftree}
+$$
+
+のようになる：すなわち、この仮定の下では $\Gamma \vdash N : A' \times A''$ の導出が存在するので、$\Gamma \vdash N : A$ である。
+
+(3) [$\beta_{+}$]
+
+$\textsf{in}_{1}$ の場合のみ示す。1ステップの簡約が $\beta_{+}$ からただちに得られる場合、具体的には 
+
+- $M = \textsf{ case } \textsf{in}_{1}L \textsf{ of } x \Rightarrow P \mid y \Rightarrow Q$
+- $N = P[x:=L]$
+
+と表せるので、$\Gamma \vdash \textsf{case } \textsf{in}_{1}L \textsf{ of } x \Rightarrow P \mid y \Rightarrow Q : A$ と仮定する。このとき、直前の導出を考えると、
+
+$$
+\begin{prooftree}
+  \AxiomC{$\vdots$}
+  \noLine
+  \UnaryInfC{$\Gamma \vdash L : B$}
+  \RightLabel {injection}
+  \UnaryInfC{$\Gamma \vdash \text{in}_{1}L : B + C$}
+    \AxiomC{$\vdots$}
+    \noLine
+    \UnaryInfC{$\Gamma, x : B \vdash P : A$}
+      \AxiomC{$\vdots$}
+      \noLine
+      \UnaryInfC{$\Gamma, y : C \vdash Q : A$}
+  \RightLabel { cases}
+  \TrinaryInfC{$\Gamma \vdash \textsf{case } \textsf{in}_{1}L \textsf{ of } x \Rightarrow P \mid y \Rightarrow Q : A$}
+\end{prooftree}
+$$
+
+のようになる：すなわち、この仮定の下では $\Gamma \vdash L : A'$ および $\Gamma, x : A' \vdash P : A$ の導出が存在する。
+ゆえに、型に関する代入補題により、$ \Gamma \vdash P[x:=L] : A$ が成り立つ。
+これは求める $\Gamma \vdash N : A$ の型判断である。
+$\Box$
+</Proof>
+
+## トップ型とボトム型
+
+<Definition name={"トップ型・ボトム型"}>
+(1) **型**の集合 $\tau(T)$ を以下の規則により拡張する： 
+
+- $\textsf{1}$ は型である。
+- $\textsf{0}$ は型である。
+
+(2) **ラムダ項**の集合 $\lambda(V)$ を以下の規則により拡張する：
+
+- $*$ はラムダ項である。
+- $M$ がラムダ項、$A$ が型であるならば、$\epsilon_{A} M$ はラムダ項である。
+</Definition>
+
+<Definition name={"トップ型・ボトム型の型付け規則"}>
+トップ型とボトム型の型付け規則として、以下の規則を追加する：
+
+$$
+\begin{prooftree}
+  \AxiomC{ }
+  \RightLabel{ top}
+  \UnaryInfC{$\Gamma \vdash * : \textsf{1}$}
+\end{prooftree}
+$$
+
+$$
+\begin{prooftree}
+  \AxiomC{$\Gamma \vdash M : \textsf{0}$}
+  \RightLabel{ bottom}
+  \UnaryInfC{$\Gamma \vdash \epsilon_{A} M : A$}
+\end{prooftree}
+$$
+</Definition>
+
+
+## 参考文献
+<References>
+[1] Peter Selinger. 2013. "Lecture notes on the lambda calculus". https://doi.org/10.48550/arXiv.0804.3434. <br />
+[2] Jean-Yves Girard, Paul Taylor, Yves Lafont. 1989. *Proofs and Types*. Cambridge : Cambridge University Press.  <br />
+[3] Greg Restall. 2000. *An Introduction to Substructural Logics*. London : Routledge.
+</References>

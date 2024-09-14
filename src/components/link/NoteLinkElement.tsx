@@ -26,9 +26,13 @@ const NoteLinkElement = ({ segment, section, path, title }: Props) => {
     <li style={mainStyle}>
       <div style={{ display: "flex", alignItems: "center" }}>
         <span style={numberStyle}>{section}</span>
-        <a href={href} style={linkStyle}>
+        { path !== "" ? (
+          <a href={href} style={linkStyle}>
+            <span style={sectionStyle}>{title}</span>
+          </a>
+        ) : (
           <span style={sectionStyle}>{title}</span>
-        </a>
+        )}
       </div>
     </li>
   );

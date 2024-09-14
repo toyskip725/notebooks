@@ -9,7 +9,8 @@ const TypeTheory = () => {
   return (
     <div>
       <ul style={listStyle}>
-        <NoteLinkElement segment={PATH} section={1} path={"simply-typed-lambda-calculus"} title={"単純型付きラムダ計算"} />
+        <NoteLinkElement segment={PATH} section={1} path={"simply-typed-lambda-calculus"} title={"単純型付きラムダ計算 (1)"} />
+        <NoteLinkElement segment={PATH} section={2} path={"simple-additional-types"} title={"単純型付きラムダ計算 (2) - さまざまな型"} />
       </ul>
     </div>
   );

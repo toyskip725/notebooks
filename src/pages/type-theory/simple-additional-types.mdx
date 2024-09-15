@@ -74,16 +74,19 @@ $$
 <Definition name={"直積型の簡約公理"}>
 
 直積型の簡約公理として、以下の簡約公理を追加する：
+
+$(\beta_{\times})$
 $$
 \begin{align}
-\pi_{1} \langle M, N \rangle \quad &\leadsto \quad M \tag{$\beta_{\times}$} \\
+\pi_{1} \langle M, N \rangle \quad &\leadsto \quad M \\
 \pi_{2} \langle M, N \rangle \quad &\leadsto \quad N \\
 \end{align}
 $$
 
+$(\eta_{\times})$
 $$
 \begin{align}
-\langle \pi_{1}M, \pi_{2}M \rangle \quad \leadsto \quad M \tag{$\eta_{\times}$}
+\langle \pi_{1}M, \pi_{2}M \rangle \quad \leadsto \quad M 
 \end{align}
 $$
 </Definition>
@@ -144,10 +147,11 @@ $$
 <Definition name={"直和型の簡約公理"}>
 直和型の簡約公理として、以下の簡約公理を追加する：
 
+$(\beta_{+})$
 $$
 \begin{align}
-\textsf{ case } \textsf{in}_{1}M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L \quad &\leadsto \quad N[x:=M] \tag{$\beta_{+}$}  \\
-\textsf{ case } \textsf{in}_{2}M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L \quad &\leadsto \quad L[y:=M]   \\
+\textsf{ case } \textsf{in}_{1}M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L \quad &\leadsto \quad N[x:=M] \\
+\textsf{ case } \textsf{in}_{2}M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L \quad &\leadsto \quad L[y:=M] \\
 \end{align}
 $$
 

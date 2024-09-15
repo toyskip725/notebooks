@@ -163,10 +163,18 @@ $$
 (1) ラムダ項に対し、**1ステップ簡約** (1-step reduction) を以下の簡約公理と簡約規則によって定義する：
 
 **簡約公理**
+
+$(\beta_{\to})$
 $$
 \begin{align}
-(\lambda x^{A}. M)N \quad &\leadsto \quad M[x:=N] \tag{$\beta_{\to}$} \\
-\lambda x^{A}. Mx \quad &\leadsto \quad M \quad (\text{where } x \notin \text{FV}(M)) \tag{$\eta_{\to}$} \\
+(\lambda x^{A}. M)N \quad &\leadsto \quad M[x:=N]
+\end{align}
+$$
+
+$(\eta_{\to})$
+$$
+\begin{align}
+\lambda x^{A}. Mx \quad &\leadsto \quad M \quad (\text{where } x \notin \text{FV}(M))
 \end{align}
 $$
 

@@ -1,109 +1,102 @@
----
-layout: ../../layouts/NoteLayout.astro
+<SumiML version="1.0" />
+<Frontmatter>
 title: 単純型付きラムダ計算 (1)
 section: 1
-version: 0.3.0
-lastUpdated: 2024/09/15
----
-import Definition from "../../components/math/Definition";
-import Proposition from "../../components/math/Proposition";
-import Lemma from "../../components/math/Lemma";
-import Theorem from "../../components/math/Theorem";
-import Corollary from "../../components/math/Corollary";
-import Example from "../../components/math/Example";
-import ExampleContent from "../../components/math/ExampleContent";
-import Proof from "../../components/math/Proof";
-import Link from "../../components/common/Link";
-import Memo from "../../components/common/Memo";
-import InProgress from "../../components/common/InProgress";
-import HeadingFrame from "../../components/common/HeadingFrame";
-import References from "../../components/common/References";
+version: 0.4.0
+lastupdated: 2024/10/20
+</Frontmatter>
 
+<Document>
 
 型付きラムダ計算について。
 
-## 型と構文規則
-<InProgress target={"section"} />
+<Section title="型と構文規則">
 
-われわれは、**型** (type) の概念をあくまでプリミティブなものとして扱う。
+われわれは、<Strong>型</Strong> (type) の概念をあくまでプリミティブなものとして扱う。
 つまり、ここでは型は、（たとえば集合や命題などの）別の何かによってそれ以上解明されることのないものと理解される。
 
-<Definition name={"型"}>
+<Definition name="型">
 (1) 記号の集合は、以下のように与えられるとする：
 
-- $T$：変数記号の集合
-- $\to$：補助記号
+<List type="itemized">
+  </> $T$：変数記号の集合
+  </> $\to$：補助記号
+</List>
 
-(2) **型** (type) の集合 $\tau(T)$ を以下のように帰納的に定義する：
+(2) <Strong>型</Strong> (type) の集合 $\tau(T)$ を以下のように帰納的に定義する：
 
-1. **基底型** $t \in T$ は型である。
-1. $A, B$ が型であるならば、$A \to B$も型である。
+<List type="ordered">
+  </> <Strong>基底型</Strong> $t \in T$ は型である。
+  </> $A, B$ が型であるならば、$A \to B$ も型である。
+</List>
 
 BNF記法で表記すると、以下のようになる：
 
-$$
+<Math>
 A, B ::= t \mid A \to B
-$$
+</Math>
 </Definition>
 
-ラムダ項の定義は、<Link title={"型なしラムダ計算"} path={"/lambda-calculus/untyped-lambda-calculus"} />の場合とほぼ同様である：
+ラムダ項の定義は、<Link href="/lambda-calculus/untyped-lambda-calculus">型なしラムダ計算</Link> の場合とほぼ同様である：
 
-<Definition name={"ラムダ項"}>
+<Definition name="ラムダ項">
+<Strong>ラムダ項</Strong>を以下のように定義する：
 
-**ラムダ項**を以下のように定義する：
-$$
+<Math>
 M, N ::= x \mid (MN) \mid (\lambda x^{A}.M)
-$$
+</Math>
 </Definition>
 
-<Definition name={"型判断"}>
-(1) **型文脈** (typing context) $\Gamma$ を以下のように帰納的に定義する：
+<Definition name="型判断">
+(1) <Strong>型文脈</Strong> (typing context) $\Gamma$ を以下のように帰納的に定義する：
 
-1. **空文脈** $\langle \rangle$ は型文脈である。
-1. $\Gamma$ が型文脈であるならば、$x$をまだ $\Gamma$ に現れていない変数、$A$ を型とすると、$\Gamma, x : A$ も型文脈である。
+<List type="ordered">
+  </> <Strong>空文脈</Strong> $\langle \rangle$ は型文脈である。
+  </> $\Gamma$ が型文脈であるならば、$x$をまだ $\Gamma$ に現れていない変数、$A$ を型とすると、$\Gamma, x : A$ も型文脈である。
+</List>
 
-(2) $M$ をラムダ項、$A$ を型、$\Gamma$ を型文脈とするとき、**型判断** (typing judgement) とは以下の形式の記号列である： 
-$$
+(2) $M$ をラムダ項、$A$ を型、$\Gamma$ を型文脈とするとき、<Strong>型判断</Strong> (typing judgement) とは以下の形式の記号列である： 
+<Math>
 \Gamma \vdash M : A
-$$
+</Math>
 この型判断は「$M$ は型文脈 $\Gamma$ のもとで型 $A$ を持つ」ということを表す。
 </Definition>
 
-ただし、我々が以下考察の対象とするのは、**適切に型付けられた** (well-typed) 型判断のみである。
+ただし、我々が以下考察の対象とするのは、<Strong>適切に型付けられた</Strong> (well-typed) 型判断のみである。
 この適切な型付けの概念は、これまでと同様に形式体系の形で与えられる：
 
-<Definition name={"型付け規則"}>
+<Definition name="型付け規則">
 型付け規則を以下の規則により定義する。
 
-**型付け公理**
-$$
+<Strong>型付け公理</Strong>
+<Math>
 \begin{prooftree}
   \AxiomC{}
   \RightLabel{ id}
   \UnaryInfC{$x : A \vdash x : A$}
 \end{prooftree}
-$$
+</Math>
 
-**型付け規則**
-$$
+<Strong>型付け規則</Strong>
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma, x : A \vdash M : B$}
   \RightLabel{ abs}
   \UnaryInfC{$\Gamma \vdash \lambda x^{A}. M : A \to B$}
 \end{prooftree}
-$$
+</Math>
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma \vdash M : A \to B$}
   \AxiomC{$\Gamma \vdash N : A$}
   \RightLabel{ app}
   \BinaryInfC{$\Gamma \vdash MN : B$}
 \end{prooftree}
-$$
+</Math>
 
-**構造規則**
-$$
+<Strong>構造規則</Strong>
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma \vdash M : A$}
   \UnaryInfC{$\Gamma, x : B \vdash M : A$}
@@ -112,9 +105,9 @@ $$
 \quad
 
 (\text{where} \quad x \notin \Gamma)
-$$
+</Math>
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma, x : B \vdash M : A$}
   \UnaryInfC{$\Gamma \vdash M : A$}
@@ -123,23 +116,21 @@ $$
 \quad
 
 (\text{where} \quad x \notin \text{FV}(M))
-$$
+</Math>
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma, x : A, y : B, \Delta \vdash M : C$}
   \UnaryInfC{$\Gamma, y : B, x : A, \Delta \vdash M : C$}
 \end{prooftree}
-$$
+</Math>
 </Definition>
 
-<Example name={"型判断の例"}>
-<ExampleContent client:load>
-
+<Example name="型判断の例">
 (1) $\vdash \lambda x^{A} \lambda y^{B} .x : A \to (B \to A)$
 
-<Proof client:load>
-$$
+<Proof>
+<Math>
 \begin{prooftree}
   \AxiomC{$x : A \vdash x : A$}
   \UnaryInfC{$x : A, y : B \vdash x : A$}
@@ -148,39 +139,37 @@ $$
   \RightLabel{ abs}
   \UnaryInfC{$\vdash \lambda x^{A} \lambda y^{B} .x : A \to (B \to A)$}
 \end{prooftree}
-$$
+</Math>
 </Proof>
-
-</ExampleContent>
 </Example>
 
-## 簡約公理
+</Section>
 
-<InProgress target={"section"} />
+<Section title="簡約公理">
 
-<Definition name={"簡約公理・簡約規則"}>
+<Definition name="簡約公理・簡約規則">
 
-(1) ラムダ項に対し、**1ステップ簡約** (1-step reduction) を以下の簡約公理と簡約規則によって定義する：
+(1) ラムダ項に対し、<Strong>1ステップ簡約</Strong> (1-step reduction) を以下の簡約公理と簡約規則によって定義する：
 
-**簡約公理**
+<Strong>簡約公理</Strong>
 
 $(\beta_{\to})$
-$$
+<Math>
 \begin{align}
 (\lambda x^{A}. M)N \quad &\leadsto \quad M[x:=N]
 \end{align}
-$$
+</Math>
 
 $(\eta_{\to})$
-$$
+<Math>
 \begin{align}
 \lambda x^{A}. Mx \quad &\leadsto \quad M \quad (\text{where } x \notin \text{FV}(M))
 \end{align}
-$$
+</Math>
 
-**簡約規則**
+<Strong>簡約規則</Strong>
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$M \leadsto M'$}
   \RightLabel{ cong}
@@ -194,54 +183,58 @@ $$
   \RightLabel{ cong}
   \UnaryInfC{$NM \leadsto NM'$}
 \end{prooftree}
-$$
+</Math>
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$M \leadsto M'$}
   \RightLabel{ $\xi$}
   \UnaryInfC{$\lambda x^{A}. M \leadsto \lambda x^{A}.M'$}
 \end{prooftree}
-$$
+</Math>
 
 (2) $\lambda(V)$ 上の二項関係 $\overset{*}{\leadsto}$ を1ステップ簡約の反射推移閉包として定義する：すなわち、
 
-- [$\leadsto \subset \overset{*}{\leadsto}$] $M \leadsto N$ ならば $M \overset{*}{\leadsto} N$.
-- [反射性] $M \overset{*}{\leadsto} M$.
-- [推移性] $M \overset{*}{\leadsto} N$ かつ $M \overset{*}{\leadsto} L$ ならば、$M \overset{*}{\leadsto} L$. 
-- [最小性] もし $\lambda(V)$ 上の二項関係 $R$ が上記を満たすならば、$\overset{*}{\leadsto} \subset R$.
+<List type="itemized">
+  </> [$\leadsto \subset \overset{*}{\leadsto}$] $M \leadsto N$ ならば $M \overset{*}{\leadsto} N$.
+  </> [反射性] $M \overset{*}{\leadsto} M$.
+  </> [推移性] $M \overset{*}{\leadsto} N$ かつ $M \overset{*}{\leadsto} L$ ならば、$M \overset{*}{\leadsto} L$. 
+  </> [最小性] もし $\lambda(V)$ 上の二項関係 $R$ が上記を満たすならば、$\overset{*}{\leadsto} \subset R$.
+</List>
 </Definition>
 
-## 代入補題と型保存定理
+</Section>
 
-<InProgress target={"section"} />
+<Section title="代入補題と型保存定理">
 
-<Lemma name={"型に関する代入補題"}>
+<Lemma name="型に関する代入補題">
 $\Gamma, x : B \vdash M : A$ かつ $\Gamma \vdash N : B$ ならば、$\Gamma \vdash M[x := N] : A$ である。
 </Lemma>
 
-<Theorem name={"型保存定理"}>
+<Theorem name="型保存定理">
 $\Gamma \vdash M : A$ かつ $M \overset{*}{\leadsto} N$ ならば、$\Gamma \vdash N : A$ である。
 </Theorem>
 
-<Proof client:load>
+<Proof>
 1ステップの簡約 $M \leadsto N$ について、型が保存されることを示せば十分である。というのも、
 1ステップの場合を証明できるのであれば、$M \overset{*}{\leadsto} N$ については、簡約ステップ数に関する帰納法によって証明できるからである。
 
 以下、証明には1ステップの簡約 $M \leadsto N$ の導出に関する帰納法を用いる。
 
-<HeadingFrame description={"initial step"} />
+<Frame>initial step</Frame>
 
 (1) [$\beta_{\to}$]
 
 1ステップの簡約が公理 $\beta_{\to}$ からただちに得られる場合、具体的には
-- $M = (\lambda x^{B} .L)P$
-- $N = L[x:=P]$
+<List type="itemized">
+  </> $M = (\lambda x^{B} .L)P$
+  </> $N = L[x:=P]$
+</List>
 
 と表せるので、$\Gamma \vdash (\lambda x^{B} .L)P : A$ を仮定してよい。
 この型判定式の直前の導出図を考えると、
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\vdots$}
   \noLine
@@ -254,7 +247,7 @@ $$
     \RightLabel{ app}
   \BinaryInfC{$\Gamma \vdash (\lambda x^{B} .L)P : A$}
 \end{prooftree}
-$$
+</Math>
 
 のようになる：すなわち、この仮定の下では $\Gamma, x : B \vdash L : A$ および $\Gamma \vdash P : B$ の導出が存在する。ゆえに、
 型に関する代入補題により $\Gamma \vdash L[x:=P] : A$ を得る。これは求める $\Gamma \vdash N : A$ の型判定式である。
@@ -263,12 +256,14 @@ $$
 (2) [$\eta_{\to}$]
 
 1ステップの簡約が公理 $\eta_{\to}$ からただちに得られる場合、具体的には
-- $M = \lambda x^{A'} .Nx$ （ただし$x \notin \text{FV}(N)$）
+<List type="itemized">
+  </> $M = \lambda x^{A'} .Nx$ （ただし$x \notin \text{FV}(N)$）
+</List>
 
 と表せるので、$\Gamma \vdash \lambda x^{A'} .Nx : A' \to A''$ を仮定してよい（ここで $A = A' \to A''$ とおく）。
 この型判定式の直前の導出図を考えると、
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\vdots^{\pi}$}
   \noLine
@@ -281,12 +276,12 @@ $$
   \RightLabel{ abs}
   \UnaryInfC{$\Gamma \vdash \lambda x^{A'} .Nx : A' \to A''$}
 \end{prooftree}
-$$
+</Math>
 
 のようになる：すなわち、この仮定の下では $\Gamma, x : A' \vdash N : A' \to A''$ の導出 $\pi$ が存在する。
 ゆえに、これに対して再び導出図を考えると、仮定より $x \notin \text{FV}(N)$ なので
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\vdots^{\pi}$}
   \noLine
@@ -294,12 +289,12 @@ $$
     \AxiomC{$x \notin \text{FV}(N)$}
   \BinaryInfC{$\Gamma \vdash N : A' \to A''$}
 \end{prooftree}
-$$
+</Math>
 
 となり、求める $\Gamma \vdash N : A$ を得る。
 
 
-<HeadingFrame description={"inductive step"} />
+<Frame>inductive step</Frame>
 
 (3)[$\text{cong}$]
 
@@ -308,7 +303,7 @@ $M = LP$、$N = L'P$ の形で表せて、$M \leadsto N$ は $L \leadsto L'$ か
 $\Gamma \vdash LP : A$ および $L \leadsto L'$ を仮定する。さらに、ラムダ項 $L$ については、1ステップの型保存定理が成り立つと仮定する（$\because$ 帰納法の仮定）。
 いまこの型判定式の直前の導出図を考えると、
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\vdots$}
   \noLine
@@ -319,14 +314,14 @@ $$
   \RightLabel{ app}
   \BinaryInfC{$\Gamma \vdash LP : A$}
 \end{prooftree}
-$$
+</Math>
 
 のようになる：すなわち、この仮定の下では $\Gamma \vdash L : B \to A$ の導出が存在する。
 仮定より $L \leadsto L'$であったので、帰納法の仮定である1ステップの型保存定理により、 $\Gamma \vdash L' : B \to A$ が成り立つ。
 
 ゆえに、これに対して再び導出図を考えると、
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma \vdash L' : B \to A$}
     \AxiomC{$\vdots$}
@@ -335,7 +330,7 @@ $$
   \RightLabel{ app}
   \BinaryInfC{$\Gamma \vdash L'P : A$}
 \end{prooftree}
-$$
+</Math>
 
 となり、求める $\Gamma \vdash N : A$ を得る。
 
@@ -346,7 +341,7 @@ $M \leadsto N$ は $L \leadsto L'$ から得られているはずなので、$\G
 さらに、ラムダ項 $L$ については、1ステップの型保存定理が成り立つと仮定する（$\because$ 帰納法の仮定）。
 いまこの型判定式の直前の導出図を考えると、
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\vdots$}
   \noLine
@@ -354,26 +349,29 @@ $$
   \RightLabel{ abs}
   \UnaryInfC{$\Gamma \vdash \lambda x^{A'}.L : A' \to A''$}
 \end{prooftree}
-$$
+</Math>
 
 のようになる：すなわち、この仮定の下では $\Gamma, x : A' \vdash L : A''$ の導出が存在する。
 仮定より $L \leadsto L'$ であったので、帰納法の仮定である1ステップの型保存定理により、$\Gamma, x : A' \vdash L' : A''$ が成り立つ。
 
 ゆえに、これに対して再び導出図を考えると、
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma, x : A' \vdash L' : A''$}
   \RightLabel{ abs}
   \UnaryInfC{$\Gamma \vdash \lambda x^{A'}.L' : A' \to A''$}
 \end{prooftree}
-$$
+</Math>
 
 となり、求める $\Gamma \vdash N : A$ を得る。 $\Box$
 </Proof>
 
-## 参考文献
-<References>
-[1] Peter Selinger, 2013. "Lecture notes on the lambda calculus". https://doi.org/10.48550/arXiv.0804.3434. <br />
-[2] 横内寛文, 1994. 『情報数学講座7 プログラム意味論』. 共立出版.
-</References>
+</Section>
+
+<Bibliography>
+  </> Peter Selinger, 2013. "Lecture notes on the lambda calculus". <Link href="https://doi.org/10.48550/arXiv.0804.3434">https://doi.org/10.48550/arXiv.0804.3434</Link>.
+  </> 横内寛文, 1994. 『情報数学講座7 プログラム意味論』. 共立出版.
+</Bibliography>
+
+</Document>

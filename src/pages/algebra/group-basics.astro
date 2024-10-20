@@ -1,0 +1,12 @@
+---
+import metadata from "@sumiml/core/src/converter/metadata";
+import preprocessor from "@sumiml/core/src/converter/preprocessor";
+import DocumentWrapperLayout from "../../layouts/DocumentWrapperLayout.astro";
+import Document from "/src/articles/algebra/1_group-basics/document.suml";
+
+const { frontmatter } = metadata(await preprocessor("src/articles/algebra/1_group-basics/document.suml"));
+---
+
+<DocumentWrapperLayout frontmatter={frontmatter}>
+  <Document />
+</DocumentWrapperLayout>

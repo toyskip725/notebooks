@@ -1,0 +1,330 @@
+<SumiML version="1.0" />
+<Frontmatter>
+title: 型なしラムダ計算
+section: 1
+version: 0.3.0
+lastupdated: 2024/10/20
+</Frontmatter>
+
+<Document>
+
+型なしラムダ計算について。
+
+<Section title="ラムダ項">
+
+<Definition name="ラムダ項">
+(1) 記号の集合は、以下のように与えられるとする：
+
+<List type="itemized">
+  </> $V$：変数記号 $ x, y, \ldots $ の集合
+  </> $\lambda, ., (, )$：補助記号
+</List>
+
+(2) <Strong>ラムダ項</Strong> (lambda term) の集合 $\lambda(V)$ を以下のように帰納的に定義する：
+
+<List type="ordered">
+  </> 変数 $x \in V$ はラムダ項である。
+  </> $M, N$ がラムダ項であるならば、<Strong>関数適用</Strong> (application) $(MN)$ もラムダ項である。
+  </> $x \in V$, かつ $M$ がラムダ項であるならば、<Strong>ラムダ抽象</Strong> (lambda abstraction) $(\lambda x.M)$ もラムダ項である。
+</List>
+
+<Strong>BNF記法</Strong> (Backus-Naur Form)を使用すると、ラムダ項の構文規則を以下のように表すことができる：
+
+<Math>
+M, N ::= x \mid (MN) \mid (\lambda x.M)
+</Math>
+</Definition>
+
+<Example name="ラムダ項の例">
+上の定義(2)に従って形成されたもののみが正しいラムダ項になる。例えば、以下はすべて正しいラムダ項である。
+
+<Math>
+(\lambda x.x) \quad (\lambda x.(\lambda y.((xy)z))) \quad ((\lambda x.y)(\lambda z.(zy)))
+</Math>
+
+一方で、以下は構文違反となるので、ラムダ項ではない。
+
+<Math>
+(\lambda \lambda) \quad ((xy)(x. \lambda))
+</Math>
+</Example>
+
+見やすさのため、ラムダ項の括弧は以下のルールに従い、曖昧性が生じない範囲で適宜省略する。
+
+<List type="itemized">
+  </> 一番外側の括弧は省略する。
+  <List type="itemized">
+    </> 例えば、$(\lambda x.x)$ は $\lambda x.x$ と書く。
+  </List>
+
+  </> 関数適用は、何も括弧がなければ左要素に対して結合する。
+  <List type="itemized">
+    </>  例えば、$(xy)z$ は $xyz$ と書くが、$x(yz)$ を表したいときは括弧を省略しない。
+  </List>
+  
+  </> ラムダ抽象は、何も括弧がなければできるだけスコープを広くとる。
+  <List type="itemized">
+    </> 例えば、$\lambda z.(\lambda x.((\lambda y.xy)z))$ は $\lambda z \lambda x.(\lambda y.xy)z$ と書く。
+    このとき、$\lambda z \lambda x \lambda y.xyz$ と書くと、$\lambda z.(\lambda x.(\lambda y.(xyz)))$ を意味することになり意味が変わってしまうため、
+    一番内側の括弧は省略しない。
+  </List>
+</List>
+
+</Section>
+
+<Section title="自由変数と束縛変数">
+
+<Definition name="自由変数">
+ラムダ項 $M$ の自由変数の集合を $\mathrm{FV}(M)$ で表す。
+$\mathrm{FV}(M)$ を以下のように帰納的に定義する：
+
+<List type="ordered">
+  </> $\mathrm{FV}(x) = \{ x \}$
+  </> $\mathrm{FV}(MN) = \mathrm{FV}(M) \cup \mathrm{FV}(N)$
+  </> $\mathrm{FV}(\lambda x.M) = \mathrm{FV}(M) - \{ x \}$
+</List>
+</Definition>
+
+</Section>
+
+<Section title="$\alpha$同値性と$\beta$簡約">
+
+<Definition name="自由変数の置換・束縛変数の名前変換">
+ラムダ項 $M$ における変数 $x$ の自由な現れを、すべてラムダ項 $N$ に置き換えたものを $M[x:=N]$ と表す。
+また、ラムダ項 $M$ における束縛変数 $x$ を、$M$ にまだ表れていない $y$ に名づけし直したものを $M[x/y]$ と表す。
+
+これらの <Strong>置換</Strong> (substitution) 操作、<Strong>名づけ直し</Strong> (rename) 操作を、以下のように帰納的に定義する：
+
+(1)
+<List type="itemized">
+  </> substitution
+  <List type="itemized">
+    </> $ x[x:=N] = N $
+    </> $ y[x:=N] = y $ (ただし、$x \neq y$ とする)
+  </List>
+
+  </> rename
+  <List type="itemized">
+    </> $ x[x/y] = x[x:=y] = y $
+    </> $ z[x/y] = z[x:=y] = z $ (ただし、$x \neq z$ とする)
+  </List>
+</List>
+
+(2)
+<List type="itemized">
+  </> substitution
+  <List type="itemized">
+    </> $ (ML)[x:=N] $ $= M[x:=N]L[x:=N] $
+  </List>
+
+  </> rename
+  <List type="itemized">
+    </> $ (MN)[x/y] = M[x/y]N[x/y] $
+  </List>
+</List>
+
+(3)
+<List type="itemized">
+  </> substitution
+  <List type="itemized">
+    </> $ (\lambda x.M)[x:=N] = \lambda x.M $
+    </> $ (\lambda y.M)[x:=N] = \lambda y.(M[x:=N]) $
+    (ただし、$x \neq y$ かつ $ y \notin \mathrm{FV}(N) $ とする)
+    </> $ (\lambda y.M)[x:=N] $ $= ((\lambda y.M)[y/y'])[x:=N] $ 
+    (ただし、$x \neq y$ かつ $y \in \mathrm{FV}(N) $ であり、$y'$ は $M, N$ において未使用の変数であるとする)
+  </List>
+
+  </> rename
+  <List type="itemized">
+    </> $ (\lambda x.M)[x/y] = \lambda y.(M[x/y]) $
+    </> $ (\lambda z.M)[x/y] = \lambda z.(M[x/y]) $ 
+    (ただし、$x \neq z$ とする)
+  </List>
+</List>
+
+</Definition>
+
+<Definition name="$\alpha$同値性">
+
+ラムダ項どうしの二項関係として、<Strong>$\alpha$ 同値性</Strong> ($\alpha$-equivalence) ($=_{\alpha}$という記号で表す) を
+以下の導出規則により定義する：
+
+<Math>
+\begin{prooftree}
+  \AxiomC{$y \notin M$}
+  \RightLabel{ $\alpha$}
+  \UnaryInfC{$\lambda x.M =_{\alpha} \lambda y.M[x/y] $}
+\end{prooftree}
+</Math>
+
+<Math>
+\begin{prooftree}
+  \AxiomC{}
+  \UnaryInfC{$M =_{\alpha} M$}
+\end{prooftree}
+
+\qquad
+
+\begin{prooftree}
+  \AxiomC{$M =_{\alpha} N$}
+  \UnaryInfC{$N =_{\alpha} M$}
+\end{prooftree}
+
+\qquad
+
+\begin{prooftree}
+  \AxiomC{$M =_{\alpha} N$}
+  \AxiomC{$N =_{\alpha} L$}
+  \BinaryInfC{$M =_{\alpha} L$}
+\end{prooftree}
+</Math>
+
+<Math>
+\begin{prooftree}
+  \AxiomC{$M =_{\alpha} M'$}
+  \AxiomC{$N =_{\alpha} N'$}
+  \RightLabel{ cong}
+  \BinaryInfC{$MN =_{\alpha} M'N'$}
+\end{prooftree}
+</Math>
+
+<Math>
+\begin{prooftree}
+  \AxiomC{$M =_{\alpha} N$}
+  \RightLabel{ $\xi$}
+  \UnaryInfC{$\lambda x.M =_{\alpha} \lambda x.N$}
+\end{prooftree}
+</Math>
+
+この定義により、$=_{\alpha}$ は同値関係である。
+</Definition>
+
+<Example name="$\alpha$同値性の例">
+(1) $ (\lambda x.xy)w =_{\alpha} (\lambda z.zy)w $
+
+<Proof>
+<Math>
+\begin{prooftree}
+  \AxiomC{$z \notin xy$}
+  \RightLabel{ $\alpha$}
+  \UnaryInfC{$\lambda x.xy =_{\alpha} \lambda z.(xy)[x/z]$}
+  \dashedLine
+  \UnaryInfC{$\lambda x.xy =_{\alpha} \lambda z.zy$}
+  \AxiomC{$w =_{\alpha} w$}
+  \RightLabel{ cong}
+  \BinaryInfC{$ (\lambda x.xy)w =_{\alpha} (\lambda z.zy)w $}
+\end{prooftree}
+</Math>
+</Proof>
+</Example>
+
+<Definition name="$\beta$簡約・$\beta$同値性">
+(1) ラムダ項どうしの二項関係として、<Strong>1ステップ $\beta$ 簡約</Strong> (1-step $\beta$-reduction) ($\to_{\beta}$という記号で表す) を
+以下の導出規則により定義する：
+
+<Math>
+\begin{prooftree}
+  \AxiomC{}
+  \RightLabel{ $\beta$}
+  \UnaryInfC{$(\lambda x.M)N \to_{\beta} M[x:=N]$}
+\end{prooftree}
+</Math>
+
+<Math>
+\begin{prooftree}
+  \AxiomC{$M \to_{\beta} M'$}
+  \RightLabel{ cong}
+  \UnaryInfC{$MN \to_{\beta} M'N$}
+\end{prooftree}
+
+\qquad
+
+\begin{prooftree}
+  \AxiomC{$M \to_{\beta} M'$}
+  \RightLabel{ cong}
+  \UnaryInfC{$LM \to_{\beta} LM'$}
+\end{prooftree}
+</Math>
+
+<Math>
+\begin{prooftree}
+  \AxiomC{$M \to_{\beta} M'$}
+  \RightLabel{ $\xi$}
+  \UnaryInfC{$\lambda x.M \to_{\beta} \lambda x.M'$}
+\end{prooftree}
+</Math>
+
+(2) さらに、二項関係$ \twoheadrightarrow_{\beta} $ を1ステップ $\beta$ 簡約の反射推移閉包として定義する：
+すなわち、
+
+<List type="itemized">
+  </> [$\to_{\beta} \subset \twoheadrightarrow_{\beta}$] $M \to_{\beta} M'$ ならば $M \twoheadrightarrow_{\beta} M'$.
+  </> [反射性] $M \twoheadrightarrow_{\beta} M$.
+  </> [推移性] $M \twoheadrightarrow_{\beta} M'$, かつ $M' \twoheadrightarrow_{\beta} M''$ ならば、 $M \twoheadrightarrow_{\beta} M''$.
+  </> [最小性] 別の関係 $R$ が上記を満たすならば、$\twoheadrightarrow_{\beta} \subset R$.
+</List>
+
+直感的には、ラムダ項 $M$ から0回以上の1ステップ $ \beta $ 簡約で $M'$ を導出できるならば、$M \twoheadrightarrow_{\beta} M'$ である。
+
+(3) <Strong>$\beta$ 同値性</Strong> ($\beta$-equivalence) ($=_{\beta}$という記号で表す) を$ \twoheadrightarrow_{\beta} $ の対称閉包として定義する：
+すなわち、
+
+<List type="itemized">
+  </> [$\twoheadrightarrow_{\beta} \subset =_{\beta}$] $M \twoheadrightarrow_{\beta} N$ ならば $M =_{\beta} N$.
+  </> [対称性] $M =_{\beta} N$ ならば $N =_{\beta} M$.
+  </> [最小性] 別の関係 $R$ が上記を満たすならば、$=_{\beta} \subset R$.
+</List>
+
+この定義から、$=_{\beta}$ は反射性、推移性、対称性を満たし、同値関係である。
+</Definition>
+
+<Example name="$\beta$簡約の例">
+(1) $(\lambda x.xy)(\lambda z.z) \twoheadrightarrow_{\beta} y$
+
+<Proof>
+<Math>
+\begin{prooftree}
+  \AxiomC{}
+  \RightLabel{ $\beta$}
+  \UnaryInfC{$(\lambda x.xy)(\lambda z.z) \to_{\beta} xy[x:=\lambda z.z]$}
+  \dashedLine
+  \UnaryInfC{$(\lambda x.xy)(\lambda z.z) \to_{\beta} (\lambda z.z)y$}
+
+  \AxiomC{}
+  \RightLabel{ $\beta$}
+  \UnaryInfC{$(\lambda z.z)y \to_{\beta} z[z:=y]$}
+  \dashedLine
+  \UnaryInfC{$(\lambda z.z)y \to_{\beta} y $}
+
+  \BinaryInfC{$(\lambda x.xy)(\lambda z.z) \twoheadrightarrow_{\beta} y$}
+\end{prooftree}
+</Math>
+</Proof>
+</Example>
+
+</Section>
+
+<Section title="$\beta$正規形">
+
+<Definition name="$\beta$基・$\beta$正規形">
+(1) $M$, $N$ をラムダ項とする。
+<Math>
+(\lambda x. M)N
+</Math>
+の形式のラムダ項を <Strong>$\beta$ 基</Strong> ($\beta$-redex) といい、これに1ステップの $\beta$ 簡約を適用した
+<Math>
+M [x:= N]
+</Math>
+の形式のラムダ項をその <Strong>$\beta$ 簡約形</Strong> (contractum / reduct) という。
+
+(2) $\beta$ 基を部分項として持たないラムダ項のことを <Strong>$\beta$ 正規形</Strong> ($\beta$-normal form) という。
+</Definition>
+
+</Section>
+
+<Bibliography>
+  </> Peter Selinger, 2013. "Lecture notes on the lambda calculus". <Link href="https://doi.org/10.48550/arXiv.0804.3434">https://doi.org/10.48550/arXiv.0804.3434</Link>.
+  </> 横内寛文, 1994. 『情報数学講座7 プログラム意味論』. 共立出版.
+</Bibliography>
+
+</Document>

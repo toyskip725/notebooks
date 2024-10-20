@@ -1,0 +1,111 @@
+---
+import '../styles/global.css';
+import '../styles/document.css';
+import TopNavigation from '../components/site/TopNavigation';
+import NoteHeader from '../components/note/NoteHeader';
+import NoteFooter from '../components/note/NoteFooter';
+import { WebsiteTitle } from '../utils/constants';
+
+// props
+const { frontmatter } = Astro.props;
+
+const pathname =  Astro.url.pathname;
+const parentPath = pathname.includes("notebooks")
+  ? pathname.split('/').slice(0, 3).join('/') 
+  : pathname.split('/').slice(0, 2).join('/');
+const pageTitle = `${frontmatter.title} | ${WebsiteTitle}`;
+---
+
+<!doctype html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator} />
+  <meta id="section" content={frontmatter.section} />
+  <link rel="shortcut icon" href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/favicon.ico`}/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>{pageTitle}</title>
+</head>
+<body>
+  <TopNavigation />
+  <main class="sumiml-content">
+    <NoteHeader title={frontmatter.title} pathname={parentPath} />
+    <slot />
+    <NoteFooter version={frontmatter.version} lastUpdated={frontmatter.lastupdated} />
+  </main>
+</body>
+
+<style>
+.sumiml-content {
+  width: 70%;
+  padding: 10px;
+  box-sizing: border-box;
+
+  h1:not([class]) {
+    color: #2a2a31;
+    font-weight: normal;
+  }
+  h2:not([class]) {
+    color: #2a2a31;
+    font-weight: normal;
+    padding-top: 1.75em;
+  }
+  p:not([class]) {
+    color: #2a2a31;
+    line-height: 1.75rem;
+  }
+  li:not([class]) {
+    color: #2a2a31;
+    line-height: 1.75rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .sumiml-content {
+    width: 100%;
+    box-sizing: border-box;
+
+    h1:not([class]) {
+      font-size: 1.5rem;
+    }
+    h2:not([class]) {
+      font-size: 1.25rem;
+    }
+    p:not([class]) {
+      font-size: 0.875rem;
+    }
+    li:not([class]) {
+      font-size: 0.875rem;
+    }
+    .MathJax {
+      transform: scale(0.875);
+      overflow-x: auto;
+    }
+}
+</style>
+
+<script is:inline>
+  // MathJax設定
+  MathJax = {
+  loader: {
+    load: ['[custom]/xypic.js'],
+    paths: {custom: 'https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/'}
+  },
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    packages: {'[+]': ['xypic']}
+  }
+};
+</script>
+<script>
+  // 定理番号を付与
+  const pageSection = document.getElementById('section');
+  const numberedElements = document.getElementsByClassName('math-numbering');
+  Array.prototype.forEach.call(numberedElements, (element, index) => 
+    element.innerText = `${element.innerText} ${pageSection?.attributes[1].value}.${index + 1}`
+  );
+</script>

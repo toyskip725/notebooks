@@ -1,0 +1,112 @@
+.section-heading {
+  color: #2a2a31;
+  font-weight: normal;
+  font-size: 1.5em;
+  padding-top: 1.5rem;
+}
+
+.bibliography-heading {
+  color: #2a2a31;
+  font-size: 1.25em;
+  padding-top: 1.5rem;
+}
+.bibliography-list {
+  list-style: none;
+  padding-inline-start: 1rem;
+}
+
+.definition-wrapper {
+  border: 1px solid #000;
+  border-color: #0a214f;
+  padding: 5px 20px;
+  margin: 20px 0px;
+}
+.definition-title {
+  color: #fff;
+  background-color: #0a214f;
+  font-weight: bold;
+  width: fit-content;
+  line-height: 1.75rem;
+  padding: 2px 8px;
+}
+
+.theorem-wrapper {
+  border: 1px solid #007989;
+  border-left: 10px solid #007989;
+  padding: 5px 20px;
+  margin: 20px 0px;
+}
+.theorem-title {
+  color: #fafafa;
+  background-color: #007989;
+  font-weight: bold;
+  width: fit-content;
+  line-height: 1.75rem;
+  padding: 2px 8px;
+}
+
+.example-wrapper {
+  border-top: 1px dashed #a22041;
+  border-bottom: 1px dashed #a22041;
+  padding: 15px 20px;
+  margin: 45px 0px 20px 0px;
+  position: relative;
+}
+.example-title {
+  color: #fff;
+  background-color: #a22041;
+  font-weight: bold;
+  width: fit-content;
+  line-height: 1.75rem;
+  padding: 2px 8px;
+  position: absolute;
+  top: -1.9em;
+}
+
+.proof-wrapper {
+  padding: 5px 0px 20px 0px;
+}
+.proof-content {
+  border-left: 1px solid #2a2a31;
+  padding: 0px 20px;
+}
+.proof-button {
+  font-size: 1rem;
+  border: 1px solid #2a2a31;
+  color: #2a2a31;
+  background-color: #fafafa;
+  padding: 2px 15px;
+}
+.proof-button:hover {
+  color: #fafafa;
+  background-color: #2a2a31;
+  transition: all 0.2s;
+}
+
+.frame {
+  color: #2a2a31;
+  width: fit-content;
+  border: 1px solid #2a2a31;
+  padding: 0.1em 0.5em;
+}
+
+@media screen and (max-width: 640px) {
+  .section-heading {
+    font-size: 1.25em;
+  }
+  .bibliography-heading {
+    font-size: 1.1em;
+  }
+  .definition-title {
+    font-size: 0.875em;
+  }
+  .example-title {
+    font-size: 0.875em;
+  }
+  .theorem-title {
+    font-size: 0.875em;
+  }
+  .proof-button {
+    font-size: 0.875em;
+  }
+}

@@ -1,60 +1,48 @@
----
-layout: ../../layouts/NoteLayout.astro
-title: "単純型付きラムダ計算 (2) - さまざまな型"
+<SumiML version="1.0" />
+<Frontmatter>
+title: 単純型付きラムダ計算 (2) - さまざまな型
 section: 2
-version: 0.1.0
-lastUpdated: 2024/09/15
----
-import Definition from "../../components/math/Definition";
-import Proposition from "../../components/math/Proposition";
-import Lemma from "../../components/math/Lemma";
-import Theorem from "../../components/math/Theorem";
-import Corollary from "../../components/math/Corollary";
-import Example from "../../components/math/Example";
-import ExampleContent from "../../components/math/ExampleContent";
-import Proof from "../../components/math/Proof";
-import Link from "../../components/common/Link";
-import Memo from "../../components/common/Memo";
-import InProgress from "../../components/common/InProgress";
-import HeadingFrame from "../../components/common/HeadingFrame";
-import References from "../../components/common/References";
+version: 0.2.0
+lastupdated: 2024/10/20
+</Frontmatter>
+<Document>
 
-
-<Link title={"単純型付きラムダ計算 (1)"} path={"/type-theory/simply-typed-lambda-calculus"} /> の続き。
+<Link href="/type-theory/simply-typed-lambda-calculus">単純型付きラムダ計算 (1)</Link> の続き。
 単純型（パラメータのない型）の範囲でのさまざまな型構成子について。
 
-## 直積型
+<Section title="直積型">
 
-<InProgress target={"section"} />
+<Definition name="直積型">
 
-<Definition name={"直積型"}>
+(1) <Strong>型</Strong>の集合 $\tau(T)$ を以下の規則により拡張する： 
 
-(1) **型**の集合 $\tau(T)$ を以下の規則により拡張する： 
+<List type="itemized">
+  </> $A, B$ が型であるならば、$A \times B$ も型である。
+</List>
 
-- $A, B$ が型であるならば、$A \times B$ も型である。
+(2) <Strong>ラムダ項</Strong>の集合 $\lambda(V)$ を以下の規則により拡張する：
 
-(2) **ラムダ項**の集合 $\lambda(V)$ を以下の規則により拡張する：
-
-- $M, N$ がラムダ項であるならば、**ペアリング** (pairing) $\langle M, N \rangle$ もラムダ項である。
-- $M$ がラムダ項であるならば、 **射影** (projection) $\pi_{1} M$, $\pi_{2} M$ もラムダ項である。
+<List type="itemized">
+  </> $M, N$ がラムダ項であるならば、<Strong>ペアリング</Strong> (pairing) $\langle M, N \rangle$ もラムダ項である。
+  </> $M$ がラムダ項であるならば、 <Strong>射影</Strong> (projection) $\pi_{1} M$, $\pi_{2} M$ もラムダ項である。
+</List>
 </Definition>
 
-型 $A \times B$ を **直積型** (product type) という。
+型 $A \times B$ を <Strong>直積型</Strong> (product type) という。
 
-<Definition name={"直積型の型付け規則"}>
-
+<Definition name="直積型の型付け規則">
 直積型の型付け規則として、以下の規則を追加する：
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma \vdash M : A$}
     \AxiomC{$\Gamma \vdash N : B$}
   \RightLabel{ product}
   \BinaryInfC{$\Gamma \vdash \langle M, N \rangle : A \times B$}
 \end{prooftree}
-$$
+</Math>
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma \vdash M : A \times B$}
   \RightLabel{ projection}
@@ -68,56 +56,53 @@ $$
   \RightLabel{ projection}
   \UnaryInfC{$\Gamma \vdash \pi_{2} M : B$}
 \end{prooftree}
-$$
+</Math>
 </Definition>
 
-<Definition name={"直積型の簡約公理"}>
-
+<Definition name="直積型の簡約公理">
 直積型の簡約公理として、以下の簡約公理を追加する：
 
 $(\beta_{\times})$
-$$
+<Math>
 \begin{align}
 \pi_{1} \langle M, N \rangle \quad &\leadsto \quad M \\
 \pi_{2} \langle M, N \rangle \quad &\leadsto \quad N \\
 \end{align}
-$$
+</Math>
 
 $(\eta_{\times})$
-$$
+<Math>
 \begin{align}
 \langle \pi_{1}M, \pi_{2}M \rangle \quad \leadsto \quad M 
 \end{align}
-$$
+</Math>
 </Definition>
 
-<Example name={"直積型の型判断"}>
-<ExampleContent client:load>
+</Section>
 
-</ExampleContent>
-</Example>
+<Section title="直和型">
 
-## 直和型
+<Definition name="直和型">
+(1) <Strong>型</Strong>の集合 $\tau(T)$ を以下の規則により拡張する： 
 
-<InProgress target={"section"} />
+<List type="itemized">
+  </> $A, B$ が型であるならば、$A + B$ も型である。
+</List>
 
-<Definition name={"直和型"}>
-(1) **型**の集合 $\tau(T)$ を以下の規則により拡張する： 
+(2) <Strong>ラムダ項</Strong>の集合 $\lambda(V)$ を以下の規則により拡張する：
 
-- $A, B$ が型であるならば、$A + B$ も型である。
-
-(2) **ラムダ項**の集合 $\lambda(V)$ を以下の規則により拡張する：
-
-- $M$ がラムダ項であるならば、**入射** (injection) $\textsf{in}_{1}M$, $\textsf{in}_{2}M$ もラムダ項である。
-- $x, y$ が変数、$M, N, L$ がラムダ項であるならば、 $\textsf{ case } M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L$ もラムダ項である。
+<List type="itemized">
+  </> $M$ がラムダ項であるならば、<Strong>入射</Strong> (injection) $\textsf{in}_{1}M$, $\textsf{in}_{2}M$ もラムダ項である。
+  </> $x, y$ が変数、$M, N, L$ がラムダ項であるならば、 $\textsf{ case } M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L$ もラムダ項である。
+</List>
 </Definition>
 
-型 $A + B$ を**直和型** (sum type) という。
+型 $A + B$ を<Strong>直和型</Strong> (sum type) という。
 
-<Definition name={"直和型の型付け規則"}>
+<Definition name="直和型の型付け規則">
 直和型の型付け規則として、以下の規則を追加する：
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma \vdash M : A$}
   \RightLabel{ injection}
@@ -131,9 +116,9 @@ $$
   \RightLabel{ injection}
   \UnaryInfC{$\Gamma \vdash \textsf{in}_{2}N : A + B$}
 \end{prooftree}
-$$
+</Math>
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma \vdash M : A + B$}
     \AxiomC{$\Gamma, x : A \vdash N : C$}
@@ -141,38 +126,30 @@ $$
   \RightLabel{ cases}
   \TrinaryInfC{$\Gamma \vdash \textsf{ case } M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L : C$}
 \end{prooftree}
-$$
+</Math>
 </Definition>
 
-<Definition name={"直和型の簡約公理"}>
+<Definition name="直和型の簡約公理">
 直和型の簡約公理として、以下の簡約公理を追加する：
 
 $(\beta_{+})$
-$$
+<Math>
 \begin{align}
 \textsf{ case } \textsf{in}_{1}M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L \quad &\leadsto \quad N[x:=M] \\
 \textsf{ case } \textsf{in}_{2}M \textsf{ of } x \Rightarrow N \mid y \Rightarrow L \quad &\leadsto \quad L[y:=M] \\
 \end{align}
-$$
-
+</Math>
 </Definition>
-
-<Example name={"直和型の型判断"}>
-<ExampleContent client:load>
-
-</ExampleContent>
-</Example>
 
 直積型と直和型の型構成子 $\times$, $+$ を加えた体系においても、型保存定理が成り立つ。
 これは、追加した簡約公理が「その公理に則って簡約を行っても型が保存される」という意味で正当なものであることの証でもある。
 
-<Proposition name={"型保存定理 - 直積型・直和型"}>
+<Proposition name="型保存定理：直積型・直和型">
 $\Gamma \vdash M : A$ は直積型と直和型を追加して拡張した体系における型判断であるとする。
 このとき、$M \overset{*}{\leadsto} N$ ならば、$\Gamma \vdash N : A$ である。
 </Proposition>
 
-<Proof client:load>
-
+<Proof>
 新しく追加した簡約公理が型を保存することを示せばよい。
 
 (1) [$\beta_{\times}$]
@@ -180,7 +157,7 @@ $\Gamma \vdash M : A$ は直積型と直和型を追加して拡張した体系�
 第一射影 $\pi_{1}$ の場合のみ示す。1ステップの簡約が公理 $\beta_{\times}$ からただちに得られる場合、具体的には $M = \pi_{1} \langle N, L \rangle$
 と表せるので、$\Gamma \vdash \pi_{1} \langle N, L \rangle : A$ と仮定する。このとき、直前の導出を考えると、
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\vdots$}
   \noLine
@@ -193,7 +170,7 @@ $$
   \RightLabel{ projection}
   \UnaryInfC{$\Gamma \vdash \pi_{1} \langle N, L \rangle : A$}
 \end{prooftree}
-$$
+</Math>
 
 のようになる：すなわち、この仮定の下では $\Gamma \vdash N : A$ の導出が存在する。
 
@@ -203,7 +180,7 @@ $$
 1ステップの簡約が $\eta_{\times}$ からただちに得られる場合、具体的には $M = \langle \pi_{1}N, \pi_{2}N \rangle$ と表せるので、
 $\Gamma \vdash \langle \pi_{1}N, \pi_{2}N \rangle : A' \times A''$ と仮定する（$A = A' \times A''$）。このとき、直前の導出を考えると、
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\vdots$}
   \noLine
@@ -218,7 +195,7 @@ $$
   \RightLabel{ product}
   \BinaryInfC{$\Gamma \vdash \langle \pi_{1}N, \pi_{2}N \rangle : A' \times A''$}
 \end{prooftree}
-$$
+</Math>
 
 のようになる：すなわち、この仮定の下では $\Gamma \vdash N : A' \times A''$ の導出が存在するので、$\Gamma \vdash N : A$ である。
 
@@ -226,12 +203,15 @@ $$
 
 $\textsf{in}_{1}$ の場合のみ示す。1ステップの簡約が $\beta_{+}$ からただちに得られる場合、具体的には 
 
-- $M = \textsf{ case } \textsf{in}_{1}L \textsf{ of } x \Rightarrow P \mid y \Rightarrow Q$
-- $N = P[x:=L]$
+<List type="itemized">
+  </> $M = \textsf{ case } \textsf{in}_{1}L \textsf{ of } x \Rightarrow P \mid y \Rightarrow Q$
+  </> $N = P[x:=L]$
+</List>
 
-と表せるので、$\Gamma \vdash \textsf{case } \textsf{in}_{1}L \textsf{ of } x \Rightarrow P \mid y \Rightarrow Q : A$ と仮定する。このとき、直前の導出を考えると、
+と表せるので、$\Gamma \vdash \textsf{case } \textsf{in}_{1}L \textsf{ of } x \Rightarrow P \mid y \Rightarrow Q : A$ と仮定する。
+このとき、直前の導出を考えると、
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\vdots$}
   \noLine
@@ -247,7 +227,7 @@ $$
   \RightLabel { cases}
   \TrinaryInfC{$\Gamma \vdash \textsf{case } \textsf{in}_{1}L \textsf{ of } x \Rightarrow P \mid y \Rightarrow Q : A$}
 \end{prooftree}
-$$
+</Math>
 
 のようになる：すなわち、この仮定の下では $\Gamma \vdash L : A'$ および $\Gamma, x : A' \vdash P : A$ の導出が存在する。
 ゆえに、型に関する代入補題により、$ \Gamma \vdash P[x:=L] : A$ が成り立つ。
@@ -255,44 +235,52 @@ $$
 $\Box$
 </Proof>
 
-## トップ型とボトム型
+</Section>
 
-<Definition name={"トップ型・ボトム型"}>
-(1) **型**の集合 $\tau(T)$ を以下の規則により拡張する： 
+<Section title="トップ型とボトム型">
 
-- $\textsf{1}$ は型である。
-- $\textsf{0}$ は型である。
+<Definition name="トップ型・ボトム型">
+(1) <Strong>型</Strong>の集合 $\tau(T)$ を以下の規則により拡張する： 
 
-(2) **ラムダ項**の集合 $\lambda(V)$ を以下の規則により拡張する：
+<List type="itemized">
+  </> $\textsf{1}$ は型である。
+  </> $\textsf{0}$ は型である。
+</List>
 
-- $*$ はラムダ項である。
-- $M$ がラムダ項、$A$ が型であるならば、$\epsilon_{A} M$ はラムダ項である。
+(2) <Strong>ラムダ項</Strong>の集合 $\lambda(V)$ を以下の規則により拡張する：
+
+<List type="itemized">
+  </> $*$ はラムダ項である。
+  </> $M$ がラムダ項、$A$ が型であるならば、$\epsilon_{A} M$ はラムダ項である。
+</List>
 </Definition>
 
-<Definition name={"トップ型・ボトム型の型付け規則"}>
+<Definition name="トップ型・ボトム型の型付け規則">
 トップ型とボトム型の型付け規則として、以下の規則を追加する：
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{ }
   \RightLabel{ top}
   \UnaryInfC{$\Gamma \vdash * : \textsf{1}$}
 \end{prooftree}
-$$
+</Math>
 
-$$
+<Math>
 \begin{prooftree}
   \AxiomC{$\Gamma \vdash M : \textsf{0}$}
   \RightLabel{ bottom}
   \UnaryInfC{$\Gamma \vdash \epsilon_{A} M : A$}
 \end{prooftree}
-$$
+</Math>
 </Definition>
 
+</Section>
 
-## 参考文献
-<References>
-[1] Peter Selinger. 2013. "Lecture notes on the lambda calculus". https://doi.org/10.48550/arXiv.0804.3434. <br />
-[2] Jean-Yves Girard, Paul Taylor, Yves Lafont. 1989. *Proofs and Types*. Cambridge : Cambridge University Press.  <br />
-[3] Greg Restall. 2000. *An Introduction to Substructural Logics*. London : Routledge.
-</References>
+<Bibliography>
+  </> Peter Selinger, 2013. "Lecture notes on the lambda calculus". <Link href="https://doi.org/10.48550/arXiv.0804.3434">https://doi.org/10.48550/arXiv.0804.3434</Link>.
+  </> Jean-Yves Girard, Paul Taylor, Yves Lafont. 1989. <Emphasis>Proofs and Types</Emphasis>. Cambridge : Cambridge University Press.
+  </> Greg Restall. 2000. <Emphasis>An Introduction to Substructural Logics</Emphasis>. London : Routledge.
+</Bibliography>
+
+</Document>

@@ -1,0 +1,100 @@
+<SumiML version="1.0" />
+<Frontmatter>
+title: 群
+section: 1
+version: 0.2.0
+lastupdated: 2024/10/20
+</Frontmatter>
+
+<Document>
+
+<Strong>群</Strong>の定義と、いくつかの基本的な概念について。
+
+<Section title="群の定義">
+<Definition name="群">
+$G$ を空でない集合とし、$\cdot : G \times G \to G$ を $G$ 上の二項演算とする。
+組 $(G, \cdot)$ が <Strong>群</Strong> (group) であるのは、$(G, \cdot)$ が以下の条件を満たすときである : 
+
+<List type="itemized">
+  </> [ $\cdot$ の結合則] 任意の $a, b, c \in G$ に対して、$a \cdot (b \cdot c) = (a \cdot b) \cdot c$ である。
+  </> [単位元] ある元 $e \in G$ が存在し、あらゆる $a \in G$ に対して$e \cdot a = a$, $a \cdot e = a$ となる。
+  この元を <Strong>単位元</Strong> といい、$1_{G}$ で表す。
+  </> [逆元] それぞれの $a \in G$ に対して、$ a \cdot a' = 1_{G}$, $a' \cdot a = 1_{G}$ となる $a' \in G$が存在する。
+  この元を <Strong>逆元</Strong> といい、$a^{-1}$ で表す。
+</List>
+</Definition>
+
+以下文脈から明らかな場合、$(G, \cdot)$ を省略して $G$ で表す。
+
+<Example name="一般線形群$GL_{n}(\mathbb{R})$">
+$G$ を実数成分からなる $n$ 次正則行列の集合とする。このとき、$G$ は通常の行列の積を演算として群になる : 
+
+<Proof>
+[結合則] 行列の積は結合的なので、$G$ 上の演算はつねに結合則を満たす。
+
+[単位元] 単位行列 $I_{n}$ はあらゆる $A \in G$ に対して $I_{n}A = AI_{n} = A$ となることから、$I_{n}$ は単位元である。
+
+[逆元] $A \in G$ とする。$A$ は正則行列なので、$A^{-1}$ が存在して $AA^{-1} = A^{-1}A = I_{n}$ となる : 
+すなわち、$A^{-1}$ は $A$ の逆元である。 $\Box$
+</Proof>
+
+この群 $G$ を<Strong>実一般線形群</Strong>といい、$GL_{n}(\mathbb{R})$ で表す。
+</Example>
+
+</Section>
+
+<Section title="部分群">
+
+<Definition name="部分群">
+$G$ を群とする。$H \subset G$ が $G$ の <Strong>部分群</Strong> (subgroup) であるのは、$H$ が以下の条件を満たすときである :
+
+<List type="ordered">
+  </> $1_{G} \in H$ .
+  </> 任意の $a, b \in G$ について, $a \cdot b \in H$ .
+  </> 任意の $a \in G$ について, $a^{-1} \in H$ .
+</List>
+</Definition>
+
+</Section>
+
+<Section title="準同型写像">
+
+<Definition name="準同型写像">
+$G$, $H$ を群とする。写像 $\phi : G \to H $ が <Strong>準同型写像</Strong> (homomorphism) であるのは、$\phi$ が以下の条件を満たすときである :
+
+<List type="itemized">
+  </> 任意の $a, b \in G$ について、$\phi(a \cdot b) = \phi(a) \cdot \phi(b)$ .
+</List>
+</Definition>
+
+<Proposition>
+群の準同型写像は単位元、逆元を保つ : すなわち、$G$, $H$ を群、$a \in G$、$\phi : G \to H$ を準同型写像とすると、
+
+<Math>
+\phi (1_{G}) = 1_{H}, \quad \phi (a)^{-1} = \phi (a^{-1})
+</Math>
+
+が成り立つ。
+</Proposition>
+
+<Proof>
+(1) $\phi$ は準同型写像なので、$\phi(1_{G}) \cdot \phi(1_{G}) = \phi (1_{G} \cdot 1_{G}) = \phi (1_{G})$ である。
+仮定より $\phi (1_{G})^{-1} \in H$ なので、
+
+<Math>
+\phi(1_{G}) = \phi(1_{G}) \cdot \phi(1_{G}) \cdot \phi (1_{G})^{-1} = \phi (1_{G}) \cdot \phi (1_{G})^{-1} = 1_{H}
+</Math>
+
+すなわち $\phi(1_{G}) = 1_{H}$ である。
+
+(2) 同様に $\phi$ は準同型写像なので、$\phi (a) \cdot \phi (a^{-1}) = \phi (a \cdot a^{-1}) = \phi (1_{G}) = 1_{H} $ 、および
+$\phi (a^{-1}) \cdot \phi (a) = \phi (a^{-1} \cdot a) = \phi (1_{G}) = 1_{H} $ が成り立つ。ゆえに $\phi (a)$ の逆元は $ \phi(a^{-1}) $ である。 $ \Box $
+</Proof>
+
+</Section>
+
+<Bibliography>
+  </> 雪江明彦, 2010. 『代数学1: 群論入門』. 日本評論社.
+</Bibliography>
+
+</Document>

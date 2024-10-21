@@ -37,7 +37,7 @@ A, B ::= t \mid A \to B
 </Math>
 </Definition>
 
-ラムダ項の定義は、<Link href="/lambda-calculus/untyped-lambda-calculus">型なしラムダ計算</Link> の場合とほぼ同様である：
+ラムダ項の定義は、<Link href="/notebooks/lambda-calculus/untyped-lambda-calculus">型なしラムダ計算</Link> の場合とほぼ同様である：
 
 <Definition name="ラムダ項">
 <Strong>ラムダ項</Strong>を以下のように定義する：

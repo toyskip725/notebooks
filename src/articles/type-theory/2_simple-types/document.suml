@@ -7,7 +7,7 @@ lastupdated: 2024/10/20
 </Frontmatter>
 <Document>
 
-<Link href="/type-theory/simply-typed-lambda-calculus">単純型付きラムダ計算 (1)</Link> の続き。
+<Link href="/notebooks/type-theory/simply-typed-lambda-calculus">単純型付きラムダ計算 (1)</Link> の続き。
 単純型（パラメータのない型）の範囲でのさまざまな型構成子について。
 
 <Section title="直積型">

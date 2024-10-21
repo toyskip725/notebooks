@@ -1,16 +1,12 @@
 ---
 import Footer from '../components/site/Footer';
-import SideNavigation from '../components/site/SideNavigation';
 import TableofContents from '../components/site/TableofContents';
 import TopNavigation from '../components/site/TopNavigation';
-import BackButton from '../components/link/BackButton';
 import { WebsiteTitle } from '../utils/constants';
 import '../styles/global.css';
 
 
 const { frontmatter, headings } = Astro.props;
-const allTopPosts = await Astro.glob('../pages/*.mdx');
-const posts = allTopPosts.filter((post) => post.frontmatter.section !== 1);
 const title = frontmatter.title !== "index" ? `${frontmatter.title} | ${WebsiteTitle}` : `${WebsiteTitle}`;
 ---
 

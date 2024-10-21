@@ -11,13 +11,6 @@ const SideNavigation = ({ posts, currentPath }: Props) => {
   const mainStyle: React.CSSProperties = {
     padding: "20px 0px",
   };
-  const headerStyle: React.CSSProperties = {
-    padding: "0px",
-    margin: "0px",
-  };
-  const listStyle: React.CSSProperties = {
-    paddingLeft: "0px",
-  };
   const linkElementStyle: React.CSSProperties = {
     listStyle: "none",
   };

@@ -15,7 +15,7 @@ const PageLinkCard = ({ path, title }: Props) => {
   };
 
   return (
-    <a href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/${path}`} style={linkStyle} >
+    <a href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}${path}`} style={linkStyle} >
       <div style={cardStyle}>
         <p>{title}</p>
       </div>

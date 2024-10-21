@@ -14,6 +14,9 @@
   list-style: none;
   padding-inline-start: 1rem;
 }
+.bibliography-list li {
+  font-size: 0.9rem;
+}
 
 .definition-wrapper {
   border: 1px solid #000;
@@ -96,6 +99,9 @@
   }
   .bibliography-heading {
     font-size: 1.1em;
+  }
+  .bibliography-list li {
+    font-size: 0.8em;
   }
   .definition-title {
     font-size: 0.875em;

@@ -5,5 +5,5 @@ import { baseConfig } from './astro.config.mjs';
 export default defineConfig({
   ...baseConfig,
   site: "http://localhost:4321",
-  base: "",
+  base: "/",
 });

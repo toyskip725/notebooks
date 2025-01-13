@@ -1,0 +1,107 @@
+---
+import Footer from '../components/site/Footer';
+import TopNavigation from '../components/site/TopNavigation';
+import { WebsiteTitle } from '../utils/constants';
+import '../styles/global.css';
+
+
+const { title } = Astro.props;
+const pageTitle = title !== "index" ? `${title} | ${WebsiteTitle}` : `${WebsiteTitle}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="shortcut icon" href={`${import.meta.env.SITE}${import.meta.env.BASE_URL}/favicon.ico`}/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link 
+      rel="stylesheet" 
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <TopNavigation />
+    <div class="note">
+      <div class="content">
+        <slot />
+      </div>
+    </div>
+    <Footer />
+  </body>
+</html>
+
+<style>
+.note {
+  display: flex;
+}
+
+.sidebar {
+  width: 20%;
+  padding: 10px;
+  position: sticky;
+  align-self: flex-start;
+  top: 0;
+}
+
+.content {
+  width: 70%;
+  padding: 20px 10px;
+  h1 {
+    color: #2a2a31;
+    font-weight: normal;
+  }
+  h2 {
+    color: #2a2a31;
+    font-weight: normal;
+  }
+  p:not([class]) {
+    color: #2a2a31;
+    line-height: 1.75rem;
+  }
+  li:not([class]) {
+    color: #2a2a31;
+    line-height: 1.75rem;
+  }
+}
+
+.table-of-contents {
+  width: 30%;
+  padding: 10px;
+  position: sticky;
+  align-self: flex-start;
+  top: 0;
+}
+
+@media screen and (max-width: 640px) {
+  aside {
+    display: none;
+  }
+  .content {
+    width: 100%;
+    box-sizing: border-box;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+    h2 {
+      font-size: 1.25rem;
+    }
+    p {
+      font-size: 0.875rem;
+    }
+    li {
+      font-size: 0.875rem;
+    }
+    .MathJax {
+      transform: scale(0.875);
+      overflow-x: auto;
+    }
+  }
+}
+</style>

@@ -1,0 +1,86 @@
+{
+  "nodes": [
+    {
+      "key": "algebra/group-basics",
+      "attributes": {
+        "label": "群",
+        "x": -0.8282081883442273,
+        "y": -0.5070349659367844,
+        "size": 10,
+        "color": "#0a214f"
+      }
+    },
+    {
+      "key": "lambda-calculus/untyped-lambda-calculus",
+      "attributes": {
+        "label": "型なしラムダ計算",
+        "x": 0.5042267135663805,
+        "y": 1.0014142135623616,
+        "size": 10,
+        "color": "#a22041"
+      }
+    },
+    {
+      "key": "lambda-calculus/church-rosser-theorem",
+      "attributes": {
+        "label": "チャーチ・ロッサーの定理",
+        "x": 2.0149612134528447,
+        "y": 2.6857816066973594,
+        "size": 10,
+        "color": "#a22041"
+      }
+    },
+    {
+      "key": "type-theory/simply-typed-lambda-calculus",
+      "attributes": {
+        "label": "単純型付きラムダ計算 (1)",
+        "x": 2.8422397075913084,
+        "y": 0.8685677257387174,
+        "size": 10,
+        "color": "#a22041"
+      }
+    },
+    {
+      "key": "type-theory/simple-types",
+      "attributes": {
+        "label": "単純型付きラムダ計算 (2)",
+        "x": 4.959206817152941,
+        "y": 0.9477997309781113,
+        "size": 10,
+        "color": "#a22041"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "key": "geid_79_0",
+      "source": "lambda-calculus/untyped-lambda-calculus",
+      "target": "lambda-calculus/church-rosser-theorem",
+      "attributes": {
+        "size": 3,
+        "type": "arrow",
+        "color": "#b8b8bd"
+      }
+    },
+    {
+      "key": "geid_79_1",
+      "source": "lambda-calculus/untyped-lambda-calculus",
+      "target": "type-theory/simply-typed-lambda-calculus",
+      "attributes": {
+        "size": 3,
+        "type": "arrow",
+        "color": "#b8b8bd"
+      }
+    },
+    {
+      "key": "geid_79_2",
+      "source": "type-theory/simply-typed-lambda-calculus",
+      "target": "type-theory/simple-types",
+      "attributes": {
+        "size": 3,
+        "type": "arrow",
+        "color": "#b8b8bd"
+      }
+    }
+  ]
+}

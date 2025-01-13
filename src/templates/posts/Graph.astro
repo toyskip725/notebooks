@@ -1,0 +1,46 @@
+---
+
+---
+
+<div id="graph-container"></div>
+
+<style>
+  #graph-container {
+    width: auto;
+    height: 400px;
+    background-color: #f2f2f2;
+    margin: 2em 0em;
+  }
+</style>
+
+<script>
+  import Graph from "graphology";
+  import Sigma from "sigma";
+  import posts from "../../static/newposts.json"; 
+
+  const container = document.getElementById("graph-container");
+  const containerInner = document.createElement("div");
+  containerInner.style.width = "auto";
+  containerInner.style.height = "400px";
+
+  const graph = new Graph();
+  graph.import(posts);
+
+  // @ts-ignore
+  const renderer = new Sigma(graph, container);
+
+  // add EventListener
+  renderer.on("enterNode", () => {
+    if (container !== null) {
+      container.style.cursor = "pointer";
+    }
+  });
+  renderer.on("leaveNode", () => {
+    if (container !== null) {
+      container.style.cursor = "auto";
+    }
+  });
+  renderer.on("clickNode", (payload) => {
+    window.location.assign(`${payload.node}`);
+  });
+</script>

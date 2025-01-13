@@ -1,0 +1,83 @@
+{
+  "nodes": [
+    {
+      "key": "algebra/group-basics",
+      "attributes": { 
+        "label": "群",
+        "x": 0,
+        "y": 0,
+        "size": 10,
+        "color": "#0a214f" 
+      }
+    },
+    {
+      "key": "lambda-calculus/untyped-lambda-calculus",
+      "attributes": {
+        "label": "型なしラムダ計算",
+        "x": 1,
+        "y": 1,
+        "size": 10,
+        "color": "#a22041"
+      }
+    },
+    {
+      "key": "lambda-calculus/church-rosser-theorem",
+      "attributes": { 
+        "label": "チャーチ・ロッサーの定理",
+        "x": 2,
+        "y": 2,
+        "size": 10,
+        "color": "#a22041"
+      }
+    },
+    {
+      "key": "type-theory/simply-typed-lambda-calculus",
+      "attributes": { 
+        "label": "単純型付きラムダ計算 (1)",
+        "x": 2.5,
+        "y": 1,
+        "size": 10,
+        "color": "#a22041"
+      }
+    },
+    {
+      "key": "type-theory/simple-types",
+      "attributes": { 
+        "label": "単純型付きラムダ計算 (2)",
+        "x": 4,
+        "y": 1,
+        "size": 10,
+        "color": "#a22041"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "lambda-calculus/untyped-lambda-calculus",
+      "target": "lambda-calculus/church-rosser-theorem",
+      "attributes": {
+        "size": 3,
+        "type": "arrow",
+        "color": "#b8b8bd"
+      }
+    },
+    {
+      "source": "lambda-calculus/untyped-lambda-calculus",
+      "target": "type-theory/simply-typed-lambda-calculus",
+      "attributes": {
+        "size": 3,
+        "type": "arrow",
+        "color": "#b8b8bd"
+      }
+    },
+    {
+      "source": "type-theory/simply-typed-lambda-calculus",
+      "target": "type-theory/simple-types",
+      "attributes": {
+        "size": 3,
+        "type": "arrow",
+        "color": "#b8b8bd"
+      }
+    }
+  ]
+}

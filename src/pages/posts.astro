@@ -1,0 +1,17 @@
+---
+import MainColorDivider from "../components/design/MainColorDivider";
+import TopPageWrapperLayout from "../layouts/TopPageWrapperLayout.astro";
+import Graph from "../templates/posts/Graph.astro";
+import List from "../templates/posts/List.astro";
+
+const title = "ノート一覧";
+---
+
+<TopPageWrapperLayout title={title}>
+  <h1>{title}</h1>
+  <MainColorDivider />
+  <div class="posts">
+    <Graph />
+    <List />
+  </div>
+</TopPageWrapperLayout>

@@ -6,7 +6,10 @@ type Props = {
 };
 
 const NoteLinkElement = ({ segment, section, path, title }: Props) => {
-  const href = `${import.meta.env.SITE}${import.meta.env.BASE_URL}/${segment}/${path}`;
+  const baseUrl = import.meta.env.SITE.includes("localhost") 
+    ? import.meta.env.SITE
+    : import.meta.env.SITE + import.meta.env.BASE_URL;
+  const href = `${baseUrl}/${segment}/${path}`;
 
   const mainStyle: React.CSSProperties = {
     listStyle: "none",

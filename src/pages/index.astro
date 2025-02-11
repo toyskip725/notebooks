@@ -1,15 +1,26 @@
 ---
-import TopIndex from "../templates/TopIndex";
 import MainColorDivider from "../components/design/MainColorDivider";
 import VerticalSpacer from "../components/design/VerticalSpacer";
 import TopPageWrapperLayout from "../layouts/TopPageWrapperLayout.astro";
+import PageLinkCard from "../components/link/PageLinkCard";
 ---
 
 <TopPageWrapperLayout title="index">
   <MainColorDivider />
   <p>澄(<a href="https://toyskip725.github.io/">toyskip725.github.io</a>)の勉強ノートです。</p>
-  <TopIndex />
+  <div class="pages">
+    <PageLinkCard path={"about"} title={"このノートについて"} />
+    <PageLinkCard path={"posts"} title={"ノート一覧"} />
+    <PageLinkCard path={"history"} title={"更新履歴"} />
+  </div>
   <h1>Links</h1>
   <a href="https://toyskip725.github.io/">toyskip725.github.io</a>  
   <VerticalSpacer height={"100px"}/>
 </TopPageWrapperLayout>
+
+<style>
+  .pages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+</style>

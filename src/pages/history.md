@@ -1,13 +1,8 @@
 ---
-layout: ../layouts/TopPageLayout.astro
+layout: ../layouts/MarkdownLayout.astro
 title: 更新履歴
-section: 4
 ---
-import MainColorDivider from "../components/design/MainColorDivider";
 
-# {frontmatter.title}
-
-<MainColorDivider />
 
 ## 2024年
 

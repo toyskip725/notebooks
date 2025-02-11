@@ -2,16 +2,12 @@
 import Footer from '../components/site/Footer';
 import TableofContents from '../components/site/TableofContents';
 import TopNavigation from '../components/site/TopNavigation';
-import NoteHeader from '../components/note/NoteHeader';
-import NoteFooter from '../components/note/NoteFooter';
 import { WebsiteTitle } from '../utils/constants';
 import '../styles/global.css';
+import MainColorDivider from '../components/design/MainColorDivider';
 
-const { frontmatter, headings } = Astro.props;
-
-const pathname =  Astro.url.pathname;
-const parentPath = pathname.includes("notebooks") ? pathname.split('/').slice(0, 3).join('/') : pathname.split('/').slice(0, 2).join('/');
-const title = `${frontmatter.title} | ${WebsiteTitle}`;
+const { frontmatter } = Astro.props;
+const title = frontmatter.title !== "index" ? `${frontmatter.title} | ${WebsiteTitle}` : `${WebsiteTitle}`;
 ---
 
 <!doctype html>
@@ -33,38 +29,19 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
   </head>
   <body>
     <TopNavigation />
-    <div class="note">
-      <div class="markdown-content">
-        <NoteHeader title={frontmatter.title} pathname={parentPath} />
-        <slot />
-        <NoteFooter version={frontmatter.version} lastUpdated={frontmatter.lastUpdated}/>
-      </div>
-      <aside class="table-of-contents">
-        <TableofContents headings={headings}/>
-      </aside>
+    <div class="markdown-content">
+      <h1>{frontmatter.title}</h1>
+      <MainColorDivider />
+      <slot />
     </div>
+    <Footer />
   </body>
-  <Footer />
 </html>
 
 <style>
-.note {
-  display: flex;
-}
-
-.sidebar {
-  width: 20%;
-  padding: 10px;
-  position: sticky;
-  align-self: flex-start;
-  top: 0;
-}
-
 .markdown-content {
   width: 70%;
-  padding: 10px;
-  box-sizing: border-box;
-
+  padding: 20px 10px;
   h1 {
     color: #2a2a31;
     font-weight: normal;
@@ -72,13 +49,12 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
   h2 {
     color: #2a2a31;
     font-weight: normal;
-    padding-top: 1.75em;
   }
-  p {
+  p:not([class]) {
     color: #2a2a31;
     line-height: 1.75rem;
   }
-  li {
+  li:not([class]) {
     color: #2a2a31;
     line-height: 1.75rem;
   }
@@ -89,16 +65,12 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
   padding: 10px;
   position: sticky;
   align-self: flex-start;
-  box-sizing: border-box;
   top: 0;
 }
 
 @media screen and (max-width: 640px) {
   aside {
     display: none;
-  }
-  .note {
-    display: block;
   }
   .markdown-content {
     width: 100%;
@@ -110,24 +82,16 @@ const title = `${frontmatter.title} | ${WebsiteTitle}`;
     h2 {
       font-size: 1.25rem;
     }
-    p:not([class]) {
+    p {
       font-size: 0.875rem;
     }
-    li:not([class]) {
+    li {
       font-size: 0.875rem;
     }
     .MathJax {
       transform: scale(0.875);
       overflow-x: auto;
     }
+  }
 }
 </style>
-
-<script>
-  // 定理番号を付与
-  const section = document.getElementById('section');
-  const elements = document.getElementsByClassName('math-numbering');
-  Array.prototype.forEach.call(elements, (element, index) => 
-    element.innerText = `${element.innerText} ${section?.attributes[1].value}.${index + 1}`
-  );
-</script>

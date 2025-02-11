@@ -1,13 +1,8 @@
 ---
-layout: ../layouts/TopPageLayout.astro
+layout: ../layouts/MarkdownLayout.astro
 title: このノートについて
-section: 2
 ---
-import MainColorDivider from "../components/design/MainColorDivider";
 
-# {frontmatter.title}
-
-<MainColorDivider />
 
 ## 概要
 

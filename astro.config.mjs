@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 import react from "@astrojs/react";
-import mdx from "@astrojs/mdx";
 import remarkMath from 'remark-math';
 import rehypeMathjax from 'rehype-mathjax';
 import sumiml from '@sumiml/astro-integration';
@@ -10,7 +9,7 @@ export const baseConfig = {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeMathjax]
   },
-  integrations: [react(), mdx(), sumiml()],
+  integrations: [react(), sumiml()],
 };
 
 // https://astro.build/config

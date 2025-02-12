@@ -1,0 +1,29 @@
+---
+import type { GetStaticPaths } from "astro";
+import MainColorDivider from "../components/design/MainColorDivider";
+import SegmentIndexFactory from "../components/site/SegmentIndexFactory";
+import FooterLink from "../components/link/FooterLink";
+import TopPageWrapperLayout from "../layouts/TopPageWrapperLayout.astro";
+import articleIndex from "../articles/articles.json";
+import { getAllSegment, getDisplayName } from "../utils/article";
+
+export const getStaticPaths = (() => {
+  const segments = getAllSegment(articleIndex);
+  return segments.map(segment => {
+    return { params: { segment: segment } };
+  });
+}) satisfies GetStaticPaths;
+
+const { segment } = Astro.params;
+const title = getDisplayName(articleIndex, segment);
+const baseUrl = import.meta.env.SITE.includes("localhost") 
+    ? import.meta.env.SITE
+    : import.meta.env.SITE + import.meta.env.BASE_URL;
+---
+
+<TopPageWrapperLayout title={title}>
+  <h1>{title}</h1>
+  <MainColorDivider />
+  <SegmentIndexFactory jsonIndex={articleIndex} segment={segment} />
+  <FooterLink title={"ノート一覧に戻る"} url={`${baseUrl}/posts`} icon={"back"} />
+</TopPageWrapperLayout>

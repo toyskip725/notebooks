@@ -1,12 +1,16 @@
 ---
-import Algebra from "../Algebra";
-import LambdaCalculus from "../LambdaCalculus";
-import TypeTheory from "../TypeTheory";
+import articleIndex from "../../articles/articles.json";
+import SegmentIndexFactory from "../../components/site/SegmentIndexFactory";
+import { getDisplayName } from "../../utils/article";
+
+const contents = [
+  "algebra",
+  "lambda-calculus",
+  "type-theory"
+];
 ---
 
-<h2>Algebra</h2>
-<Algebra />
-<h2>Lambda Calculus</h2>
-<LambdaCalculus />
-<h2>Type Theory</h2>
-<TypeTheory />
+{contents.map(content => (
+  <h2>{getDisplayName(articleIndex, content)}</h2>
+  <SegmentIndexFactory jsonIndex={articleIndex} segment={content} />
+))}

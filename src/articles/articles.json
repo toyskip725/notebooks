@@ -13,7 +13,7 @@
               "title": "群",
               "displayTitle": "群",
               "path": "group-basics",
-              "source": "src/articles/algebra/1_group-basics/document.suml",
+              "source": "algebra/1_group-basics",
               "status": "active"
             }
           ]
@@ -33,7 +33,7 @@
               "title": "型なしラムダ計算",
               "displayTitle": "型なしラムダ計算",
               "path": "untyped-lambda-calculus" ,
-              "source": "src/articles/lambda-calculus/1_untyped-lambda-calculus/document.suml",
+              "source": "lambda-calculus/1_untyped-lambda-calculus",
               "status": "active"
             },
             {
@@ -42,7 +42,7 @@
               "title": "チャーチ・ロッサーの定理",
               "displayTitle": "チャーチ・ロッサーの定理",
               "path": "church-rosser-theorem",
-              "source": "src/articles/lambda-calculus/2_church-rosser-theorem/document.suml",
+              "source": "lambda-calculus/2_church-rosser-theorem",
               "status": "active"
             }
           ]
@@ -57,7 +57,7 @@
               "title": "単純型付きラムダ計算 (1)",
               "displayTitle": "単純型付きラムダ計算 (1)",
               "path": "simply-typed-lambda-calculus",
-              "source": "src/articles/type-theory/1_simply-typed-lambda-calculus/document.suml",
+              "source": "type-theory/1_simply-typed-lambda-calculus",
               "status": "active"
             },
             {
@@ -66,7 +66,7 @@
               "title":"単純型付きラムダ計算 (2) - 単純型",
               "displayTitle":"単純型付きラムダ計算 (2)",
               "path": "simple-types",
-              "source": "src/articles/type-theory/2_simple-types/document.suml",
+              "source": "type-theory/2_simple-types",
               "status": "active"
             }
           ]

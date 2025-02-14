@@ -5,10 +5,10 @@ import SegmentIndexFactory from "../components/site/SegmentIndexFactory";
 import FooterLink from "../components/link/FooterLink";
 import TopPageWrapperLayout from "../layouts/TopPageWrapperLayout.astro";
 import articleIndex from "../articles/articles.json";
-import { getAllSegment, getDisplayName } from "../utils/article";
+import { getAllSegmentName, getDisplayName } from "../utils/article";
 
 export const getStaticPaths = (() => {
-  const segments = getAllSegment(articleIndex);
+  const segments = getAllSegmentName(articleIndex);
   return segments.map(segment => {
     return { params: { segment: segment } };
   });

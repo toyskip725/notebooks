@@ -4,7 +4,7 @@ import metadata from "@sumiml/core/src/converter/metadata";
 import preprocessor from "@sumiml/core/src/converter/preprocessor";
 import DocumentWrapperLayout from "../../layouts/DocumentWrapperLayout.astro";
 import articleIndex from "../../articles/articles.json";
-import { getAllSegment, getSource } from "../../utils/article";
+import { getAllSegment, getSource } from "../../utils/articleUtility";
 
 export const getStaticPaths = (() => {
   const segments = getAllSegment(articleIndex);

@@ -1,4 +1,4 @@
-import { getNotes } from "../../utils/article";
+import { getNotes } from "../../utils/articleUtility";
 import NoteLinkElement from "../link/NoteLinkElement";
 
 type Props = {

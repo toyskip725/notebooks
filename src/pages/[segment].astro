@@ -5,7 +5,7 @@ import SegmentIndexFactory from "../components/site/SegmentIndexFactory";
 import FooterLink from "../components/link/FooterLink";
 import TopPageWrapperLayout from "../layouts/TopPageWrapperLayout.astro";
 import articleIndex from "../articles/articles.json";
-import { getAllSegmentName, getDisplayName } from "../utils/article";
+import { getAllSegmentName, getDisplayName } from "../utils/articleUtility";
 
 export const getStaticPaths = (() => {
   const segments = getAllSegmentName(articleIndex);

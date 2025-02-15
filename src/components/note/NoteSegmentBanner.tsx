@@ -1,4 +1,4 @@
-import { getDisplayNameWithStyle } from "../../utils/article";
+import { getDisplayNameWithStyle } from "../../utils/articleUtility";
 
 type Props = {
   jsonIndex: any;

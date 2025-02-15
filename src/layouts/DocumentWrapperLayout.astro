@@ -5,6 +5,7 @@ import TopNavigation from '../components/site/TopNavigation';
 import NoteHeader from '../components/note/NoteHeader';
 import NoteFooter from '../components/note/NoteFooter';
 import { WebsiteTitle } from '../utils/constants';
+import articleIndex from "../articles/articles.json";
 
 // props
 const { frontmatter } = Astro.props;
@@ -31,7 +32,7 @@ const pageTitle = `${frontmatter.title} | ${WebsiteTitle}`;
 <body>
   <TopNavigation />
   <main class="sumiml-content">
-    <NoteHeader title={frontmatter.title} pathname={parentPath} />
+    <NoteHeader jsonIndex={articleIndex} title={frontmatter.title} pathname={parentPath} />
     <slot />
     <NoteFooter version={frontmatter.version} lastUpdated={frontmatter.lastupdated} />
   </main>

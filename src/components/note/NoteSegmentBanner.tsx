@@ -1,5 +1,4 @@
 import { getDisplayNameWithStyle } from "../../utils/article";
-import { findNoteSegmentInfo } from "../../utils/category";
 
 type Props = {
   jsonIndex: any;

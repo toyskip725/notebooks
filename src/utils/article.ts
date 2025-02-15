@@ -1,3 +1,5 @@
+import { mainColor, type WithStyle } from "./mainColor";
+
 export type Note = {
   key: string;
   section: number;
@@ -12,12 +14,26 @@ export type Segment = {
   displayName: string;
   notes: Note[];
 };
+export type CategoryName = "mathematics" | "logic" | "physics" | "philosophy";
 export type Category = {
-  name: "mathematics" | "logic" | "physics" | "philosophy";
+  name: CategoryName;
   segments: Segment[];
 };
 export type ArticleIndex = {
   categories: Category[];
+};
+
+export const color = (categoryName: CategoryName) => {
+  switch(categoryName) {
+    case "mathematics":
+      return mainColor.navy;
+    case "logic": 
+      return mainColor.crimson;
+    case "physics":
+      return mainColor.teal;
+    case "philosophy":
+        return mainColor.orange;
+  }
 };
 
 export const getAllSegment = (jsonIndex: any) => {
@@ -32,6 +48,18 @@ export const getAllSegmentName = (jsonIndex: any) => {
     .map(segment => segment.name);
 };
 
+export const getParentCategoryName = (jsonIndex: any, segmentName: string) => {
+  const index = jsonIndex as ArticleIndex;
+  const parent = index.categories
+    .filter(category => category.segments.some(segment => segment.name === segmentName));
+
+  if (parent.length === 0 || parent.length >= 2) {
+    throw new Error("not found");
+  }
+
+  return parent.at(0)?.name;
+}
+
 export const getDisplayName = (jsonIndex: any, segmentName: string) => {
   const index = jsonIndex as ArticleIndex;
   const segment = index.categories
@@ -43,6 +71,19 @@ export const getDisplayName = (jsonIndex: any, segmentName: string) => {
   }
 
   return segment.displayName;
+};
+
+export const getDisplayNameWithStyle: WithStyle<typeof getDisplayName> = (jsonIndex: any, segmentName: string) => {
+  const parentName = getParentCategoryName(jsonIndex, segmentName);
+
+  if (parentName === undefined) {
+    throw new Error("category is undefined");
+  }
+
+  return {
+    value: getDisplayName(jsonIndex, segmentName),
+    color: color(parentName),
+  };
 };
 
 export const getNotes = (jsonIndex: any, segmentName: string) => {

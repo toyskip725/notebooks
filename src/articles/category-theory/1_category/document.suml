@@ -1,0 +1,140 @@
+<SumiML version="1.0" />
+<Frontmatter>
+title: 圏
+section: 1
+version: 0.1.0
+lastupdated: 2025/02/12
+</Frontmatter>
+
+<Document>
+
+本ページでは、<Strong>圏</Strong> (category) の概念を導入し、いくつかの初歩的な例と構成について述べる。
+
+<Section title="圏の定義">
+
+<Definition name="圏">
+(1) 
+われわれは二種類のなんらかのものの集まり (collection) が存在することを前提する。
+一方の集まりの要素を <Strong>対象</Strong> (object)、もう一方の集まりの要素を <Strong>射</Strong> (arrow/morphism) と呼び、それぞれ以下の記号で書く。
+
+<List type="itemized">
+  </> 対象 (object) : $A, B, C, \cdots$
+  </> 射 (arrow/morphism) : $f, g, h, \cdots$
+</List>
+
+(2)
+さらに、それぞれの射に対し、<Strong>始域</Strong> (domain) および <Strong>終域</Strong> (codomain) と呼ばれる対象が必ず一つずつ存在するものとする。
+
+<List type="itemized">
+  </> 射 $f$ の始域が $A$ であることを $\mathrm{dom}(f) = A$ と書き、$f$ の終域が $B$ であることを $\mathrm{cod}(f) = B$ と書く。
+  </> 始域が $A$、終域が $B$ である射 $f$ を $f : A \to B$ とも書く。
+</List>
+
+
+(3)
+対象の集まりと射の集まりの組 $\mathbf{C}$ が <Strong>圏</Strong> (category) であるのは、$\mathbf{C}$ が以下の条件を満たすときである : 
+
+[合成射] 始域と終域が一致する射は合成可能である。すなわち、$f : A \to B$、$g : B \to C$ がともに $\mathbf{C}$ の射であるならば、
+$g \circ f : A \to C$ も $\mathbf{C}$ の射である。
+
+<Math>
+\xymatrix {
+A \ar[r]^{f} \ar[dr]_{g \circ f} & B \ar[d]^{g}\\
+  & C \\
+}
+</Math>
+
+[$\circ$ の結合則] 射の合成は結合的である。すなわち、任意の射 $f : A \to B$、$g : B \to C$、$h : C \to D$ について
+<Math>
+f \circ (g \circ h) = (f \circ g) \circ h
+</Math>
+である。
+
+[恒等射] あらゆる対象 $A$ に対してある射 $\mathrm{id}_{A} : A \to A$ が存在して、任意の $f : A \to B$、$g : C \to A$ に対し
+<Math>
+f \circ \mathrm{id}_{A} = f, \quad \mathrm{id}_{A} \circ g = g
+</Math>
+が成り立つ。この $\mathrm{id}_{A}$ を<Strong>恒等射</Strong> (identity arrow) と呼ぶ。
+
+</Definition>
+
+集合論では、二つの写像 $f, g : A \to B$ が等しいのは、すべての $a \in A$ に対して $f(a) = g(a)$ が成り立つときである：
+すなわち、写像の同一性は、要素の同一性から派生的に定義されていた。
+
+射の同一性は、圏論の視点から見る限りはプリミティブである。
+
+</Section>
+
+<Section title="圏の例">
+
+圏の具体例は非常に数多く存在する。ここでは最も基本的で、かつ前提知識をそれほど必要としないいくつかの例を挙げるにとどめる。
+
+<Example name="集合圏$\mathbf{Set}$">
+すべての集合を対象、それらの間の写像を射とみなしたものは圏である。
+
+<Proof>
+通常の写像の合成を射の合成とみなせば、写像の合成が結合則を満たすことから射の結合則はただちに満たされる。対象 $A$ の恒等射は、通常の意味での恒等写像
+<Math>
+\mathrm{id}_A : A \to A ; \quad \mathrm{id}_{A}(a) = a
+</Math>
+である。 $\Box$
+</Proof>
+この圏のことを <Strong>集合圏</Strong> (category of sets) といい、$\mathbf{Set}$ と書く。
+</Example>
+
+<Example name="群の圏$\mathbf{Grp}$">
+すべての群を対象、それらの間の準同型写像を射とみなしたものは圏である。
+
+この圏のことを $\mathbf{Grp}$ と書く。
+</Example>
+
+</Section>
+
+<Section title="圏の構成">
+
+なんらかの圏が与えられたとき、その圏から別の圏をつくる操作を考えることができる。
+
+<Definition name="反対圏">
+$\mathbf{C}$ を圏とするとき、以下のように対象と射を定めたものも圏である：
+
+<List type="itemized">
+  </> 対象 : $\mathbf{C}$ の対象を対象とする。
+  </> 射 : $\mathbf{C}$ の射 $f : A \to B$ に対して、$f^{*} : B \to A$ を射とする。
+</List>
+
+この圏のことを $\mathbf{C}$ の <Strong>反対圏</Strong> (opposite/dual category) といい、$\mathbf{C}^{op}$ と書く。
+</Definition>
+
+$\mathbf{C}^{op}$ は $\mathbf{C}$ の射をすべて反転させた圏である。
+
+<Math>
+\xymatrix {
+A \ar[r]^{f} \ar[dr]_{g \circ f} & B \ar[d]^{g} \\
+  & C \\
+}
+\qquad
+
+\xymatrix {
+A & B \ar[l]_{f^{*}} \\
+  & C \ar[lu]^{f^{*} \circ g^{*}} \ar[u]_{g^{*}}  \\
+}
+</Math>
+
+<Definition name="積圏">
+$\mathbf{C}$、$\mathbf{D}$ を圏とするとき、以下のように対象と射を定めたものも圏である：
+
+<List type="itemized">
+  </> 対象 : $\mathbf{C}$ の対象と $\mathbf{D}$ の対象の組。$A$ が $\mathbf{C}$ の対象、$A'$ が $\mathbf{D}$ の対象のとき、$\langle A, A' \rangle$ を対象とする。
+  </> 射：$\mathbf{C}$ の射と $\mathbf{D}$ の射の組。
+</List>
+
+この圏のことを $\mathbf{C}$ と $\mathbf{D}$ の <Strong>圏の直積</Strong> あるいは <Strong>積圏</Strong> (product category) といい、$\mathbf{C} \times \mathbf{D}$ と書く。
+</Definition>
+
+</Section>
+
+<Bibliography>
+  </> Steve Awodey, 2010. <Emphasis>Category Theory</Emphasis>. Second Edition. Oxford University Press.
+</Bibliography>
+
+</Document>

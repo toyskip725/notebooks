@@ -70,6 +70,21 @@
               "status": "active"
             }
           ]
+        },
+        {
+          "name": "category-theory",
+          "displayName": "Category Theory",
+          "notes": [
+            {
+              "key": "category-theory/category",
+              "section": 1,
+              "title": "圏",
+              "displayTitle": "圏",
+              "path": "category",
+              "source": "category-theory/1_category",
+              "status": "active"
+            }
+          ]
         }
       ]
     }

@@ -1,0 +1,19 @@
+{
+  "dependencies": [
+    {
+      "sourceKey": "lambda-calculus/untyped-lambda-calculus",
+      "targetKey": "lambda-calculus/church-rosser-theorem",
+      "type": "prerequisite"
+    },
+    {
+      "sourceKey": "lambda-calculus/untyped-lambda-calculus",
+      "targetKey": "type-theory/simply-typed-lambda-calculus",
+      "type": "relates to"
+    },
+    {
+      "sourceKey": "type-theory/simply-typed-lambda-calculus",
+      "targetKey": "type-theory/simple-types",
+      "type": "prerequisite"
+    }
+  ]
+}

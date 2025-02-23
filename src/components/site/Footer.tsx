@@ -1,3 +1,5 @@
+import { CopyRight } from "../../utils/constants";
+
 const Footer = () => {
   const textStyle: React.CSSProperties = {
     color: "#999",
@@ -8,7 +10,7 @@ const Footer = () => {
 
   return (
     <footer>
-      <p style={textStyle}>© Copyright 2024. toyskip725</p>
+      <p style={textStyle}>{CopyRight}</p>
     </footer>
   );
 };

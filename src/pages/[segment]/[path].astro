@@ -1,0 +1,32 @@
+---
+import type { GetStaticPaths } from "astro";
+import metadata from "@sumiml/core/src/converter/metadata";
+import preprocessor from "@sumiml/core/src/converter/preprocessor";
+import DocumentWrapperLayout from "../../layouts/DocumentWrapperLayout.astro";
+import articleIndex from "../../articles/articles.json";
+import { getAllSegment, getSource } from "../../utils/articleUtility";
+
+export const getStaticPaths = (() => {
+  const segments = getAllSegment(articleIndex);
+  const results = segments.map(segment => {
+    return segment.notes.map(note => {
+      return {
+        params: {
+          segment: segment.name,
+          path: note.path,
+        }
+      };
+    })
+  }).flat(1);
+  return results;
+}) satisfies GetStaticPaths;
+
+const { segment, path } = Astro.params;
+const source = getSource(articleIndex, `${segment}/${path}`);
+const document = await import(/* @vite-ignore */ `/src/articles/${source}/document.suml`);
+const { frontmatter } = metadata(await preprocessor(`src/articles/${source}/document.suml`));
+---
+
+<DocumentWrapperLayout frontmatter={frontmatter}>
+  {<document.default />}
+</DocumentWrapperLayout>

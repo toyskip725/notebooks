@@ -1,13 +1,13 @@
-import { findNoteSegmentInfo } from "../../utils/category";
+import { getDisplayNameWithStyle } from "../../utils/articleUtility";
 
 type Props = {
+  jsonIndex: any;
   path: string;
 };
 
-const NoteSegmentBanner = ({ path }: Props) => {
+const NoteSegmentBanner = ({ jsonIndex, path }: Props) => {
   const segment = path.split('/').pop();
-
-  const info = segment !== undefined ? findNoteSegmentInfo(segment) : undefined;
+  const info = segment !== undefined ? getDisplayNameWithStyle(jsonIndex, segment) : undefined;
 
   const bannerStyle = {
     width: "fit-content",
@@ -23,7 +23,7 @@ const NoteSegmentBanner = ({ path }: Props) => {
 
   return (
     <a href={path} style={linkStyle}>
-      <p style={bannerStyle}>{info?.title}</p>
+      <p style={bannerStyle}>{info?.value}</p>
     </a>
   );
 };

@@ -1,0 +1,14 @@
+---
+import articleIndex from "../../articles/articles.json";
+import SegmentIndexFactory from "../../components/site/SegmentIndexFactory";
+import { getDisplayName } from "../../utils/articleUtility";
+import { loadOrder } from "../../utils/configUtility";
+import order from "../../static/order.json";
+
+const contents = loadOrder(order);
+---
+
+{contents.map(content => (
+  <h2>{getDisplayName(articleIndex, content)}</h2>
+  <SegmentIndexFactory jsonIndex={articleIndex} segment={content} />
+))}

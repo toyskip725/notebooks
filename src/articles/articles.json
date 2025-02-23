@@ -1,0 +1,92 @@
+{
+  "categories": [
+    {
+      "name": "mathematics",
+      "segments": [
+        {
+          "name": "algebra",
+          "displayName": "Algebra",
+          "notes": [
+            {
+              "key": "algebra/group-basics",
+              "section": 1,
+              "title": "群",
+              "displayTitle": "群",
+              "path": "group-basics",
+              "source": "algebra/1_group-basics",
+              "status": "active"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "logic",
+      "segments": [
+        {
+          "name": "lambda-calculus",
+          "displayName": "Lambda Calculus",
+          "notes": [
+            {
+              "key": "lambda-calculus/untyped-lambda-calculus",
+              "section": 1,
+              "title": "型なしラムダ計算",
+              "displayTitle": "型なしラムダ計算",
+              "path": "untyped-lambda-calculus" ,
+              "source": "lambda-calculus/1_untyped-lambda-calculus",
+              "status": "active"
+            },
+            {
+              "key": "lambda-calculus/church-rosser-theorem",
+              "section": 2,
+              "title": "チャーチ・ロッサーの定理",
+              "displayTitle": "チャーチ・ロッサーの定理",
+              "path": "church-rosser-theorem",
+              "source": "lambda-calculus/2_church-rosser-theorem",
+              "status": "active"
+            }
+          ]
+        },
+        {
+          "name": "type-theory",
+          "displayName":"Type Theory",
+          "notes": [
+            {
+              "key": "type-theory/simply-typed-lambda-calculus",
+              "section": 1,
+              "title": "単純型付きラムダ計算 (1)",
+              "displayTitle": "単純型付きラムダ計算 (1)",
+              "path": "simply-typed-lambda-calculus",
+              "source": "type-theory/1_simply-typed-lambda-calculus",
+              "status": "active"
+            },
+            {
+              "key": "type-theory/simple-types",
+              "section": 2,
+              "title":"単純型付きラムダ計算 (2) - 単純型",
+              "displayTitle":"単純型付きラムダ計算 (2)",
+              "path": "simple-types",
+              "source": "type-theory/2_simple-types",
+              "status": "active"
+            }
+          ]
+        },
+        {
+          "name": "category-theory",
+          "displayName": "Category Theory",
+          "notes": [
+            {
+              "key": "category-theory/category",
+              "section": 1,
+              "title": "圏",
+              "displayTitle": "圏",
+              "path": "category",
+              "source": "category-theory/1_category",
+              "status": "active"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -2,13 +2,10 @@
 import articleIndex from "../../articles/articles.json";
 import SegmentIndexFactory from "../../components/site/SegmentIndexFactory";
 import { getDisplayName } from "../../utils/articleUtility";
+import { loadOrder } from "../../utils/configUtility";
+import order from "../../static/order.json";
 
-const contents = [
-  "algebra",
-  "lambda-calculus",
-  "type-theory",
-  "category-theory"
-];
+const contents = loadOrder(order);
 ---
 
 {contents.map(content => (

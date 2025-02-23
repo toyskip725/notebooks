@@ -23,7 +23,9 @@ export const getStaticPaths = (() => {
 
 const { segment, path } = Astro.params;
 const source = getSource(articleIndex, `${segment}/${path}`);
-const document = await import(/* @vite-ignore */ `/src/articles/${source}/document.suml`);
+
+const documents = import.meta.glob("../../articles/**/document.suml", { eager: true });
+const document = documents[`../../articles/${source}/document.suml`] as any;
 const { frontmatter } = metadata(await preprocessor(`src/articles/${source}/document.suml`));
 ---
 

@@ -12,4 +12,5 @@ export const mainColor = {
   crimson: "#a22041",
   orange: "#cd5e3c",
 } as const;
+export type ColorCode = `#${string}`;
 export type MainColor = (typeof mainColor)[keyof typeof mainColor];

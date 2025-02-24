@@ -1,28 +1,35 @@
 import fs from "node:fs/promises";
-import { graphBuilder, loadDependencies } from "../src/utils/graphUtility";
+import { graphBuilder, loadDependencies, type SimpleGraph } from "../src/utils/graphUtility";
 import Graph from "graphology";
 import forceLayout from "graphology-layout-force";
 
 // JSON load
-const jsonArticles = await fs.readFile("src/articles/articles.json", { encoding: "utf-8" });
-const jsonDependencies = await fs.readFile("src/articles/dependencies.json", { encoding: "utf-8" });
-const dependencies = loadDependencies(JSON.parse(jsonDependencies));
+let graphData: SimpleGraph;
 
-// init
-const builder = graphBuilder({
-  node: {
-    size: 10,
-    range: {
-      x: { min: -1, max: 1 },
-      y: { min: -1, max: 1 },
+if (process.argv[2] == "load") {
+  const file = await fs.readFile("src/static/graph.json", { encoding: "utf-8" });
+  graphData = JSON.parse(file);
+} else {
+  const jsonArticles = await fs.readFile("src/articles/articles.json", { encoding: "utf-8" });
+  const jsonDependencies = await fs.readFile("src/articles/dependencies.json", { encoding: "utf-8" });
+  const dependencies = loadDependencies(JSON.parse(jsonDependencies));
+
+  // init
+  const builder = graphBuilder({
+    node: {
+      size: 10,
+      range: {
+        x: { min: -1, max: 1 },
+        y: { min: -1, max: 1 },
+      },
     },
-  },
-  edge: {
-    size: 3,
-    color: "#b8b8bd",
-  }
-});
-const graphData = builder(JSON.parse(jsonArticles), dependencies);
+    edge: {
+      size: 3,
+      color: "#b8b8bd",
+    }
+  });
+  graphData = builder(JSON.parse(jsonArticles), dependencies);
+}
 
 // assign force layout
 // settings:
@@ -37,8 +44,8 @@ graph.import(graphData);
 forceLayout.assign(graph, {
   maxIterations: 10000,
   settings: {
-    attraction: 1,
-    repulsion: 1.5,
+    attraction: 0.01,
+    repulsion: 1,
     gravity: 0.01
   }
 });

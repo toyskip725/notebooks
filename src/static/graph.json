@@ -2,60 +2,60 @@
   "nodes": [
     {
       "key": "algebra/group-basics",
-      "attributes": { 
+      "attributes": {
         "label": "群",
-        "x": 0,
-        "y": 0,
+        "x": -17.607853008224907,
+        "y": -10.704184928423071,
         "size": 10,
-        "color": "#0a214f" 
+        "color": "#0a214f"
       }
     },
     {
       "key": "lambda-calculus/untyped-lambda-calculus",
       "attributes": {
         "label": "型なしラムダ計算",
-        "x": 1,
-        "y": 1,
+        "x": 10.827734627219233,
+        "y": 4.907734274921962,
         "size": 10,
         "color": "#a22041"
       }
     },
     {
       "key": "lambda-calculus/church-rosser-theorem",
-      "attributes": { 
+      "attributes": {
         "label": "チャーチ・ロッサーの定理",
-        "x": 2,
-        "y": 2,
+        "x": -1.0486398191268305,
+        "y": 8.489088363455284,
         "size": 10,
         "color": "#a22041"
       }
     },
     {
       "key": "type-theory/simply-typed-lambda-calculus",
-      "attributes": { 
+      "attributes": {
         "label": "単純型付きラムダ計算 (1)",
-        "x": 2.5,
-        "y": 1,
+        "x": 14.595568401487132,
+        "y": -6.83727721587587,
         "size": 10,
         "color": "#a22041"
       }
     },
     {
       "key": "type-theory/simple-types",
-      "attributes": { 
+      "attributes": {
         "label": "単純型付きラムダ計算 (2)",
-        "x": 4,
-        "y": 1,
+        "x": 6.941795314365814,
+        "y": -15.146771055054538,
         "size": 10,
         "color": "#a22041"
       }
     },
     {
       "key": "category-theory/category",
-      "attributes": { 
+      "attributes": {
         "label": "圏",
-        "x": 1.5,
-        "y": -1,
+        "x": -11.165893084822939,
+        "y": 18.415471408053925,
         "size": 10,
         "color": "#a22041"
       }
@@ -63,6 +63,7 @@
   ],
   "edges": [
     {
+      "key": "geid_25_0",
       "source": "lambda-calculus/untyped-lambda-calculus",
       "target": "lambda-calculus/church-rosser-theorem",
       "attributes": {
@@ -72,6 +73,7 @@
       }
     },
     {
+      "key": "geid_25_1",
       "source": "lambda-calculus/untyped-lambda-calculus",
       "target": "type-theory/simply-typed-lambda-calculus",
       "attributes": {
@@ -81,6 +83,7 @@
       }
     },
     {
+      "key": "geid_25_2",
       "source": "type-theory/simply-typed-lambda-calculus",
       "target": "type-theory/simple-types",
       "attributes": {

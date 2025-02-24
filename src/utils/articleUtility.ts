@@ -86,6 +86,13 @@ export const getDisplayNameWithStyle: WithStyle<typeof getDisplayName> = (jsonIn
   };
 };
 
+export const getAllNotes = (jsonIndex: any) => {
+  const index = jsonIndex as ArticleIndex;
+  return index.categories
+    .map(category => category.segments).flat(1)
+    .map(segment => segment.notes).flat(1);
+};
+
 export const getNotes = (jsonIndex: any, segmentName: string) => {
   const index = jsonIndex as ArticleIndex;
   const segment = index.categories

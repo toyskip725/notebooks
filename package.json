@@ -8,7 +8,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "serve:static": "npx serve dist"
+    "serve:static": "npx serve dist",
+    "graph:generate": "npx tsx scripts/graphGenerator.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",

@@ -16,7 +16,7 @@
     "@astrojs/react": "^3.1.0",
     "@fontsource/noto-sans-jp": "^5.0.18",
     "@sumiml/astro-integration": "file:sumiml-astro-integration-0.1.0.tgz",
-    "@sumiml/core": "file:sumiml-core-0.1.0.tgz",
+    "@sumiml/core": "file:sumiml-core-0.1.1.tgz",
     "@sumiml/math": "file:sumiml-math-0.1.0.tgz",
     "@sumiml/util": "file:sumiml-util-0.1.0.tgz",
     "@types/node": "^22.7.7",

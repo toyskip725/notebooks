@@ -6,6 +6,9 @@ title: 更新履歴
 
 ## 2025年
 
+- 2025/03/02
+  - 【新規追加】[エピ射とモノ射](../category-theory/epis-and-monos) (0.1.0)
+  - 【更新】[圏](../category-theory/category) (0.1.0 → 0.1.1)
 - 2025/02/23
   - 【新規追加】[圏](../category-theory/category) (0.1.0)
 

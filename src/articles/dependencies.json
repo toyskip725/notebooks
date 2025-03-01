@@ -14,6 +14,11 @@
       "sourceKey": "type-theory/simply-typed-lambda-calculus",
       "targetKey": "type-theory/simple-types",
       "type": "prerequisite"
+    },
+    {
+      "sourceKey": "category-theory/category",
+      "targetKey": "category-theory/epis-and-monos",
+      "type": "prerequisite"
     }
   ]
 }

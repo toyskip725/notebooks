@@ -1,0 +1,154 @@
+<SumiML version="1.0" />
+<Frontmatter>
+title: エピ射とモノ射
+section: 2
+version: 0.1.0
+lastupdated: 2025/03/02
+</Frontmatter>
+
+<Document>
+
+本ページでは、圏における射について一歩踏み込んで性質を調べる。<Strong>エピ射</Strong> (epimorphism) と <Strong>モノ射</Strong> (monomorphism) は、それぞれ集合論での全射と単射の圏論的な対応物である。
+
+<Section title="エピ射とモノ射">
+
+<Definition name="エピ射・モノ射">
+$\mathbf{C}$ を圏とする。
+
+(1) $\mathbf{C}$ の射 $f : A \to B$ が <Strong>モノ射</Strong> (monomorphism) であるのは、任意の $\mathbf{C}$ の射 $g, h : C \to A$ に対して、
+$f \circ g = f \circ h$ ならば $g = h$ が成り立つときである。
+
+<Math>
+\xymatrix {
+C \ar@/^/[r]^{g} \ar@/_/[r]_{h} & A \ar[r]^{f} & B \\
+}
+</Math>
+
+(2) $\mathbf{C}$ の射 $f : A \to B$ が<Strong>エピ射</Strong> (epimorphism) であるのは、任意の $\mathbf{C}$ の射 $g, h : B \to C$ に対して、
+$g \circ f = h \circ f$ ならば $g = h$ が成り立つときである。
+
+<Math>
+\xymatrix {
+A \ar[r]^{f} & B \ar@/^/[r]^{g} \ar@/_/[r]_{h} & C \\
+}
+</Math>
+</Definition>
+
+<Proposition>
+圏 $\mathbf{Set}$ において、以下の (1) (2) が成り立つ：
+
+<List type="ordered">
+  </> $\mathbf{Set}$ の射 $f$ がモノ射であるならば、$f$ は単射である。
+  </> $\mathbf{Set}$ の射 $f$ が単射であるならば、$f$ はモノ射である。
+</List>
+</Proposition>
+
+したがって、集合圏 $\mathbf{Set}$ においては、モノ射の概念は単射と一致する。
+
+<Proof>
+(1) $f : A \to B$ はモノ射であると仮定し、$a, a' \in A$ を相異なる $A$ の要素とする。
+$f$ が単射であることを示すには、$f(a) \neq f(a')$ を示せばよい。
+
+いま、ただ1点からなる集合 $\{ * \}$ から $A$ への写像 $g, h : \{ * \} \to A$ を
+<Math>
+g(*) = a \qquad h(*) = a'
+</Math>
+により定義する。このとき $g \neq h$ であり、 $f$ はモノ射なので、$f \circ g \neq f \circ h$ である。したがって
+<Math>
+f(a) = f(g(*)) = (f \circ g)(*) \neq (f \circ h)(*) = f(h(*)) = f(a') 
+</Math>
+より、$f(a) \neq f(a')$ を得る。
+
+(2) $f : A \to B$ は単射であると仮定する。
+いま、写像 $g, h : C \to A$ は $g \neq h$ を満たすとすると、ある $c \in C$ が存在して $g(c) \neq h(c)$ である。
+$f$ は単射なので、さらに $f(g(c)) \neq f(h(c))$、すなわち $(f \circ g)(c) \neq (f \circ h)(c)$が成り立つ。したがって $f \circ g \neq f \circ h$ となるので、 $f$ はモノ射である。
+$\Box$
+</Proof>
+
+<Proposition>
+圏 $\mathbf{Set}$ において、以下の (1) (2) が成り立つ：
+
+<List type="ordered">
+  </> $\mathbf{Set}$ の射 $f$ がエピ射であるならば、$f$ は全射である。
+  </> $\mathbf{Set}$ の射 $f$ が全射であるならば、$f$ はエピ射である。
+</List>
+</Proposition>
+
+したがって、モノ射の場合と同様に、集合圏 $\mathbf{Set}$ においては、エピ射の概念は全射と一致する。
+
+<Proof>
+(1) $f : A \to B$ はエピ射であると仮定し、$b \in B$ を任意にとる。
+$f$ が全射であることを示すには、$f(a) = b$ となる $a \in A$ が存在することを示せばよい。
+
+いま、$B$ から2点集合 $\{ 0, 1 \}$ への写像 $g, h_{b} : B \to \{ 0, 1 \}$ を
+<Math>
+g(x) = 0 \quad (x \in B) 
+</Math>
+<Math>
+h_{b}(x) = 
+\begin{cases}
+1 \quad (x = b) \\
+0 \quad (x \neq b)
+\end{cases}
+</Math>
+により定義する。このとき $g(b) \neq h_{b}(b)$ なので $g \neq h_{b}$ であり、$f$ はエピ射なので、$g \circ f \neq h_{b} \circ f$ である。
+
+ここで、もし $b \notin f(A)$（どの $a \in A$ についても $f(a) \neq b$ ）であるとすれば、$g, h_{b}$ の定義からすべての $a \in A$ について $g(f(a)) = h_{b}(f(a)) =0$ となるが、
+これは $g \circ f \neq h_{b} \circ f$ であることに反する。したがって、$f(a) = b$ となる $a \in A$ が存在しなければならない。
+
+(2) $f : A \to B$ は全射であると仮定する。
+いま、写像 $g, h : B \to C$ は $g \neq h$ を満たすとすると、ある $b \in B$ が存在して $g(b) \neq h(b)$ である。
+$f$ は全射なので、この $b$ に対して $f(a) = b$ となる $a \in A$ が存在し、$g(f(a)) \neq h(f(a))$ すなわち $(g \circ f)(a) \neq (h \circ f)(a)$ となる。
+したがって $g \circ f \neq h \circ f$ が成り立つので、 $f$ はエピ射である。$\Box$
+</Proof>
+
+</Section>
+
+<Section title="同型射">
+
+<Definition name="同型射">
+$\mathbf{C}$ を圏とする。
+$\mathbf{C}$ の射 $f : A \to B$ が <Strong>同型射</Strong> (isomorphism) であるのは、ある射 $g : B \to A$ が $\mathbf{C}$ に存在して
+<Math>
+g \circ f = \mathrm{id}_{A} \qquad f \circ g = \mathrm{id}_{B}
+</Math>
+の両方ともが成り立つときである。
+</Definition>
+
+この射 $g$ は、存在すれば必ず一意に定まる。そのためこの $g$ を <Strong>逆射</Strong> (inverse) ともいい、$f^{-1}$ とも書く。
+また、同型射 $f$ が存在するとき、$A$ と $B$ は <Strong>同型</Strong> (isomorphic) であるといい、$A \cong B$ とも表す。
+
+<Proof>
+逆射は存在すれば一意であることを確認しておく。
+そのためには、射 $g, g'$ がともに条件を満たすならば $g = g'$ となることを示せばよい。
+実際、$g, g' : B \to A$ が、ともに $f : A \to B$ が同型射となるための条件（$f$ と合成すると恒等射になる）を満たしているとすると、
+<Math>
+g = g \circ \mathrm{id}_{B} = g \circ f \circ g' = \mathrm{id}_{A} \circ g' = g'
+</Math>
+より、$g = g'$ である。$\Box$
+
+</Proof>
+
+<Proposition>
+任意の圏 $\mathbf{C}$ において、同型射はモノ射かつエピ射である。
+</Proposition>
+
+<Proof>
+$f : A \to B$ は同型射であるとし、$g, h : C \to A$ は $f \circ g = f \circ h$ を満たすとする。
+仮定より $f$ には逆射 $f^{-1}$ が存在するので、$f^{-1}$ を左から合成すると
+<Math>
+g = \mathrm{id}_{A} \circ g = f^{-1} \circ f \circ g = f^{-1} \circ f \circ h = \mathrm{id}_{A} \circ h = h
+</Math>
+より、$g = h$ である。ゆえに $f$ はモノ射である。
+
+同様に、$g, h : B \to C$ が $g \circ f = h \circ f$ を満たすとすると、$f^{-1}$ を右から合成することで $g = h$ を得るので、$f$ はエピ射である。
+$\Box$
+</Proof>
+
+</Section>
+
+<Bibliography>
+  </> Steve Awodey, 2010. <Emphasis>Category Theory</Emphasis>. Second Edition. Oxford University Press.
+</Bibliography>
+
+</Document>

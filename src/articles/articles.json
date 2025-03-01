@@ -83,6 +83,15 @@
               "path": "category",
               "source": "category-theory/1_category",
               "status": "active"
+            },
+            {
+              "key": "category-theory/epis-and-monos",
+              "section": 2,
+              "title": "エピ射とモノ射",
+              "displayTitle": "エピ射とモノ射",
+              "path": "epis-and-monos",
+              "source": "category-theory/2_epis-and-monos",
+              "status": "active"
             }
           ]
         }

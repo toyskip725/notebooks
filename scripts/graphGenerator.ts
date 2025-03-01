@@ -46,7 +46,7 @@ forceLayout.assign(graph, {
   settings: {
     attraction: 0.01,
     repulsion: 1,
-    gravity: 0.01
+    gravity: 0.03
   }
 });
 

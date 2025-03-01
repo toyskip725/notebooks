@@ -4,8 +4,8 @@
       "key": "algebra/group-basics",
       "attributes": {
         "label": "群",
-        "x": -17.607853008224907,
-        "y": -10.704184928423071,
+        "x": -9.488138259785682,
+        "y": 7.520434624257282,
         "size": 10,
         "color": "#0a214f"
       }
@@ -14,8 +14,8 @@
       "key": "lambda-calculus/untyped-lambda-calculus",
       "attributes": {
         "label": "型なしラムダ計算",
-        "x": 10.827734627219233,
-        "y": 4.907734274921962,
+        "x": -6.642897729979564,
+        "y": 1.1328807885176437,
         "size": 10,
         "color": "#a22041"
       }
@@ -24,8 +24,8 @@
       "key": "lambda-calculus/church-rosser-theorem",
       "attributes": {
         "label": "チャーチ・ロッサーの定理",
-        "x": -1.0486398191268305,
-        "y": 8.489088363455284,
+        "x": -8.721123910646075,
+        "y": -7.898155853300079,
         "size": 10,
         "color": "#a22041"
       }
@@ -34,8 +34,8 @@
       "key": "type-theory/simply-typed-lambda-calculus",
       "attributes": {
         "label": "単純型付きラムダ計算 (1)",
-        "x": 14.595568401487132,
-        "y": -6.83727721587587,
+        "x": -1.196760981609497,
+        "y": 7.3944722200768735,
         "size": 10,
         "color": "#a22041"
       }
@@ -44,8 +44,8 @@
       "key": "type-theory/simple-types",
       "attributes": {
         "label": "単純型付きラムダ計算 (2)",
-        "x": 6.941795314365814,
-        "y": -15.146771055054538,
+        "x": 8.406733063105515,
+        "y": 10.41770903168922,
         "size": 10,
         "color": "#a22041"
       }
@@ -54,8 +54,18 @@
       "key": "category-theory/category",
       "attributes": {
         "label": "圏",
-        "x": -11.165893084822939,
-        "y": 18.415471408053925,
+        "x": 5.842718991939341,
+        "y": -10.127479390214027,
+        "size": 10,
+        "color": "#a22041"
+      }
+    },
+    {
+      "key": "category-theory/epis-and-monos",
+      "attributes": {
+        "label": "エピ射とモノ射",
+        "x": 10.193426086404886,
+        "y": -5.835206788316983,
         "size": 10,
         "color": "#a22041"
       }
@@ -63,7 +73,7 @@
   ],
   "edges": [
     {
-      "key": "geid_25_0",
+      "key": "geid_193_0",
       "source": "lambda-calculus/untyped-lambda-calculus",
       "target": "lambda-calculus/church-rosser-theorem",
       "attributes": {
@@ -73,7 +83,7 @@
       }
     },
     {
-      "key": "geid_25_1",
+      "key": "geid_193_1",
       "source": "lambda-calculus/untyped-lambda-calculus",
       "target": "type-theory/simply-typed-lambda-calculus",
       "attributes": {
@@ -83,9 +93,19 @@
       }
     },
     {
-      "key": "geid_25_2",
+      "key": "geid_193_2",
       "source": "type-theory/simply-typed-lambda-calculus",
       "target": "type-theory/simple-types",
+      "attributes": {
+        "size": 3,
+        "type": "arrow",
+        "color": "#b8b8bd"
+      }
+    },
+    {
+      "key": "geid_193_3",
+      "source": "category-theory/category",
+      "target": "category-theory/epis-and-monos",
       "attributes": {
         "size": 3,
         "type": "arrow",

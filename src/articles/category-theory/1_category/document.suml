@@ -2,8 +2,8 @@
 <Frontmatter>
 title: 圏
 section: 1
-version: 0.1.0
-lastupdated: 2025/02/23
+version: 0.1.1
+lastupdated: 2025/03/02
 </Frontmatter>
 
 <Document>
@@ -88,6 +88,9 @@ f \circ \mathrm{id}_{A} = f, \quad \mathrm{id}_{A} \circ g = g
 この圏のことを $\mathbf{Grp}$ と書く。
 </Example>
 
+同様に、すべての位相空間とそれらの間の連続写像、すべてのベクトル空間とそれらの間の線形写像なども圏とみなすことができる。
+これらの集合上の数学的構造とその構造を保つ写像からなる圏は <Strong>具体圏</Strong> (concrete category) と呼ばれる。
+
 </Section>
 
 <Section title="圏の構成">
@@ -130,6 +133,25 @@ $\mathbf{C}$、$\mathbf{D}$ を圏とするとき、以下のように対象と�
 
 この圏のことを $\mathbf{C}$ と $\mathbf{D}$ の <Strong>圏の直積</Strong> あるいは <Strong>積圏</Strong> (product category) といい、$\mathbf{C} \times \mathbf{D}$ と書く。
 </Definition>
+
+<Proof>
+射の合成 $\langle g, g' \rangle \circ \langle f, f' \rangle$ は、元々の射の合成を用いて $\langle g \circ f, g' \circ f' \rangle$ と定義する。
+この合成が元々の射の結合則を引き継いで結合則を満たすことは
+
+<Math>
+\begin{align}
+\langle h, h' \rangle \circ (\langle g, g' \rangle \circ \langle f, f' \rangle) &=  \langle h, h' \rangle \circ \langle g \circ f, g' \circ f' \rangle \\
+  &= \langle h \circ (g \circ f), h' \circ (g' \circ f') \rangle \\
+  &= \langle (h \circ g) \circ f, (h' \circ g') \circ f' \rangle \\
+  &= \langle h \circ g, h' \circ g' \rangle \circ \langle f, f' \rangle \\
+  &= (\langle h, h' \rangle \circ \langle g, g' \rangle) \circ \langle f, f' \rangle \\
+\end{align}
+</Math>
+となることから確認できる。
+
+恒等射 $\mathrm{id}_{\langle A, A' \rangle} : \langle A, A' \rangle \to \langle A, A' \rangle$ は、
+元々の圏での恒等射からなる $\langle \mathrm{id}_{A}, \mathrm{id}_{A'} \rangle$ である。 $\Box$
+</Proof>
 
 </Section>
 

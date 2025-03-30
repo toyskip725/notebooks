@@ -3,24 +3,33 @@ import MainColorDivider from "../components/design/MainColorDivider";
 import VerticalSpacer from "../components/design/VerticalSpacer";
 import TopPageWrapperLayout from "../layouts/TopPageWrapperLayout.astro";
 import PageLinkCard from "../components/link/PageLinkCard";
+import ProfileCard from "../components/site/ProfileCard";
 ---
 
 <TopPageWrapperLayout title="index">
   <MainColorDivider />
   <p>澄(<a href="https://toyskip725.github.io/">toyskip725.github.io</a>)の勉強ノートです。</p>
-  <div class="pages">
-    <PageLinkCard path={"about"} title={"このノートについて"} />
-    <PageLinkCard path={"posts"} title={"ノート一覧"} />
-    <PageLinkCard path={"history"} title={"更新履歴"} />
+  <div class="pages-container">
+    <div class="pages">
+      <PageLinkCard path={"about"} title={"このノートについて"} />
+      <PageLinkCard path={"posts"} title={"ノート一覧"} />
+      <PageLinkCard path={"history"} title={"更新履歴"} />
+    </div>
   </div>
-  <h1>Links</h1>
-  <a href="https://toyskip725.github.io/">toyskip725.github.io</a>  
-  <VerticalSpacer height={"100px"}/>
+  <div class="profile">
+    <ProfileCard />
+  </div>
 </TopPageWrapperLayout>
 
 <style>
-  .pages {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
+.pages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.pages-container {
+  padding: 2em 0em;
+}
+.profile {
+  padding-top: 3em;
+}
 </style>

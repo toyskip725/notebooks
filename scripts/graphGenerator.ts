@@ -44,7 +44,7 @@ graph.import(graphData);
 forceLayout.assign(graph, {
   maxIterations: 10000,
   settings: {
-    attraction: 0.01,
+    attraction: 0.012,
     repulsion: 1,
     gravity: 0.03
   }

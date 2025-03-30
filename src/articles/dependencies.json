@@ -19,6 +19,11 @@
       "sourceKey": "category-theory/category",
       "targetKey": "category-theory/epis-and-monos",
       "type": "prerequisite"
+    },
+    {
+      "sourceKey": "category-theory/epis-and-monos",
+      "targetKey": "category-theory/products-and-coproducts",
+      "type": "prerequisite"
     }
   ]
 }

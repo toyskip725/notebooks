@@ -92,6 +92,15 @@
               "path": "epis-and-monos",
               "source": "category-theory/2_epis-and-monos",
               "status": "active"
+            },
+            {
+              "key": "category-theory/products-and-coproducts",
+              "section": 3,
+              "title": "積と余積",
+              "displayTitle": "積と余積",
+              "path": "products-and-coproducts",
+              "source": "category-theory/3_products-and-coproducts",
+              "status": "active"
             }
           ]
         }

@@ -1,0 +1,164 @@
+<SumiML version="1.0" />
+<Frontmatter>
+title: 積と余積
+section: 3
+version: 0.1.0
+lastupdated: 2025/03/30
+</Frontmatter>
+
+<Document>
+
+本ページでは、<Strong>積</Strong> (product) と <Strong>余積</Strong> (coproduct) の概念を導入する。
+積と余積は、圏における極限と双対性の最も基本的な例の一つである。
+
+<Section title="積">
+
+<Definition name="積">
+$\mathbf{C}$ を圏とする。$\mathbf{C}$ の対象 $A \times B$ と 射 $\pi_{1}: A \times B \to A$、$\pi_{2}: A \times B \to B$ の三つ組が
+$A$ と $B$ の <Strong>積</Strong> (product) であるのは、これが以下の性質を満たすときである：
+
+<List type="itemized">
+  </> [積の普遍性] $\mathbf{C}$ の任意の対象 $X$ および射 $x_{1}: X \to A$、$x_{2}: X \to B$ に対して、以下の図式を可換にする（すなわち、$x_{1} = \pi_{1}u$ かつ $x_{2} = \pi_{2}u$ となる）射
+  $u : X \to A \times B$ がただ一つ存在する。
+</List>
+
+<Math>
+\xymatrix {
+  & X \ar[ld]_{x_{1}} \ar[rd]^{x_{2}} \ar@{.>}[d]_{u} & \\
+A & A \times B \ar[l]_{\pi_{1}} \ar[r]^{\pi_{2}} & B \\
+}
+</Math>
+</Definition>
+
+<Proposition>
+任意の圏 $\mathbf{C}$ において、積は存在すれば同型を除いて一意である。
+</Proposition>
+
+つまり、$A$ と $B$ の積が複数存在するならば、それらは同型である（同型射が存在する）という点で、ある意味一意的であると見做せるというのである。
+
+<Proof>
+$P$、$p_{1}: P \to A$、$p_{2}: P \to B$ と、$Q$、$q_{1}: Q \to A$、$q_{2}: Q \to B$ はともに $A$ と $B$ の積であるとする。
+
+このとき、 $P$ の積の普遍性から、射 $u : Q \to P$ が存在して $q_{1} = p_{1}u$、$q_{2} = p_{2}u$ である。
+同様に、$Q$ の積の普遍性から、射 $v : P \to Q$ が存在して $p_{1} = q_{1}v$、$p_{2} = q_{2}v$ である。
+
+<Math>
+\xymatrix {
+  & Q \ar[ld]_{q_{1}} \ar[rd]^{q_{2}} \ar@{.>}@/_/[dd]_{u} & \\
+A &  & B \\
+  & P \ar[lu]^{p_{1}} \ar[ru]_{p_{2}} \ar@{.>}@/_/[uu]_{v} & \\
+}
+</Math>
+
+われわれは $u$ と $v$ が同型射であることを示せばよい。まず、$u$ と $v$ の性質から
+<Math>
+p_{1} = q_{1}v = p_{1}uv \qquad p_{2} = q_{2}v = p_{2}uv 
+</Math>
+が成り立つ。
+$u$ と $v$ の定義から、 $uv$ は $P$、$p_{1}$、$p_{2}$、$Q$、$q_{1}$、$q_{2}$ に対してこの等式を満たすただ一つの射である。
+一方で、$\mathrm{id}_{P}$ も $p_{1} = p_{1} \circ \mathrm{id}_{P}$ および $p_{2} = p_{2} \circ \mathrm{id}_{P}$
+を満たすが、$uv$ の一意性によりこのような射はただ一つしか存在しないため、$uv = \mathrm{id}_{P}$ となる。
+
+同様にして、$vu = \mathrm{id}_{Q}$ であるため、$u$ と $v$ は同型射、すなわち、$P \cong Q$ である。 $\Box$
+</Proof>
+
+<Example name="$\mathbf{Set}$における積">
+(1) 圏 $\mathbf{Set}$ において、通常の集合のデカルト積
+<Math>
+A \times B = \{ (a, b) \mid a \in A, b \in B \}
+</Math>
+は圏論的な意味でも積である：
+
+デカルト積 $A \times B$ から集合 $A, B$ には、<Strong>標準射影</Strong> (projection)
+<Math>
+\begin{align}
+\pi_{1} : A \times B \to A \qquad (a, b) \mapsto a \\
+\pi_{2} : A \times B \to B \qquad (a, b) \mapsto b
+\end{align}
+</Math>
+が存在し、また集合 $X$ および写像 $f : X \to A, g : X \to B$ が存在するならば、$u : X \to A \times B$ を
+<Math>
+u : X \to A \times B \qquad x \mapsto (f(x), g(x))
+</Math>
+とすれば、任意の $x \in X$ に対して $f(x) = \pi_{1}(u(x))$ かつ $g(x) = \pi_{2}(u(x))$ である。
+このような写像は $u$ 以外には存在しない。（そのような写像がもし $u$ 以外に存在するなら、それは $u$ と外延的に異なる $X$ から $A \times B$ への写像を考えることと等しい。）
+ゆえに $u$ は一意である。 $\Box$
+
+(2) たとえば、以下のように非標準的に定義された直積
+<Math>
+A * B = \{ (\{ a \}, \{b \}) \mid a \in A, b \in B \}
+</Math>
+および射影
+<Math>
+\begin{align}
+\pi^{*}_{1} : A * B \to A \qquad (\{ a \}, \{ b\}) \mapsto a \\
+\pi^{*}_{2} : A * B \to B \qquad (\{ a \}, \{ b\}) \mapsto b
+\end{align}
+</Math>
+もまた圏論的な意味では積である。このとき、$f : A \times B \to A * B$ を
+<Math>
+f : A \times B \to A * B \qquad (a, b) \mapsto (\{ a \}, \{ b\})
+</Math>
+とすれば、$f$ は全単射であり、ゆえに $A \times B \cong A * B$ である。 $\Box$
+</Example>
+
+
+</Section>
+
+<Section title="余積">
+
+<Definition name="余積">
+$\mathbf{C}$ を圏とする。$\mathbf{C}$ の対象 $A + B$ と 射 $\iota_{1}: A \to A + B$、$\iota_{2}: B \to A + B$ の三つ組が
+$A$ と $B$ の <Strong>余積</Strong> (coproduct) であるのは、これが以下の性質を満たすときである：
+
+<List type="itemized">
+  </> [余積の普遍性] $\mathbf{C}$ の任意の対象 $X$ および射 $x_{1}: A \to X$、$x_{2}: B \to X$ に対して、以下の図式を可換にする（すなわち、$x_{1} = u \iota_{1}$ かつ $x_{2} = u \iota_{2}$ となる）射
+  $u : A + B \to X$ がただ一つ存在する。
+</List>
+
+<Math>
+\xymatrix {
+A \ar[r]^{\iota_{1}} \ar[dr]_{x_{1}} & A + B \ar@{.>}[d]_{u} & B \ar[l]_{\iota_{2}} \ar[dl]^{x_{2}} \\
+  & X & \\
+}
+</Math>
+</Definition>
+
+積の場合と同様に、余積の場合も以下が成り立つ。
+
+<Proposition>
+任意の圏 $\mathbf{C}$ において、余積は存在すれば同型を除いて一意である。
+</Proposition>
+
+<Example name="$\mathbf{Set}$における余積">
+(1) 圏 $\mathbf{Set}$ において、集合の非交和 (disjoint union)
+<Math>
+A \sqcup B = \{ (a, 1) \mid a \in A \} \cup \{ (b, 2) \mid b \in B \}
+</Math>
+は圏論的な意味での余積である：
+
+この場合、集合 $A, B$ から 非交和 $A \sqcup B$ への入射は
+<Math>
+\begin{align}
+\iota_{1} : A \to A \sqcup B \qquad a \mapsto (a, 1) \\
+\iota_{2} : B \to A \sqcup B \qquad b \mapsto (b, 2) 
+\end{align}
+</Math>
+であり、また集合 $X$ に対して $f : A \to X, g : B \to X$ が存在するならば、$u : A \sqcup B \to X$ を
+<Math>
+u : A \sqcup B \to X \qquad (*, i) \mapsto
+\begin{cases}
+f(*) \quad (i = 1) \\
+g(*) \quad (i = 2)
+\end{cases}
+</Math>
+とすれば、任意の $a \in A$ に対して $f(a) = u(\iota_{1}(a))$、かつ任意の $b \in B$ に対して $g(b) = u(\iota_{2}(b))$ である。 $\Box$
+</Example>
+
+</Section>
+
+<Bibliography>
+  </> Steve Awodey, 2010. <Emphasis>Category Theory</Emphasis>. Second Edition. Oxford University Press.
+</Bibliography>
+
+</Document>

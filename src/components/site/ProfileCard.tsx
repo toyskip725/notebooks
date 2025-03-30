@@ -41,7 +41,7 @@ const ProfileCardLayout = ({ profile }: Props) => {
         </div>
         <ul className="profile-card-link-list">
           {Object.entries(profile.link).map((entry) => 
-            <ProfileCardLink title={entry[0]} url={entry[1]} />
+            <ProfileCardLink key={entry[0]} title={entry[0]} url={entry[1]} />
           )}
         </ul>
       </div>

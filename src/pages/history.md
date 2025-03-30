@@ -6,6 +6,8 @@ title: 更新履歴
 
 ## 2025年
 
+- 2025/03/30
+  - 【新規追加】[積と余積](../category-theory/products-and-coproducts) (0.1.0)
 - 2025/03/02
   - 【新規追加】[エピ射とモノ射](../category-theory/epis-and-monos) (0.1.0)
   - 【更新】[圏](../category-theory/category) (0.1.0 → 0.1.1)
